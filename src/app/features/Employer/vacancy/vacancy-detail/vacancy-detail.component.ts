@@ -12,12 +12,12 @@ import { NgToastService } from 'ng-angular-popup';
 })
 
 export class VacancyDetailComponent implements OnInit {
-  vacancy :Vacancy={} as Vacancy;
+  vacancy: Vacancy = {} as Vacancy;
 
 
-vacancies?:Vacancy[];
-  constructor(private vacancyService:VacancyService,private router:Router, private toast: NgToastService) {
- 
+  vacancies?: Vacancy[];
+  constructor(private vacancyService: VacancyService, private router: Router, private toast: NgToastService) {
+
   }
   ngOnInit(): void {
     this.vacancyService.getAllCompanyVacancy().subscribe({
@@ -27,33 +27,33 @@ vacancies?:Vacancy[];
     });
 
   }
-  VacancyDelete(id:string) {
+  VacancyDelete(id: string) {
     this.vacancyService.deletevacancy(id).subscribe({
       next: (response) => {
-this.vacancies=this.vacancies?.filter((vac)=>vac.id!=id);
-this.toast.warning({detail:"",summary:'Vacancy Deleted Succesfully', position: 'topRight'}); 
+        this.vacancies = this.vacancies?.filter((vac) => vac.id != id);
+        this.toast.warning({ detail: "", summary: 'Vacancy Deleted Succesfully', position: 'topRight' });
       }
     });
   }
-  
-  
-  onEditInitHandler(id:string){
-     
-  this.vacancyService.getvacancyById(id).subscribe({
-    next:(data)=>{
-      this.vacancy = this.vacancies?.find((x) => x.id == id) || {} as Vacancy;
-    }
-  });    
+
+
+  onEditInitHandler(id: string) {
+
+    this.vacancyService.getvacancyById(id).subscribe({
+      next: (data) => {
+        this.vacancy = this.vacancies?.find((x) => x.id == id) || {} as Vacancy;
+      }
+    });
   }
-  UpdateVacancy(){
+  UpdateVacancy() {
     this.vacancyService.updateVacancy(this.vacancy).subscribe({
-      
-      next:(response)=>{
+
+      next: (response) => {
         console.log(response);
         this.router.navigateByUrl('vacancy');
       },
-      complete:()=>{
-        this.toast.success({detail:"",summary:'Vacancy Edited Succesfully', position: 'topRight'}); 
+      complete: () => {
+        this.toast.success({ detail: "", summary: 'Vacancy Edited Succesfully', position: 'topRight' });
 
       }
     });

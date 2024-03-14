@@ -1,3 +1,6 @@
+import { Experience } from "../Experiences/models/experiences.model";
+import { Qualification } from "../Qualification/models/qualification.model";
+
 export interface JobSeeker{
     id:string;
     firstName:string;
@@ -10,4 +13,6 @@ export interface JobSeeker{
     dob:Date;
     resumeURL?:string;
     profileImgURL?:string;
+    qualification:Qualification[];
+    experience:Experience[]
 }

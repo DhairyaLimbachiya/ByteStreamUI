@@ -1,5 +1,4 @@
 <div class="container">
-
   <h1 class="mt-3">Vacancy List</h1>
 
   <div class="d-flex justify-content-end mt-3">
@@ -7,37 +6,48 @@
   </div>
   <ng-container *ngIf="vacancies; else novacancies">
     <div class="card mt-3">
-      <p-table [value]="vacancies" [tableStyle]="{ 'min-width': '60rem'}" [paginator]="true" [rows]="5"
+      <p-table [value]="vacancies" [tableStyle]="{ 'min-width': '60rem' }" [paginator]="true" [rows]="5"
         [showCurrentPageReport]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="jobTitle" style="width:12%">JobTitle <p-sortIcon field="jobTitle"></p-sortIcon></th>
-            <th pSortableColumn="noOfVacancies" style="width:8%">No of vacancies<p-sortIcon field="noOfVacancies"></p-sortIcon>
+            <th pSortableColumn="jobTitle" style="width: 12%">
+              JobTitle <p-sortIcon field="jobTitle"></p-sortIcon>
             </th>
-            <th pSortableColumn="minimumQualification" style="width:12%">Minimum Qualification <p-sortIcon
-                field="minimumQualification"></p-sortIcon></th>
-            <th pSortableColumn="experienceRequired" style="width:12%">Experience Required <p-sortIcon
-                field="experienceRequired"></p-sortIcon></th>
-            <th pSortableColumn="lastDate" style="width:17%">Last Date<p-sortIcon field="lastDate"></p-sortIcon></th>
+            <th pSortableColumn="noOfVacancies" style="width: 8%">
+              No of vacancies<p-sortIcon field="noOfVacancies"></p-sortIcon>
+            </th>
+            <th pSortableColumn="minimumQualification" style="width: 12%">
+              Minimum Qualification
+              <p-sortIcon field="minimumQualification"></p-sortIcon>
+            </th>
+            <th pSortableColumn="experienceRequired" style="width: 12%">
+              Experience Required
+              <p-sortIcon field="experienceRequired"></p-sortIcon>
+            </th>
+            <th pSortableColumn="lastDate" style="width: 17%">
+              Last Date<p-sortIcon field="lastDate"></p-sortIcon>
+            </th>
 
-            <th pSortableColumn="minSalary" style="width:12%">Minimum Salary <p-sortIcon field="minSalary"></p-sortIcon>
+            <th pSortableColumn="minSalary" style="width: 12%">
+              Minimum Salary <p-sortIcon field="minSalary"></p-sortIcon>
             </th>
-            <th pSortableColumn="maxSalary" style="width:12%">Maximum Salary<p-sortIcon field="maxSalary"></p-sortIcon>
+            <th pSortableColumn="maxSalary" style="width: 12%">
+              Maximum Salary<p-sortIcon field="maxSalary"></p-sortIcon>
             </th>
-            <th style="width:5%"></th>
-            <th style="width:5%"></th>
-            <th style="width:5%"></th>
+            <th style="width: 5%"></th>
+            <th style="width: 5%"></th>
+            <th style="width: 5%"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-vacancy>
           <tr>
-            <td>{{vacancy.jobTitle}}</td>
-            <td>{{vacancy.noOfVacancies}}</td>
-            <td>{{vacancy.minimumQualification}}</td>
-            <td>{{vacancy.experienceRequired}}</td>
-            <td>{{vacancy.lastDate |date:'yyyy-MM-dd'}}</td>
-            <td>{{vacancy.maxSalary}}</td>
-            <td>{{vacancy.minSalary}}</td>
+            <td>{{ vacancy.jobTitle }}</td>
+            <td>{{ vacancy.noOfVacancies }}</td>
+            <td>{{ vacancy.minimumQualification }}</td>
+            <td>{{ vacancy.experienceRequired }}</td>
+            <td>{{ vacancy.lastDate | date : "yyyy-MM-dd" }}</td>
+            <td>{{ vacancy.maxSalary }}</td>
+            <td>{{ vacancy.minSalary }}</td>
 
             <td>
               <button class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"
@@ -49,7 +59,7 @@
               <a class="btn btn-danger" (click)="VacancyDelete(vacancy.id)">Delete</a>
             </td>
             <td>
-              <a class="btn btn-light"  [routerLink]="['/appliedinVacancy',vacancy.id]">Applications</a>
+              <a class="btn btn-light" [routerLink]="['/appliedinVacancy', vacancy.id]">Applications</a>
             </td>
           </tr>
         </ng-template>
@@ -59,7 +69,9 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">
+                Modal title
+              </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -72,19 +84,19 @@
                   <div class="mt-3">
                     <label for="jobtitle" class="form-label">Job Title</label>
                     <input type="text" id="jobtitle" name="jobtitle" class="form-control"
-                      [(ngModel)]="vacancy.jobTitle">
+                      [(ngModel)]="vacancy.jobTitle" />
                   </div>
 
                   <div class="mt-3">
                     <label for="urlHandle" class="form-label">No Of Vacancy</label>
                     <input type="text" id="noOfVacancy" name="noOfVacancy" class="form-control"
-                      [(ngModel)]="vacancy.noOfVacancies">
+                      [(ngModel)]="vacancy.noOfVacancies" />
                   </div>
 
                   <div class="mt-3">
                     <label for="minimumQualification" class="form-label">Minimum Qualification</label>
                     <input type="text" id="minimumQualification" name="minimumQualification" class="form-control"
-                      [(ngModel)]="vacancy.minimumQualification">
+                      [(ngModel)]="vacancy.minimumQualification" />
                   </div>
                   <div class="mt-3">
                     <label for="jobdescription" class="form-label">Job Description</label>
@@ -94,30 +106,33 @@
 
                   <label for="experienceRequired" class="form-label">Minimum years of Experience Required</label>
                   <input type="text" id="experienceRequired" name="experienceRequired" class="form-control"
-                    [(ngModel)]="vacancy.experienceRequired">
+                    [(ngModel)]="vacancy.experienceRequired" />
                 </div>
 
                 <div class="mt-3">
                   <label for="lastDate" class="form-label">Last Date</label>
-                  <input type="date" id="lastDate" name="lastDate" class="form-control" [(ngModel)]="vacancy.lastDate">
+                  <input type="date" id="lastDate" name="lastDate" class="form-control"
+                    [(ngModel)]="vacancy.lastDate" />
                 </div>
                 <div class="mt-3">
                   <label for="minSalary" class="form-label">Minimum Salary</label>
                   <input type="text" id="minSalary" name="experienceRequired" class="form-control"
-                    [(ngModel)]="vacancy.minSalary">
+                    [(ngModel)]="vacancy.minSalary" />
                 </div>
                 <div class="mt-3">
                   <label for="maxSalary" class="form-label">Minimum Salary</label>
                   <input type="text" id="maxSalary" name="maxSalary" class="form-control"
-                    [(ngModel)]="vacancy.maxSalary  ">
+                    [(ngModel)]="vacancy.maxSalary" />
                 </div>
-
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary " (click)="UpdateVacancy()" data-dismiss="modal">Save
-                changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" (click)="UpdateVacancy()" data-dismiss="modal">
+                Save changes
+              </button>
             </div>
           </div>
         </div>
@@ -127,7 +142,5 @@
 </div>
 
 <ng-template #novacancies>
-  <p class="mt-2">
-    You have added any vacancies yet!!
-  </p>
+  <p class="mt-2">You have added any vacancies yet!!</p>
 </ng-template>

@@ -16,8 +16,7 @@ import { JobseekerService } from 'src/app/features/JobSeeker/services/jobseeker.
 export class ApplicantDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private qualificationservice: QualificationService, private experienceService: ExperienceService,private jobSeekerService:JobseekerService){}
   jobseekerId: string | null = null;
-  qualifications?: Qualification[];
-  experiences?: Experience[];
+  
   jobseeker: JobSeeker = {} as JobSeeker;
 
   ngOnInit(): void {
@@ -32,18 +31,7 @@ if(this.jobseekerId){
         this.jobseeker = response;
       },
     });
-
-    this.qualificationservice.getAllQualification(this.jobseekerId).subscribe({
-      next: (response) => {
-        this.qualifications = response
-      }
-    });
-
-    this.experienceService.getAllExperience(this.jobseekerId).subscribe({
-      next: (response) => {
-        this.experiences = response
-      }
-    });
+    
 }
 
   }

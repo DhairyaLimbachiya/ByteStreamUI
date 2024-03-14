@@ -18,9 +18,6 @@ export class ExperienceService {
   getExperience():Observable<Experience[]>{
     return this.http.get<Experience[]>(`${environment.jobSeekerBaseURL}/api/experience?addAuth=true`);
   }
-  getAllExperience(id:string):Observable<Experience[]>{
-    return this.http.get<Experience[]>(`${environment.jobSeekerBaseURL}/api/experience/getAllExperiences/${id}?addAuth=true`);
-  }
 
 
   getExperienceById(id:string):Observable<Experience[]>{

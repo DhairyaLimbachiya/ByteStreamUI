@@ -68,13 +68,13 @@
         <p-accordionTab header="Experiences">
 
             <div class="my-3 border border-dark rounded  p-3" style="background-color: rgba(192, 229, 244, 0.314);">
-                <ng-container *ngIf="experiences">
+                <ng-container *ngIf="jobseeker.experience">
                     <div class="d-flex justify-content-between">
                         <div>
                             <h3>Experiences</h3>
                         </div>
                     </div>
-                    <div *ngFor="let experience of experiences">
+                    <div *ngFor="let experience of jobseeker.experience">
                         <hr>
                         <div class="mt-3">
                             <div class="d-flex flex-row">
@@ -128,11 +128,11 @@
         </p-accordionTab>
         <p-accordionTab header="Qualifications">
             <div class="my-3 border border-dark rounded  p-3" style="background-color: rgba(192, 229, 244, 0.314);">
-                <ng-container *ngIf="qualifications">
+                <ng-container *ngIf="jobseeker.qualification">
                     <div class="d-flex justify-content-between">
                         <h3>Qualifications</h3>
                     </div>
-                    <div *ngFor="let qualification of qualifications">
+                    <div *ngFor="let qualification of jobseeker.qualification">
                         <hr>
                         <div class="mt-3">
                             <div class="d-flex flex-row">

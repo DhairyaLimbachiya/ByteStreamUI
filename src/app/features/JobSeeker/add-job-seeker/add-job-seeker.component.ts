@@ -50,6 +50,9 @@ export class AddJobSeekerComponent implements OnInit {
       totalExperience: this.addProfileForm.get('totalExperience')?.value || 0,
       dob: this.model.dob,
       resumeURL: this.model.resumeURL,
+     // ProfileImgURL:this.model.ProfileImgURL
+     qualification:this.model.qualification,
+     experience:this.model.experience
     }
     if(this.file && this.user?.id){
       this.jobseekerService.uploadImage(this.file, this.user.id).subscribe({
