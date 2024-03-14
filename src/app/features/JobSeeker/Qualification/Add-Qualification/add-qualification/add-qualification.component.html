@@ -1,0 +1,53 @@
+<div class="container">
+    <h1 class="mt-3">Add Qualification</h1>
+
+    <form [formGroup]="addQualificationForm"  (ngSubmit)="onFormSubmit()">
+        <div class="mt-2 mb-5">
+            <div class="mt-3">
+                <label for="qualificationName" class="form-label"> Qualification Name</label>
+                <input type="text" id="qualificationName" name="qualificationName" class="form-control" formControlName="qualificationName" placeholder="Enter Qualification Url">
+                <small class="d-block text-danger"
+                *ngIf="addQualificationForm.get('qualificationName')?.invalid && addQualificationForm.get('qualificationName')?.dirty">
+                Qualification Name is Required.
+            </small>
+            </div>
+
+            <div class="mt-3">
+                <label for="University" class="form-label">University Name</label>
+                <input type="text" id="University" name="university" class="form-control" formControlName="university" placeholder="Enter University Name">
+                <small class="d-block text-danger"
+                *ngIf="addQualificationForm.get('university')?.invalid && addQualificationForm.get('university')?.dirty">
+                University Name is Required.
+            </small>
+            </div>
+
+            <div class="mt-3">
+                <label for="Year of Completion" class="form-label" >Year of Qualification</label>
+                <input type="text" id="yearOfCompletion" name="yearOfCompletion" class="form-control"
+                formControlName="yearOfCompletion"placeholder="Enter Year of Qualification">
+                    <small class="d-block text-danger"
+                    *ngIf="addQualificationForm.get('yearOfCompletion')?.invalid && addQualificationForm.get('yearOfCompletion')?.dirty">
+                    Enter Valid Year Between 1900 to 2024
+                </small>
+                </div>
+            <div class="mt-3">
+                <label for="gradeOrScore" class="form-label">Grade/Score</label>
+                <input type="text" id="gradeOrScore" name="gradeOrScore" class="form-control"
+                formControlName="gradeOrScore" placeholder="Enter Grade / Score">
+                    <small class="d-block text-danger"
+                    *ngIf="addQualificationForm.get('gradeOrScore')?.invalid && addQualificationForm.get('gradeOrScore')?.dirty">
+                    Grade or Score is Required.
+                </small>
+                </div>
+            
+            </div>
+            
+            
+            
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary"[disabled]="addQualificationForm.invalid">Save</button>
+            </div>
+        
+    </form>
+</div>

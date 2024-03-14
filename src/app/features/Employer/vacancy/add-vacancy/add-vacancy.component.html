@@ -1,0 +1,107 @@
+<div class="container">
+    <h1 class="mt-3">Add Job Vacancy</h1>
+
+    <form [formGroup]="addVacancyForm" (ngSubmit)="onFormSubmit()">
+        <div class="mt-2 mb-5">
+            <div class="mt-3">
+                <label for="jobtitle" class="form-label">Job Title</label>
+                <input type="text" id="jobTitle" name="jobTitle" class="form-control w-100"
+                    placeholder="Enter Job Title" formControlName="jobTitle" />
+                <small class="d-block text-danger"
+                    *ngIf="addVacancyForm.get('jobTitle')?.invalid && addVacancyForm.get('jobTitle')?.dirty">
+                    Job Title is Required.
+                </small>
+            </div>
+
+            <div class="mt-3">
+                <label for="urlHandle" class="form-label">No Of Vacancy</label>
+                <input type="number" id="noOfVacancies" name="noOfVacancies" class="form-control w-100"
+                    placeholder="Enter Total Number of Vacancies" formControlName="noOfVacancies" />
+                <small class="d-block text-danger"
+                    *ngIf="addVacancyForm.get('noOfVacancies')?.invalid && addVacancyForm.get('noOfVacancies')?.dirty">
+                    Total Number of Vacancies should be greater than 1.
+                </small>
+            </div>
+
+            <div class="mt-3">
+                <label for="minimumQualification" class="form-label">Minimum Qualification</label>
+                <input 
+                type="text" 
+                id="minimumQualification"
+                name="minimumQualification" 
+                class="form-control w-100"
+                placeholder="Enter Minimum Qualification"
+                formControlName="minimumQualification"/>
+            <small class="d-block text-danger"
+                *ngIf="addVacancyForm.get('minimumQualification')?.invalid && addVacancyForm.get('minimumQualification')?.dirty">
+                Minimum Qualification is Required.
+            </small>
+            </div>
+            <div class="mt-3">
+                <label for="jobdescription" class="form-label">Job Description</label>
+                <textarea 
+                pInputTextarea
+                id="jobDescription" 
+                name="jobDescription" 
+                style="height: 180px; max-height: 180px;" 
+                class="form-control w-100"
+                placeholder="Enter Job Description"
+                formControlName="jobDescription">
+            </textarea>
+            <small class="d-block text-danger"
+                *ngIf="addVacancyForm.get('jobDescription')?.invalid && addVacancyForm.get('jobDescription')?.dirty">
+                Minimum 50 characters are Required
+            </small>
+            </div>
+
+            <label for="experienceRequired" class="form-label">Minimum years of Experience Required</label>
+            <input 
+            type="text" 
+            id="experienceRequired"
+            name="experienceRequired" 
+            class="form-control w-100"
+            placeholder="Enter Experience Required"
+            formControlName="experienceRequired"/>
+        <small class="d-block text-danger"
+            *ngIf="addVacancyForm.get('experienceRequired')?.invalid && addVacancyForm.get('experienceRequired')?.dirty">
+            Experience is Required.
+        </small>
+        </div>
+
+        <div class="mt-3">
+            <label for="lastDate" class="form-label">Last Date</label>
+            <p-calendar type="date" id="lastDate" name="lastDate" [(ngModel)]="addvacancy.lastDate" [ngModelOptions]="{standalone: true}"></p-calendar>        </div>
+        <div class="mt-3">
+            <label for="minSalary" class="form-label">Minimum Salary</label>
+            <input 
+            type="number" 
+            id="minimumSalary" 
+            name="minimumSalary" 
+            class="form-control w-100"
+            placeholder="Enter Minimum Salary"
+            formControlName="minimumSalary"/>
+        <small class="d-block text-danger"
+            *ngIf="addVacancyForm.get('minimumSalary')?.invalid && addVacancyForm.get('minimumSalary')?.dirty">
+            Minimum Salary is Required.
+        </small>
+        </div>
+        <div class="mt-3">
+            <input 
+            type="number" 
+            id="maximumSalary"
+            name="maximumSalary" 
+            class="form-control w-100"
+            placeholder="Enter Maximum Salary"
+            formControlName="maximumSalary"/>
+        <small class="d-block text-danger"
+            *ngIf="addVacancyForm.get('maximumSalary')?.invalid && addVacancyForm.get('maximumSalary')?.dirty">
+            Maximum Salary is Required.
+        </small>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-primary"[disabled]="addVacancyForm.invalid">Save</button>
+        </div>
+
+    </form>
+</div>

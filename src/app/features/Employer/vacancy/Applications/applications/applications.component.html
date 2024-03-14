@@ -1,0 +1,40 @@
+<div class="container">
+    <h1 class="mt-3">Applicants </h1>
+    <ng-container *ngIf="jobapplications; else noApplications">
+        <div class="card mt-3">
+            <p-table [value]="jobapplications" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                [tableStyle]="{'min-width': '60rem'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="user.firstName" style="width:20%">Candidate Name<p-sortIcon
+                                field="user.firstName"></p-sortIcon></th>
+                        <th pSortableColumn="user.email" style="width:20%">Candidate Email <p-sortIcon
+                                field="user.email"></p-sortIcon></th>
+                        <th pSortableColumn="user.email" style="width:20%">Candidate PhoneNo</th>
+                        <th pSortableColumn="appliedDate" style="width:20%">Applied Date<p-sortIcon
+                                field="appliedDate"></p-sortIcon></th>
+                        <th style="width:20%"></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-jobapplication>
+                    <tr>
+                       
+                        <td>{{jobapplication.user.firstName}} {{jobapplication.user.lastName}}</td>
+                        <td>{{jobapplication.user.email}}</td>
+                        <td>{{jobapplication.user.phone}}</td>
+                        <td>{{jobapplication.appliedDate | date: 'yyyy-MM-dd'}}</td>
+                        <td>
+                        <a class="btn btn-light" [routerLink]="['/applicantdetails/',jobapplication.user.id]">candidate details</a>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            
+        </div>
+    </ng-container>
+    <ng-template #noApplications>
+        <p class="mt-2">
+            No one has Applied for this Vacancy!
+        </p>
+    </ng-template>
+</div>

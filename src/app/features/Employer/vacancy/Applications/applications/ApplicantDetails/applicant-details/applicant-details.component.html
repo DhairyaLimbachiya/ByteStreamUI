@@ -1,0 +1,157 @@
+<div class="container-sm">
+<ng-container  class="card-body">
+    <div class="my-3 border border-dark rounded bg-light p-3">
+        <div class="d-flex justify-content-between">
+            <div>
+                <h3>Details</h3>
+            </div>
+            <div>
+                <!-- <a href={{profile.resumeUrl}} target="_blank" class="btn btn-dark text-decoration-none fw-bold">Resume</a> -->
+            </div>
+        </div>
+        <hr>
+        <div class="mt-2">
+            <div class="d-flex flex-row">
+                <div class="col-6">
+                    <span class="fw-bold">First Name: </span>{{jobseeker.firstName}}
+                </div>
+                <div class="col-6">
+                    <span class="fw-bold">Last Name: </span>{{jobseeker.lastName}}
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <div class="d-flex flex-row">
+                <div class="col-6">
+                    <span class="fw-bold">Phone Number: </span>{{jobseeker.phone}}
+                </div>
+                <div class="col-6">
+                    <span class="fw-bold">Date of Birth: </span>{{jobseeker.dob | date: 'yyyy-MM-dd'}}
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <div class="d-flex flex-row">
+                <div class="col-6">
+                    <span class="fw-bold">Total Experience: </span>{{jobseeker.totalExperience}}
+                </div>
+                <div class="col-6">
+                    <span class="fw-bold">Expected Salary: </span>{{jobseeker.expectedSalary}}
+                </div>
+            </div>
+        </div>
+        <div class="mt-2">
+            <div class="d-flex flex-row">
+                <div class="col-12">
+                    <p class="m-0 fw-bold">Address: </p>
+                    <pre style="white-space: pre-wrap;">{{jobseeker.address}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-accordion >
+        <p-accordionTab header="Experiences" >
+
+            <div class="my-3 border border-dark rounded bg-light p-3">
+                <ng-container *ngIf="experiences">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3>Experiences</h3>
+                        </div>
+                    </div>
+                    <div *ngFor="let experience of experiences">
+                        <hr>
+                        <div class="mt-3">
+                            <div class="d-flex flex-row">
+                                <div class="col-6">
+                                    <i class="pi pi-user" style="font-size: 1.2rem"></i><span class="fw-bold">
+                                        Designation: </span>{{experience.designation}}
+                                </div>
+                                <div class="col-6">
+                                    <i class="pi pi-building" style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">  Company Name: </span>{{experience.companyName}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex flex-row">
+                                <div class="col-6">
+                                    <i class="pi pi-calendar-plus" style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">  Start Date: </span>{{experience.startYear | date:
+                                    'yyyy-MM-dd'}}
+                                </div>
+                                <div class="col-6">
+                                    <i class="pi pi-calendar-minus" style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">  End Date: </span>{{experience.endYear| date: 'yyyy-MM-dd'}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="d-flex flex-row">
+                                <div class="col-6">
+                                    <i class="pi pi-link" style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">  Company Url: </span>{{experience.companyUrl}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="d-flex flex-row">
+                                <div class="col-12">
+                                    <i class="pi pi-folder-open"style="font-size: 1.2rem"></i>
+                                    <span class="m-0 fw-bold">Job Description </span>
+                                    <pre style="white-space: pre-wrap;">{{experience.jobDescription}}</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-container>
+
+            </div>
+        </p-accordionTab>
+        <p-accordionTab header="Qualifications">
+            <div class="my-3 border border-dark rounded bg-light p-3">
+                <ng-container *ngIf="qualifications">
+                    <div class="d-flex justify-content-between">
+                        <h3>Qualifications</h3>
+                    </div>
+                    <div *ngFor="let qualification of qualifications">
+                        <hr>
+                        <div class="mt-3">
+                            <div class="d-flex flex-row">
+                                <div class="col-6">
+                                    <i class="pi pi-pencil"style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">  Qualification Name: </span>{{qualification.qualificationName}}
+                                </div>
+                                <div class="col-6">
+                                    <i class="pi pi-building"style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">  University Name: </span>{{qualification.university}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-flex flex-row">
+                                <div class="col-6">
+                                    <i class="pi pi-calendar-minus"style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">Year of Completion:
+                                    </span>{{qualification.yearOfCompletion|date:'yyyy'}}
+                                </div>
+                                <div class="col-6">
+                                    <i class="pi pi-calender-plus"style="font-size: 1.2rem"></i>
+                                    <span class="fw-bold">  Grade or Score: </span>{{qualification.gradeOrScore}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </p-accordionTab>
+    </p-accordion>
+  
+               
+</ng-container>
+</div>

@@ -1,0 +1,115 @@
+<div class="container">
+
+    <h1 class="mt-3">Experiences</h1>
+
+    <div class="d-flex justify-content-end mt-3">
+        <a [routerLink]="['/experience/add']" class="btn btn-primary">ADD Experience</a>
+    </div>
+
+    <ng-container *ngIf="experiences; else noexperiences">
+        <div class="card mt-3">
+        <p-table [value]="experiences" [tableStyle]="{ 'min-width': '60rem'}" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="companyName" style="width:20%">Company Name <p-sortIcon field="companyName"></p-sortIcon></th>
+                    <th pSortableColumn="startYear" style="width:20%">Start Year <p-sortIcon field="startYear"></p-sortIcon></th>
+                    <th pSortableColumn="endYear" style="width:20%">End Year <p-sortIcon field="endYear"></p-sortIcon></th>
+                    <th pSortableColumn="designation" style="width:20%">designation <p-sortIcon field="designation"></p-sortIcon></th>
+                    <!-- <th pSortableColumn="appliedDate" style="width:15%">Applied Date <p-sortIcon field="appliedDate"></p-sortIcon></th> -->
+                    <th style="width:10%"></th>
+                    <th style="width:10%"></th>
+                </tr>
+            </ng-template>
+ 
+                <ng-template pTemplate="body" let-experience >
+                    <tr>
+                    <td>{{experience.companyName}}</td>
+                    <td>{{experience.startYear|date:'yyyy-MM-dd'}}</td>
+                    <td>{{experience.endYear|date:'yyyy-MM-dd'}}</td>
+                    <td>{{experience.designation}}</td>
+                    
+                    <td>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"
+                            (click)="onEditInitHandler(experience.id)">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" (click)="ExperienceDelete(experience.id)">Delete</a>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h1 class="mt-3">Edit Vacancy</h1>
+
+                        <form #form="ngForm" >
+                            <div class="mt-2 mb-5">
+                                <ng-container *ngIf="error">
+                                    <span class="text-danger">{{error}}</span>
+                                </ng-container>
+                                <div class="mt-3">
+                                    <label for="companyName" class="form-label">Company Name</label>
+                                    <input type="text" id="companyName" name="companyName"  class="form-control"
+                                        [(ngModel)]="  experience.companyName">
+
+                                </div>
+
+                                <div class="mt-3" style="flex-direction: column;">
+                                    <label for="startDate" class="form-label"> Start Date</label>
+                                    <p-calendar type="date" id="endYear" name="endYear" [(ngModel)]="experience.startYear" [ngModelOptions]="{standalone: true}"></p-calendar>
+
+                                </div>
+
+                                <div class="mt-3 " >
+                                    <label for="endDate" class="form-label"> End Date</label>
+                                    <p-calendar type="date" id="endYear" name="endYear" [(ngModel)]="experience.endYear" [ngModelOptions]="{standalone: true}"></p-calendar>
+                                </div>
+                                <div class="mt-3">
+                                    <label for="CompanyUrl" class="form-label">Company Url</label>
+                                    <input type="text" id="companyUrl" name="companyUrl" class="form-control"
+                                        [(ngModel)]="experience.companyUrl">
+                                </div>
+                                <div class="mt-3">
+                                    <label for="Designation" class="form-label">Designation</label>
+                                    <input type="text" id="Designation" name="Designation" class="form-control"
+                                        [(ngModel)]="experience.designation">
+                                </div>
+                                 <div class="mt-3">
+                                    <label for="jobDescription" class="form-label">Job Description</label>
+                                    <textarea 
+                                    id="jobDescription" 
+                                    name="jobDescription" 
+                                    class="form-control" 
+                                    style="height: 180px; max-height: 180px;" 
+                                    [(ngModel)]="experience.jobDescription">
+                                </textarea>
+                                 </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="click" class="btn btn-primary " (click)="UpdateExperience()"
+                            data-dismiss="modal">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </ng-container>
+</div>
+<ng-template #noexperiences>
+    <p class="mt-2">
+        You have added any experiences yet!!
+    </p>
+</ng-template>
