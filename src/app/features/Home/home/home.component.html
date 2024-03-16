@@ -1,20 +1,24 @@
-<div class="container">
-    <div class="my-5">
+<div style=" background-image: url('https://www.employmenthelp.org/wp-content/uploads/Job-Board-Header-Background.png'); height: 92vh">
+
+   <div class="container">
+    <div >
         <div class="row align-items-stretch">
             <ng-container *ngIf="vacancies ">
-                <div class="col-12 col-md-4 mb-3" *ngFor="let vacancy of vacancies">
-                    <div class="card h-100">
+                <div class="col-12 col-md-4 mb-3" *ngFor="let vacancy of vacancies" >
+                    <div class="card h-100 mt-2"  style="background-color: rgb(219, 244, 255);">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{vacancy.jobTitle}}</h5>
-                            <div class="card-text">Organization Name: {{vacancy.publishedBy}}</div>
-                            <div class="card-text">No of Vacancies: {{vacancy.noOfVacancies}}</div>
-                            <div class="card-text">Salary Range: {{vacancy.minSalary}} - {{vacancy.maxSalary}}</div>
+                            <div class="card-text"><b>Organization Name: </b> {{vacancy.publishedBy}}</div>
+                            <div class="card-text"><b>No of Vacancies:</b> {{vacancy.noOfVacancies}}</div>
+                            <div class="card-text"><b>Salary Range: </b> {{vacancy.minSalary}} - {{vacancy.maxSalary}}</div>
                             <span class="d-flex align-items-end mt-3" style="flex: 1">
                                 <button type="button" (click)="OnModelOpen(vacancy.publishedBy,vacancy.id)"
-                                    class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                    read more
+                                    class="btn btn-light btn-sm " data-toggle="modal" data-target="#exampleModalCenter">
+                                    Read more
                                 </button>
                             </span>
+                
+                        </div>
                             <div class="modal fade modal-xl" id="exampleModalCenter" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -150,5 +154,5 @@
                             </div>
 
                         </div>
+                    
                     </div>
-                </div>

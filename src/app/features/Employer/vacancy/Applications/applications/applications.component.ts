@@ -35,21 +35,3 @@ export class ApplicationsComponent implements OnInit  {
     }
   }
 }
-
-//  this.authService.user().subscribe({
-//       next:(response)=>{
-//       this.user=response;
-//       }
-//     });
-//     if(this.user?.id){
-//     this.jobseekerService.getApplicationsByUserId(this.user.id).subscribe({
-//       next: (response) => {
-//        this.applicationResponses=response;
-//       },
-//       error: (error) => {
-//         console.log(error);
-//       }
-//     });
-
-//     }
-//   }

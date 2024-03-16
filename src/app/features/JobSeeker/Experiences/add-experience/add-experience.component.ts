@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Experience } from '../../../models/experiences.model';
-import { ExperienceService } from '../../../Services/experience.service';
+import { Experience } from '../models/experiences.model';
+import { ExperienceService } from '../Services/experience.service';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AddExperience } from '../../../models/add-experience.model';
+import { AddExperience } from '../models/add-experience.model';
 
 @Component({
   selector: 'app-add-experience',

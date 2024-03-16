@@ -1,6 +1,5 @@
 export interface AddJobSeeker{
-
-    firstName:string;
+ firstName:string;
     lastName:string;
     phone:string;
     email:string;

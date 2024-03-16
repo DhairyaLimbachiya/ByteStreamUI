@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Experience } from '../../../models/experiences.model';
-import { ExperienceService } from '../../../Services/experience.service';
+import { Experience } from '../models/experiences.model';
+import { ExperienceService } from '../Services/experience.service';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 

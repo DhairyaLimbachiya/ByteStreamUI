@@ -19,6 +19,7 @@ export class JobseekerProfileComponent {
   jobseeker: JobSeeker = {} as JobSeeker;
   flag: boolean = true;
   user?: User;
+  file?: File;
   constructor(private jobSeekerService: JobseekerService, private router: Router, private route: ActivatedRoute, private authservice: AuthService, private toast: NgToastService) {
   }
   ngOnInit(): void {
@@ -38,6 +39,11 @@ export class JobseekerProfileComponent {
       }); 
   }
   onFormSubmit(): void {
+    if(this.file&&this.user?.id){
+    this.jobSeekerService.uploadImage(this.file,this.user?.id).subscribe({
+      next: (response) => {
+        if(response.isSuccess){
+          this.jobseeker.resumeURL = response.result;
     this.jobSeekerService.updateJobSeeker(this.jobseeker).subscribe({
 next: (response) => {
 this.jobseeker=response
@@ -47,6 +53,10 @@ this.jobseeker=response
       }
     });
   }
+}
+});
+}
+}
   DeleteProfile(id: string) {
     this.jobSeekerService.deleteJobSeeker(id).subscribe({
       next: (response) => {
@@ -56,6 +66,10 @@ this.jobseeker=response
     });
   }
 
+  onFileUploadChange(event: Event) : void{
+    const element = event.currentTarget as HTMLInputElement;
+    this.file = element.files?.[0];
+  }
 
 
 }

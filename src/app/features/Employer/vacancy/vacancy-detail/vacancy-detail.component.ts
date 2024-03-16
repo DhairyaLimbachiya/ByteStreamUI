@@ -31,7 +31,11 @@ export class VacancyDetailComponent implements OnInit {
     this.vacancyService.deletevacancy(id).subscribe({
       next: (response) => {
         this.vacancies = this.vacancies?.filter((vac) => vac.id != id);
+        console.log(response);
         this.toast.warning({ detail: "", summary: 'Vacancy Deleted Succesfully', position: 'topRight' });
+      },
+      error:(error)=>{
+        console.log(error);
       }
     });
   }

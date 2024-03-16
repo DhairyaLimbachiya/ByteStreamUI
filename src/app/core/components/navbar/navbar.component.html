@@ -6,16 +6,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" [routerLink]="['/home']">Home</a>
-          </li>
           <ng-container *ngIf="user !== undefined && user?.userType?.includes('Employer')">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Employer
+              <i class="bi bi-person-circle"></i> Profile
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" [routerLink]="['/employer']">Employer Details</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/employer']"> My Details</a></li>
               <li><a class="dropdown-item" [routerLink]="['/vacancy']">Vacancy Details</a></li>
               
             </ul>
@@ -24,21 +21,21 @@
   <ng-container *ngIf="user !== undefined && user?.userType?.includes('JobSeeker')">
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Profile
+        <i class="bi bi-person-circle"></i> Profile
       </a>
       <ul class="dropdown-menu">
         <li><a class="dropdown-item" [routerLink]="['/jobseeker']">Manage Profile</a></li>
-        <li><a class="dropdown-item" [routerLink]="['/qualification']">Qualification</a></li>
+        <li><a class="dropdown-item" [routerLink]="['/qualification']">Qualifications</a></li>
         <li><a class="dropdown-item" [routerLink]="['/experience']">Experiences</a></li>
       </ul>
     </li>
-    <a [routerLink]="['/appliedVacancy']" class="nav-link active mx-3">Applied Vacancies</a>
+    <a [routerLink]="['/appliedVacancy']" class="nav-link active mx-3"><i class="bi bi-card-list"></i> Applied Vacancies</a>
 </ng-container>
         </ul>
 
         <div class="d-flex">
           <ng-container *ngIf="user === undefined;else showLogout">
-            <!-- Show Login Button -->
+      
             <a [routerLink]="['/login']" class="btn btn-primary mx-3">Login</a>
             <a [routerLink]="['/register']" class="btn btn-primary">Register</a>
 

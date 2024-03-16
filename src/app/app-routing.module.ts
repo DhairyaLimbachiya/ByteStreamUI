@@ -11,8 +11,8 @@ import { AddJobSeekerComponent } from './features/JobSeeker/add-job-seeker/add-j
 import { QualificationDetailComponent } from './features/JobSeeker/Qualification/Qualification-Detail/qualification-detail/qualification-detail.component';
 import { AddQualificationComponent } from './features/JobSeeker/Qualification/Add-Qualification/add-qualification/add-qualification.component';
 import { HomeComponent } from './features/Home/home/home.component';
-import { ExperienceDetailComponent } from './features/JobSeeker/Experiences/Experiences/Experience-Detail/experience-detail/experience-detail.component';
-import { AddExperienceComponent } from './features/JobSeeker/Experiences/Experiences/Add-Experience/add-experience/add-experience.component';
+import { ExperienceDetailComponent } from './features/JobSeeker/Experiences/experience-detail/experience-detail.component';
+import { AddExperienceComponent } from './features/JobSeeker/Experiences/add-experience/add-experience.component';
 import { MyAppliedVacanciesComponent } from './features/JobSeeker/myAppliedVacancies/my-applied-vacancies/my-applied-vacancies.component';
 import { ApplicationsComponent } from './features/Employer/vacancy/Applications/applications/applications.component';
 import { ApplicantDetailsComponent } from './features/Employer/vacancy/Applications/applications/ApplicantDetails/applicant-details/applicant-details.component';

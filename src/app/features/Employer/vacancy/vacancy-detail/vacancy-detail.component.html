@@ -6,21 +6,26 @@
   </div>
   <ng-container *ngIf="vacancies; else novacancies">
     <div class="card mt-3">
-      <p-table [value]="vacancies" [tableStyle]="{ 'min-width': '60rem' }" [paginator]="true" [rows]="5"
-        [showCurrentPageReport]="true">
+      <p-table
+        [value]="vacancies"
+        [tableStyle]="{ 'min-width': '60rem' }"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+      >
         <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="jobTitle" style="width: 12%">
+            <th pSortableColumn="jobTitle" style="width: 10%">
               JobTitle <p-sortIcon field="jobTitle"></p-sortIcon>
             </th>
             <th pSortableColumn="noOfVacancies" style="width: 8%">
               No of vacancies<p-sortIcon field="noOfVacancies"></p-sortIcon>
             </th>
-            <th pSortableColumn="minimumQualification" style="width: 12%">
+            <th pSortableColumn="minimumQualification" style="width: 10%">
               Minimum Qualification
               <p-sortIcon field="minimumQualification"></p-sortIcon>
             </th>
-            <th pSortableColumn="experienceRequired" style="width: 12%">
+            <th pSortableColumn="experienceRequired" style="width: 10%">
               Experience Required
               <p-sortIcon field="experienceRequired"></p-sortIcon>
             </th>
@@ -28,14 +33,14 @@
               Last Date<p-sortIcon field="lastDate"></p-sortIcon>
             </th>
 
-            <th pSortableColumn="minSalary" style="width: 12%">
+            <th pSortableColumn="minSalary" style="width: 10%">
               Minimum Salary <p-sortIcon field="minSalary"></p-sortIcon>
             </th>
-            <th pSortableColumn="maxSalary" style="width: 12%">
+            <th pSortableColumn="maxSalary" style="width: 10%">
               Maximum Salary<p-sortIcon field="maxSalary"></p-sortIcon>
             </th>
-            <th style="width: 5%"></th>
-            <th style="width: 5%"></th>
+            <th style="width: 9%"></th>
+            <th style="width: 9%"></th>
             <th style="width: 5%"></th>
           </tr>
         </ng-template>
@@ -50,29 +55,94 @@
             <td>{{ vacancy.minSalary }}</td>
 
             <td>
-              <button class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter"
-                (click)="onEditInitHandler(vacancy.id)">
-                Edit
+              <button
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+                (click)="onEditInitHandler(vacancy.id)"
+              >
+                <i class="bi bi-pencil-square"></i>Edit
+              </button>
+            </td>
+            <td></td>
+            <td>
+              <button
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#confirmDelete"
+              >
+                <i class="bi bi-trash3"></i>Delete
               </button>
             </td>
             <td>
-              <a class="btn btn-danger" (click)="VacancyDelete(vacancy.id)">Delete</a>
-            </td>
-            <td>
-              <a class="btn btn-light" [routerLink]="['/appliedinVacancy', vacancy.id]">Applications</a>
+              <a
+                class="btn btn-light"
+                [routerLink]="['/appliedinVacancy', vacancy.id]"
+                >Applications</a
+              >
             </td>
           </tr>
+
+          <div
+            class="modal fade"
+            id="confirmDelete"
+            tabindex="-1"
+            aria-labelledby="confirmDeleteLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="confirmDeleteLabel">
+                    Confirm Delete
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you wat to delete this vacancy?
+                </div>
+                <div class="modal-footer">
+                  <a class="btn btn-danger" (click)="VacancyDelete(vacancy.id)">
+                    <i class="bi bi-trash3"></i>Delete</a
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </ng-template>
       </p-table>
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="exampleModalCenter"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLongTitle">
                 Modal title
               </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -83,54 +153,115 @@
                 <div class="mt-2 mb-5">
                   <div class="mt-3">
                     <label for="jobtitle" class="form-label">Job Title</label>
-                    <input type="text" id="jobtitle" name="jobtitle" class="form-control"
-                      [(ngModel)]="vacancy.jobTitle" />
+                    <input
+                      type="text"
+                      id="jobtitle"
+                      name="jobtitle"
+                      class="form-control"
+                      [(ngModel)]="vacancy.jobTitle"
+                    />
                   </div>
 
                   <div class="mt-3">
-                    <label for="urlHandle" class="form-label">No Of Vacancy</label>
-                    <input type="text" id="noOfVacancy" name="noOfVacancy" class="form-control"
-                      [(ngModel)]="vacancy.noOfVacancies" />
+                    <label for="urlHandle" class="form-label"
+                      >No Of Vacancy</label
+                    >
+                    <input
+                      type="text"
+                      id="noOfVacancy"
+                      name="noOfVacancy"
+                      class="form-control"
+                      [(ngModel)]="vacancy.noOfVacancies"
+                    />
                   </div>
 
                   <div class="mt-3">
-                    <label for="minimumQualification" class="form-label">Minimum Qualification</label>
-                    <input type="text" id="minimumQualification" name="minimumQualification" class="form-control"
-                      [(ngModel)]="vacancy.minimumQualification" />
+                    <label for="minimumQualification" class="form-label"
+                      >Minimum Qualification</label
+                    >
+                    <input
+                      type="text"
+                      id="minimumQualification"
+                      name="minimumQualification"
+                      class="form-control"
+                      [(ngModel)]="vacancy.minimumQualification"
+                    />
                   </div>
                   <div class="mt-3">
-                    <label for="jobdescription" class="form-label">Job Description</label>
-                    <textarea type="text" id="jobdescription" name="jobdescription" class="form-control"
-                      [(ngModel)]="vacancy.jobDescription"></textarea>
+                    <label for="jobdescription" class="form-label"
+                      >Job Description</label
+                    >
+                    <textarea
+                      type="text"
+                      id="jobdescription"
+                      name="jobdescription"
+                      class="form-control"
+                      [(ngModel)]="vacancy.jobDescription"
+                    ></textarea>
                   </div>
 
-                  <label for="experienceRequired" class="form-label">Minimum years of Experience Required</label>
-                  <input type="text" id="experienceRequired" name="experienceRequired" class="form-control"
-                    [(ngModel)]="vacancy.experienceRequired" />
+                  <label for="experienceRequired" class="form-label"
+                    >Minimum years of Experience Required</label
+                  >
+                  <input
+                    type="text"
+                    id="experienceRequired"
+                    name="experienceRequired"
+                    class="form-control"
+                    [(ngModel)]="vacancy.experienceRequired"
+                  />
                 </div>
 
                 <div class="mt-3">
                   <label for="lastDate" class="form-label">Last Date</label>
-                  <input type="date" id="lastDate" name="lastDate" class="form-control"
-                    [(ngModel)]="vacancy.lastDate" />
+                  <input
+                    type="date"
+                    id="lastDate"
+                    name="lastDate"
+                    class="form-control"
+                    [(ngModel)]="vacancy.lastDate"
+                  />
                 </div>
                 <div class="mt-3">
-                  <label for="minSalary" class="form-label">Minimum Salary</label>
-                  <input type="text" id="minSalary" name="experienceRequired" class="form-control"
-                    [(ngModel)]="vacancy.minSalary" />
+                  <label for="minSalary" class="form-label"
+                    >Minimum Salary</label
+                  >
+                  <input
+                    type="text"
+                    id="minSalary"
+                    name="experienceRequired"
+                    class="form-control"
+                    [(ngModel)]="vacancy.minSalary"
+                  />
                 </div>
                 <div class="mt-3">
-                  <label for="maxSalary" class="form-label">Minimum Salary</label>
-                  <input type="text" id="maxSalary" name="maxSalary" class="form-control"
-                    [(ngModel)]="vacancy.maxSalary" />
+                  <label for="maxSalary" class="form-label"
+                    >Minimum Salary</label
+                  >
+                  <input
+                    type="text"
+                    id="maxSalary"
+                    name="maxSalary"
+                    class="form-control"
+                    [(ngModel)]="vacancy.maxSalary"
+                  />
                 </div>
               </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
                 Close
               </button>
-              <button type="button" class="btn btn-primary" (click)="UpdateVacancy()" data-dismiss="modal">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="UpdateVacancy()"
+                data-dismiss="modal"
+              >
                 Save changes
               </button>
             </div>
