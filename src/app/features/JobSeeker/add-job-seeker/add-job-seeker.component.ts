@@ -17,7 +17,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AddJobSeekerComponent implements OnInit {
   user?:User;
-  model:JobSeeker={} as JobSeeker;
+  model:AddJobSeeker={} as AddJobSeeker;
   file?:File;
   addProfileSubscription$?: Subscription;
   constructor(private jobseekerService:JobseekerService,private router:Router,private toast:NgToastService,private authService:AuthService,private fb:FormBuilder) {
@@ -40,7 +40,6 @@ export class AddJobSeekerComponent implements OnInit {
  
   onFormSubmit(): void {
     this.model = {
-      id: this.model.id,
       firstName: this.addProfileForm.get('firstName')?.value || '',
       lastName: this.addProfileForm.get('lastName')?.value || '',
       phone: this.addProfileForm.get('phone')?.value || '',
@@ -50,9 +49,6 @@ export class AddJobSeekerComponent implements OnInit {
       totalExperience: this.addProfileForm.get('totalExperience')?.value || 0,
       dob: this.model.dob,
       resumeURL: this.model.resumeURL,
-     // ProfileImgURL:this.model.ProfileImgURL
-     qualification:this.model.qualification,
-     experience:this.model.experience
     }
     if(this.file && this.user?.id){
       this.jobseekerService.uploadImage(this.file, this.user.id).subscribe({
@@ -61,6 +57,7 @@ export class AddJobSeekerComponent implements OnInit {
             this.model.resumeURL = response.result;
             this.addProfileSubscription$ = this.jobseekerService.addJobSeeker(this.model).subscribe({
               next: (response) =>{
+             
                 this.router.navigateByUrl('/jobseeker');
                 this.toast.success({detail:"",summary:'Profile added Succesfully', position: 'topRight'}); 
 
@@ -77,9 +74,7 @@ export class AddJobSeekerComponent implements OnInit {
       });
     }
   }
-ngOnDestroy(): void {
-  this.addProfileSubscription$?.unsubscribe();
-}
+
   onFileUploadChange(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     this.file = element.files?.[0];

@@ -11,8 +11,8 @@ export interface JobSeeker{
     totalExperience:number;
     expectedSalary:number;
     dob:Date;
-    resumeURL?:string;
-    profileImgURL?:string;
+    resumeURL:string;
+    profileImgURL:string;
     qualification:Qualification[];
     experience:Experience[]
 }

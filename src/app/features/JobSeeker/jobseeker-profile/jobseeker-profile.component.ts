@@ -22,7 +22,11 @@ export class JobseekerProfileComponent {
   constructor(private jobSeekerService: JobseekerService, private router: Router, private route: ActivatedRoute, private authservice: AuthService, private toast: NgToastService) {
   }
   ngOnInit(): void {
- 
+    this.authservice.user().subscribe({
+      next:(response)=>{
+      this.user=response;
+      }
+    })
       this.jobSeekerService.getJobseeker().subscribe({
         next: (response) => {
           this.jobseeker = response;

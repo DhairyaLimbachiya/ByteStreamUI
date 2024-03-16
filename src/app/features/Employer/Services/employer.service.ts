@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/enviroments/enviroment.development';
 import { AddEmployer } from '../model/add-Employer.model';
 import { ApplicationResponse } from '../../Home/home/models/application-response.model';
+import { UpdatedApplicationResponse } from '../../Home/home/models/updatedApplicationResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ employer?:Employer;
 
       }
       
-      getApplicationsByVacancyId(id: string): Observable<ApplicationResponse[]>{
-        return this.http.get<ApplicationResponse[]>(`${environment.employerBaseURL}/api/application/getAllByVacancy/${id}?addAuth=true`);
+      getApplicationsByVacancyId(id: string,): Observable<UpdatedApplicationResponse> {
+        return this.http.get<UpdatedApplicationResponse>(`${environment.employerBaseURL}/api/application/getAllByVacancy/${id}?addAuth=true`);
       }
       
 }

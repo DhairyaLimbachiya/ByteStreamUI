@@ -10,14 +10,13 @@ import { environment } from 'src/enviroments/enviroment.development';
 })
 export class QualificationService {
   constructor(private http: HttpClient) { }
-  
+
   addQualification(data: AddQualification): Observable<Qualification> {
     return this.http.post<Qualification>(
       `${environment.jobSeekerBaseURL}/api/qualification?addAuth=true`,
       data
     );
   }
-
   getQualification(): Observable<Qualification[]> {
     return this.http.get<Qualification[]>(
       `${environment.jobSeekerBaseURL}/api/qualification/?addAuth=true`

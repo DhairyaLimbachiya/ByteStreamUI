@@ -1,5 +1,5 @@
 export interface AddJobSeeker{
-    id:string
+
     firstName:string;
     lastName:string;
     phone:string;
@@ -9,5 +9,4 @@ export interface AddJobSeeker{
     expectedSalary:number;
     dob:Date;
     resumeURL:string;
-    ProfileImgURL:string
 }

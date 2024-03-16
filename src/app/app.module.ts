@@ -32,6 +32,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { AccordionModule } from 'primeng/accordion';
 import { ApplicantDetailsComponent } from './features/Employer/vacancy/Applications/applications/ApplicantDetails/applicant-details/applicant-details.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     CalendarModule,
     NgToastModule,
     AccordionModule,
+    NgxDocViewerModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

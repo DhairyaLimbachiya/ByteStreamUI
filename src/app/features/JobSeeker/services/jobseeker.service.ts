@@ -19,13 +19,13 @@ jobseeker?:JobSeeker;
     return  this.http.get<JobSeeker>(`${environment.jobSeekerBaseURL}/api/jobseeker/${id}?addAuth=true`)
     }
    
-    addJobSeeker(request:JobSeeker):Observable<JobSeeker>{
-      return  this.http.post<JobSeeker>(`${environment.jobSeekerBaseURL}/api/jobseeker?addAuth=true`,{
+    addJobSeeker(request:AddJobSeeker):Observable<JobSeeker>{
+      return  this.http.post<JobSeeker>(`${environment.jobSeekerBaseURL}/api/Jobseeker?addAuth=true`,{
      ...request
       })
       }
       updateJobSeeker(request: JobSeeker):Observable<JobSeeker>{
-        return  this.http.put<JobSeeker>(`${environment.jobSeekerBaseURL}/api/jobseeker?addAuth=true`,{
+        return  this.http.put<JobSeeker>(`${environment.jobSeekerBaseURL}/api/Jobseeker?addAuth=true`,{
           ...request
            })
       }

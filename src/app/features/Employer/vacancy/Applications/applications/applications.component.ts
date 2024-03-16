@@ -27,8 +27,10 @@ export class ApplicationsComponent implements OnInit  {
     if(this.vacancyId){
       this.employerService.getApplicationsByVacancyId(this.vacancyId).subscribe({
        next:(response)=>{
-        this.jobapplications=response;
+        this.jobapplications=response.response;
+        console.log(response);
        }
+       
       });
     }
   }
