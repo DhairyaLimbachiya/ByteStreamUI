@@ -69,7 +69,6 @@ checkProfile(){
 
       next: (response) => {
         console.log(response);
-        this.router.navigateByUrl('vacancy');
       },
       complete: () => {
         this.toast.success({ detail: "", summary: 'Vacancy Edited Succesfully', position: 'topRight' });

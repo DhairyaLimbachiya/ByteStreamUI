@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { EmployerService } from '../../../Services/employer.service';
 import { ActivatedRoute, Route } from '@angular/router';
-import { Vacancy } from '../../models/vacancy.model';
-import { VacancyService } from '../../services/vacancy.service';
+
 import { ApplicationResponse } from 'src/app/features/Home/home/models/application-response.model';
-import { Observable } from 'rxjs';
+
+import { TableLazyLoadEvent } from 'primeng/table';
 
 @Component({
   selector: 'app-applications',
@@ -12,26 +12,29 @@ import { Observable } from 'rxjs';
   styleUrls: ['./applications.component.css']
 })
 
-export class ApplicationsComponent implements OnInit  {
+export class ApplicationsComponent implements  AfterContentChecked {
   vacancyId: string | null = null;
-  jobapplications?:ApplicationResponse[];
+  jobapplications!: ApplicationResponse[];
+  totalRecords!: number;
+  constructor(private employerService: EmployerService, private router: ActivatedRoute, private changeDetector: ChangeDetectorRef) { }
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
+  }
 
-  constructor(private employerService: EmployerService,private router:ActivatedRoute){ }
-  ngOnInit(): void {
+  loadCustomers(event: TableLazyLoadEvent) {
     this.router.paramMap.subscribe({
       next: (response) => {
         this.vacancyId = response.get('id');
       }
     });
-
-    if(this.vacancyId){
-      this.employerService.getApplicationsByVacancyId(this.vacancyId).subscribe({
-       next:(response)=>{
-        this.jobapplications=response.response;
-        console.log(response);
-       }
-       
-      });
-    }
-  }
+    if(this.vacancyId && event.first != undefined && event.rows){
+      this.employerService.paginationEndpoint({vacancyId: this.vacancyId, pageNumber: (event.first / event.rows) +1, pageSize: event.rows}).subscribe({
+        next: (response) => {
+          this.totalRecords = response.result.totalRecords;
+          this.jobapplications=response.result.results;
+  } 
+});
+      }
 }
+}
+  

@@ -19,7 +19,7 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'applicantdetails/:id',
+    path: 'applicantdetails/:id/:Id',
     component: ApplicantDetailsComponent,
     canActivate: [authGuard],
   },
