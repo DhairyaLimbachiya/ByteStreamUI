@@ -1,13 +1,13 @@
 <div class="container">
 
-    <h1 class="mt-3">Add Your Profile</h1>
+    <h1 class="mt-3">Add Your Profile </h1>
   
     <form [formGroup]="addProfileForm" >
       <div class="mt-2">
   
         <div class="mt-3  d-flex justify-content-start">
        <div class="col-4">
-          <label class="form-label">First Name</label>
+          <label class="form-label">First Name *</label>
           <input pInputText type="text" id="firstName" name="firstName" class="w-100"
           placeholder="Enter Your First Name" formControlName="firstName" />
       <small class="d-block text-danger"
@@ -16,7 +16,7 @@
       </small>
         </div>
         <div class="col-6 mx-3">
-          <label class="form-label">Last  Name</label>
+          <label class="form-label">Last  Name *</label>
           <input pInputText type="text" id="lastName" name="lastName" class="w-100"
           placeholder="Enter Your Last Name" formControlName="lastName" />
       <small class="d-block text-danger"
@@ -28,15 +28,15 @@
   
   <div class="mt-3  d-flex justify-content-start">
     <div class="col-4">
-          <label class="form-label">Contact-Number</label>
+          <label class="form-label">Contact-Number *</label>
           <input pInputText type="text" id="phone" name="phone" class="w-100"
           placeholder="Enter Your Phone Number" formControlName="phone" />
       <small class="d-block text-danger"
           *ngIf="addProfileForm.get('phone')?.invalid && addProfileForm.get('phone')?.dirty">
           Phone Number should be of 10 digit
       </small>        </div>
-        <div class="col-6 mx-3">
-          <label for="dateOfBirth" class="form-label">Date Of Birth</label>
+        <div class="col-6 mx-3 " >
+          <label for="dateOfBirth" class="form-label">Date Of Birth *</label>
           <p-calendar type="date" [(ngModel)]="model.dob"
           [ngModelOptions]="{standalone: true}">
       </p-calendar>
@@ -44,7 +44,7 @@
 </div>  
 
         <div class="mt-3 col-6">
-          <label class="form-label">Address</label>
+          <label class="form-label">Address *</label>
           <textarea rows="5" cols="30" pInputTextarea id="address" name="address" class="w-100 h-100"
           formControlName="address">
       </textarea>
@@ -58,7 +58,7 @@
         
         <div class="mt-3  d-flex justify-content-start">
           <div class="col-4">
-          <label class="form-label">Total Years Of Experience</label>
+          <label class="form-label">Total Years Of Experience *</label>
           <input pInputText type="number" id="totalExperience" name="totalExperience" class="w-100"
           placeholder="Enter Your Total Experience" formControlName="totalExperience" />
       <small class="d-block text-danger"
@@ -66,7 +66,7 @@
           Total Experience is Required.
       </small>        </div>
         <div class="col-6 mx-3">
-          <label class="form-label">Expected Salary</label>
+          <label class="form-label">Expected Salary *</label>
           <input pInputText type="number" id="expectedSalary" name="expectedSalary" class="w-100"
           placeholder="Enter Your Expected Salary" formControlName="expectedSalary" />
       <small class="d-block text-danger"
@@ -75,7 +75,7 @@
       </small>        </div>
         </div>
         <div class="mt-3 p-2">
-          <label for="UploadResume" class="form-label">Upload Resume</label>
+          <label for="UploadResume" class="form-label">Upload Resume *</label>
           <input type="file" id="UploadResume" name="UploadResume" class="form-control"
               (change)="onFileUploadChange($event)" />
       </div>

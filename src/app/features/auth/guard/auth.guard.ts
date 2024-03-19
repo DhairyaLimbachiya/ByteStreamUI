@@ -40,8 +40,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
   else{
     toast.error({detail:"Error",summary:'unAuthorized access', position: 'topRight'})
-    //alert("UnAuthorized");
-    
     authService.logout();
     return router.createUrlTree(['/login'], { queryParams: {returnUrl: state.url} });
   }

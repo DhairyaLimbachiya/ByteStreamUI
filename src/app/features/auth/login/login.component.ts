@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginRequest } from '../models/login-request.model';
 import { AuthService } from '../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -7,12 +7,21 @@ import { jwtDecode } from 'jwt-decode';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Toast } from 'primeng/toast';
 import { NgToastService } from 'ng-angular-popup';
+import { JobseekerService } from '../../JobSeeker/services/jobseeker.service';
+import { EmployerService } from '../../Employer/Services/employer.service';
+import { User } from '../models/user.model';
+import { JobSeeker } from '../../JobSeeker/model/JobSeeker.model';
+import { Employer } from '../../Employer/model/Employer.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  user?: User;
+  jobseeker?: JobSeeker;
+  employer?: Employer;
+  profileMade?: boolean=true;
   model: LoginRequest = {
     userName: '',
     password: '',
@@ -32,8 +41,17 @@ export class LoginComponent {
     private cookieService: CookieService,
     private router: Router,
     private fb: FormBuilder,
-    private toast: NgToastService
-  ) {}
+    private toast: NgToastService,
+    private jobseekerService: JobseekerService,
+    private employerService: EmployerService
+  ) { }
+  ngOnInit(): void {
+    this.authservice.user().subscribe({
+      next: (response) => {
+        this.user = response;
+      },
+    });
+  }
   onFormSubmit(): void {
     this.model = {
       userName: this.loginForm.get('userName')?.value || '',
@@ -53,8 +71,46 @@ export class LoginComponent {
         );
 
         this.authservice.JwtDecoder(response.token);
-        //redirect back to home
-        this.router.navigateByUrl('/home');
+
+        if (this.user?.id &&this.user.userType.includes("JobSeeker")) {
+          this.jobseekerService.getJobSeeker(this.user?.id).subscribe({
+            next:(response)=>{
+              this.profileMade=true
+             this.router.navigateByUrl('/home');
+
+            },
+            error:(error)=>{
+              this.profileMade=false;
+              if(!this.profileMade){
+                this.router.navigateByUrl('/Jobseeker/jobseeker/add');
+          
+              }
+           
+              }
+          
+          });
+        }
+        if (this.user?.id &&this.user.userType.includes("Employer")) {
+          this.employerService.getEmployer().subscribe({
+            next:(response)=>{
+              this.profileMade=true
+             this.router.navigateByUrl('/home');
+
+            },
+            error:(error)=>{
+              this.profileMade=false;
+              if(!this.profileMade){
+                this.router.navigateByUrl('/Employer/employer/add');
+              
+              }
+           
+              }
+          
+          });
+        
+         
+        }
+
       },
       error: (error) => {
         console.log(error);
@@ -67,7 +123,7 @@ export class LoginComponent {
       password: this.forgotPasswordForm.get('password')?.value || '',
     };
     this.authservice.forgotPassword(this.model).subscribe({
-      next: (response) => {},
+      next: (response) => { },
       complete: () => {
         this.toast.success({
           detail: '',
