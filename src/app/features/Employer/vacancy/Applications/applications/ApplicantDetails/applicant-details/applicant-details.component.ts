@@ -30,20 +30,29 @@ export class ApplicantDetailsComponent implements OnInit {
 jobapplicationId?:string|null=null;
   jobseeker: JobSeeker = {} as JobSeeker;
 applicationStatus?:string|null=null;
+jobapplication?:ApplicationResponse
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (response) => {
         this.jobseekerId = response.get('id');
         this.jobapplicationId=response.get('Id')
+       
       },
     });
-    if (this.jobseekerId) {
+    if (this.jobseekerId&&this.jobapplicationId) {
       this.jobSeekerService.getJobSeeker(this.jobseekerId).subscribe({
         next: (response) => {
           this.jobseeker = response;
+          
         },
       });
-    }
+   
+    this.employerService.getDetailsbyApplication(this.jobapplicationId).subscribe({
+      next:(response)=>{
+        this.jobapplication=response;
+      },
+    })
+  }
   }
 
   AcceptReject(status: string){
@@ -51,15 +60,16 @@ applicationStatus?:string|null=null;
     this.employerService.processApplication(status, this.jobapplicationId).subscribe({
       
       next: (response) => {
-        if(response.isSuccess){
-          this.applicationStatus = status
+        if(response.isSuccess&&this.jobapplication){
+          this.jobapplication.applicationStatus = status
           if(status == "Accepted"){
             this.toast.success({detail:"Success",summary:'Application Selected'})
           }
           else{
             this.toast.warning({detail:"Rejected",summary:'Application Rejected'})
           }
-        this.router.navigateByUrl('/Vacancy/vacancy');
+          
+        this.router.navigateByUrl('/Vacancy/vacancy/');
         }
       },
       error: (error) => {

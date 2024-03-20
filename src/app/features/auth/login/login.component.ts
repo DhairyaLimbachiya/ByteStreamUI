@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
               this.profileMade=false;
               if(!this.profileMade){
                 this.router.navigateByUrl('/Employer/employer/add');
-              
+              console.log(this.user);
               }
            
               }

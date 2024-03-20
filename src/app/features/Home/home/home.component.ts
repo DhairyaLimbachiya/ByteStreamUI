@@ -20,7 +20,6 @@ import { JobSeeker } from '../../JobSeeker/model/JobSeeker.model';
 export class HomeComponent {
   vacancies?: Vacancy[];
   vacancyDetail: Vacancy = {} as Vacancy;
-  //test:Vacancy={} as Vacancy;
   employer: Employer = {} as Employer;
   jobseeker: JobSeeker = {} as JobSeeker;
   user?: User;

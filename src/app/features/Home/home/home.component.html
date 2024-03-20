@@ -17,7 +17,7 @@
                             <h5 class="card-title">{{vacancy.jobTitle}}</h5>
                             <div class="card-text"><b>Organization Name: </b> {{vacancy.publishedBy}}</div>
                             <div class="card-text"><b>No of Vacancies:</b> {{vacancy.noOfVacancies}}</div>
-                            <div class="card-text"><b>Salary Range: </b> {{vacancy.minSalary}} - {{vacancy.maxSalary}}</div>
+                            <div class="card-text"><b>Salary Range: </b> {{vacancy.minSalary | currency:'INR' }} - {{vacancy.maxSalary | currency:'INR'}}</div>
                             <span class="d-flex align-items-end mt-3" style="flex: 1">
                                 <button type="button" (click)="OnModelOpen(vacancy.publishedBy,vacancy.id)"
                                     class="btn btn-light btn-sm " data-toggle="modal" data-target="#exampleModalCenter">
@@ -85,8 +85,8 @@
                                                     <div class="col-4 d-flex align-items-center gap-2 ">
                                                         <label for="noOfEmployees" class="text-nowrap"><b>Salary Range :
                                                             </b></label>
-                                                        <div class="card-text">{{vacancy.minSalary}} -
-                                                            {{vacancy.maxSalary}}</div>
+                                                        <div class="card-text">{{vacancy.minSalary | currency:'INR'}} -
+                                                            {{vacancy.maxSalary | currency:'INR'}}</div>
 
                                                     </div>
                                                     <div class="  align-items-center gap-2 mt-3 ">

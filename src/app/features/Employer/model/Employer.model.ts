@@ -2,7 +2,7 @@ export interface Employer{
     id:string;
     organization:string;
     organizationType:string;
-    companyEmail:String;
+    companyEmail:string;
     companyPhone:string;
     noOfEmployees:number;
     startYear:number;   

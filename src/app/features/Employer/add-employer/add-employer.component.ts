@@ -40,7 +40,7 @@ onFormSubmit(): void {
   
     this.employerService.addEmployer(this.model).subscribe({
       next:(response)=>{
-        this.router.navigateByUrl('/employer');
+        this.router.navigateByUrl('/Employer/profile');
         this.toast.success({detail:"",summary:'Company Profile added Succesfully', position: 'topRight'}); 
 
       }

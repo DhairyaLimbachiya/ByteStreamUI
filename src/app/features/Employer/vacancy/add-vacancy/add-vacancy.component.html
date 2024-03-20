@@ -4,7 +4,7 @@
     <form [formGroup]="addVacancyForm" (ngSubmit)="onFormSubmit()">
         <div class="mt-2 mb-5">
             <div class="mt-3">
-                <label for="jobtitle" class="form-label">Job Title *</label>
+                <label for="jobtitle" class="form-label">Job Title <span class="RequiredValidationSign">*</span></label>
                 <input type="text" id="jobTitle" name="jobTitle" class="form-control w-100"
                     placeholder="Enter Job Title" formControlName="jobTitle" />
                 <small class="d-block text-danger"
@@ -14,7 +14,7 @@
             </div>
 
             <div class="mt-3">
-                <label for="urlHandle" class="form-label">No Of Vacancy *</label>
+                <label for="urlHandle" class="form-label">No Of Vacancy <span class="RequiredValidationSign">*</span></label>
                 <input type="number" id="noOfVacancies" name="noOfVacancies" class="form-control w-100"
                     placeholder="Enter Total Number of Vacancies" formControlName="noOfVacancies" />
                 <small class="d-block text-danger"
@@ -24,7 +24,7 @@
             </div>
 
             <div class="mt-3">
-                <label for="minimumQualification" class="form-label">Minimum Qualification *</label>
+                <label for="minimumQualification" class="form-label">Minimum Qualification <span class="RequiredValidationSign">*</span></label>
                 <input 
                 type="text" 
                 id="minimumQualification"
@@ -38,7 +38,7 @@
             </small>
             </div>
             <div class="mt-3">
-                <label for="jobdescription" class="form-label">Job Description *</label>
+                <label for="jobdescription" class="form-label">Job Description <span class="RequiredValidationSign">*</span></label>
                 <textarea 
                 pInputTextarea
                 id="jobDescription" 
@@ -53,8 +53,8 @@
                 Minimum 50 characters are Required
             </small>
             </div>
-        <div clas="mt-3">
-            <label for="experienceRequired" class="form-label">Minimum years of Experience Required</label>
+        <div class="mt-3">
+            <label for="experienceRequired" class="form-label">Minimum years of Experience Required <span class="RequiredValidationSign">*</span></label>
             <input 
             type="text" 
             id="experienceRequired"
@@ -70,11 +70,11 @@
         
 
         <div class="mt-3">
-            <label for="lastDate" class="form-label">Last Date *</label>
-            <p-calendar type="date" id="lastDate" name="lastDate" [(ngModel)]="addvacancy.lastDate" [ngModelOptions]="{standalone: true}"></p-calendar>      
+            <label for="lastDate" class="form-label">Last Date <span class="RequiredValidationSign">*</span></label>
+            <p-calendar placeholder="dd-MM-yyyy" type="date" id="lastDate" name="lastDate" [(ngModel)]="addvacancy.lastDate" [ngModelOptions]="{standalone: true}"></p-calendar>      
           </div>
         <div class="mt-3">
-            <label for="minSalary" class="form-label">Minimum Salary *</label>
+            <label for="minSalary" class="form-label">Minimum Salary <span class="RequiredValidationSign">*</span></label>
             <input 
             type="number" 
             id="minimumSalary" 
@@ -88,7 +88,7 @@
         </small>
         </div>
         <div class="mt-3">
-            <label for="maxSalary" class="form-label">Maximum Salary *</label>
+            <label for="maxSalary" class="form-label">Maximum Salary <span class="RequiredValidationSign">*</span></label>
 
             <input 
             type="number" 

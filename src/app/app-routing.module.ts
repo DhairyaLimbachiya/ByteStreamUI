@@ -11,7 +11,7 @@ path: 'home',component:HomeComponent
   { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
 
 // Employer Routes
-{ path: 'Employer', loadChildren: () => import('./features/Employer/profile.module').then(m => m.EmployerModule) },
+{ path: 'Employer', loadChildren: () => import('./features/Employer/employer.module').then(m => m.EmployerModule) },
 { path: 'Vacancy', loadChildren:()=>import('./features/Employer/vacancy.module').then(m=>m.VacancyModule)},
 
 

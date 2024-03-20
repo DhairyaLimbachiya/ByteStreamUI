@@ -19,6 +19,7 @@ export class AddJobSeekerComponent implements OnInit {
   user?:User;
   model:AddJobSeeker={} as AddJobSeeker;
   file?:File;
+
   addProfileSubscription$?: Subscription;
   constructor(private jobseekerService:JobseekerService,private router:Router,private toast:NgToastService,private authService:AuthService,private fb:FormBuilder) {
   }
@@ -50,7 +51,8 @@ export class AddJobSeekerComponent implements OnInit {
       dob: this.model.dob,
       resumeURL: this.model.resumeURL,
     }
-    if(this.file && this.user?.id){
+   
+    if (this.file && this.user?.id){
       this.jobseekerService.uploadImage(this.file, this.user.id).subscribe({
         next: (response) => {
           if(response.isSuccess){

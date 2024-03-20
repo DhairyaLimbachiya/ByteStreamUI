@@ -79,54 +79,124 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #form="ngForm" (click)="onFormSubmit()" method="post">
+          <form [formGroup]="editCompanyForm" >
             <div class="mt-2">
-
               <div class="mt-3">
                 <label class="form-label">Organization Name</label>
-                <input type="text" id="organization" class="form-control" name="organization"
-                  [(ngModel)]="employer.organization">
+                <input 
+                type="text" 
+                id="organization" 
+                name="organization" 
+                class="form-control w-100"
+                placeholder="Enter Organization Name"
+                formControlName="organization" 
+                [value]="employer.organization"/>
+            <small class="d-block text-danger"
+                *ngIf="editCompanyForm.get('organization')?.invalid && editCompanyForm.get('organization')?.dirty">
+                Organization Name is Required.
+            </small>
               </div>
 
 
               <div class="mt-3">
                 <label class="form-label">Organization Type</label>
-                <input type="text" id="organizationType" class="form-control" name="organizationType"
-                  [(ngModel)]="employer.organizationType">
+                <input 
+                type="text" 
+                id="organizationType" 
+                name="organizationType" 
+                class="form-control w-100"
+                placeholder="Enter Organization Type"
+                formControlName="organizationType"
+                [value]="employer.organizationType"/>
+            <small class="d-block text-danger"
+                *ngIf="editCompanyForm.get('organizationType')?.invalid && editCompanyForm.get('organizationType')?.dirty">
+                Organization Type is Required.
+            </small>
               </div>
               <div class="mt-3">
                 <label class="form-label">Company Email</label>
-                <input type="text" id="companyEmail" class="form-control" name="companyEmail"
-                  [(ngModel)]="employer.companyEmail">
+                <input 
+                            type="text" 
+                            id="companyEmail" 
+                            name="companyEmail" 
+                            class="form-control w-100"
+                            placeholder="Enter Company Email"
+                            formControlName="companyEmail"
+                            [value]="employer.companyEmail"/>
+                        <small class="d-block text-danger"
+                            *ngIf="editCompanyForm.get('companyEmail')?.invalid && editCompanyForm.get('companyEmail')?.dirty">
+                            Company Email is Required.
+                        </small>
               </div>
               <div class="mt-3">
                 <label class="form-label">Company's Phone Number</label>
-                <input type="text" id="companyPhone" class="form-control" name="companyPhone"
-                  [(ngModel)]="employer.companyPhone">
+                <input 
+                type="text" 
+                id="companyPhone" 
+                name="companyPhone" 
+                class="form-control w-100"
+                placeholder="Enter Company Number"
+                formControlName="companyPhone"
+                [value]="employer.companyPhone"/>
+            <small class="d-block text-danger"
+                *ngIf="editCompanyForm.get('companyPhone')?.invalid && editCompanyForm.get('companyPhone')?.dirty">
+                Company Phone Number Should be 10 digits.
+            </small>
               </div>
               <div class="mt-3">
                 <label class="form-label">No of Employee</label>
-                <input type="text" id="noOfEmployees" class="form-control" name="noOfEmployees"
-                  [(ngModel)]="employer.noOfEmployees">
+                <input 
+                type="number" 
+                id="noOfEmployees" 
+                name="noOfEmployees" 
+                class="form-control w-100"
+                placeholder="Enter Total Number of Employees"
+                formControlName="noOfEmployees"
+                [value]="employer.noOfEmployees"/>
+            <small class="d-block text-danger"
+                *ngIf="editCompanyForm.get('noOfEmployees')?.invalid && editCompanyForm.get('noOfEmployees')?.dirty">
+                Total Number of Employees should be greater than 1.
+            </small>
               </div>
               <div class="mt-3">
                 <label class="form-label">Started In Year</label>
-                <input type="date" id="startedInYear" class="form-control" name="startYear"
-                  value="{{ employer.startYear }}" [ngModel]="employer.startYear | date : 'yyy-MM-dd'"
-                  (ngModelChange)="employer.startYear = $event">
+                <input 
+                type="number" 
+                id="startYear" 
+                name="startYear" 
+                class="form-control w-100"
+                placeholder="When was Organization Established?"
+                formControlName="startYear"
+                [value]="employer.startYear"/>
+            <small class="d-block text-danger"
+                *ngIf="editCompanyForm.get('startYear')?.invalid && editCompanyForm.get('startYear')?.dirty">
+                Invalid Year Should be between 1900 - 2024
+            </small>
               </div>
               <div class="mt-3">
                 <label class="form-label">About Company</label>
-                <textarea type="text" id="aboutCompany" class="form-control" name="aboutCompany"
-                  [(ngModel)]="employer.about">
-                </textarea>
+                <textarea 
+                pInputTextarea
+                id="about" 
+                name="about" 
+                class="form-control" 
+                style="height: 180px; max-height: 180px;" 
+                class="form-control w-100"
+                placeholder="Enter Organization Information"
+                formControlName="about"
+                [value]="employer.about">
+            </textarea>
+            <small class="d-block text-danger"
+                *ngIf="editCompanyForm.get('about')?.invalid && editCompanyForm.get('about')?.dirty">
+                Minimum 50 characters are Required
+            </small>
               </div>
 
 
             </div>
 
 
-            <button type="submit" class="btn btn-primary" data-dismiss="modal">Submit</button>
+            <button type="submit" class="btn btn-primary"[disabled]="editCompanyForm.invalid" (click)="onFormSubmit()"data-dismiss="modal">Submit</button>
 
           </form>
 

@@ -23,7 +23,7 @@
             <tr>
                 <td>{{applicationResponses.vacancy?.jobTitle}}</td>
                 <td>{{applicationResponses.vacancy?.publishedBy}}</td>
-                <td>{{applicationResponses.vacancy?.minSalary}} - {{applicationResponses.vacancy?.maxSalary}}</td>
+                <td>{{applicationResponses.vacancy?.minSalary | currency:'INR'}} - {{applicationResponses.vacancy?.maxSalary | currency:'INR'}}</td>
                 <td>{{applicationResponses.vacancy?.noOfVacancies}}</td>
                 <td>{{applicationResponses.appliedDate | date: 'yyyy-MM-dd'}}</td>
                 <td>{{applicationResponses.applicationStatus}}</td>

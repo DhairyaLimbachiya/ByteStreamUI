@@ -2,17 +2,15 @@
   <h1 class="mt-3">Vacancy List</h1>
 
   <div class="d-flex justify-content-end mt-3">
-    <a (click)="checkProfile()" class="btn btn-primary"> <i class="bi bi-file-earmark-plus-fill"></i> Add Vacancy</a>
+    <a (click)="checkProfile()" class="btn btn-primary">
+      <i class="bi bi-file-earmark-plus-fill"></i> Add Vacancy</a
+    >
   </div>
   <ng-container *ngIf="vacancies; else novacancies">
     <div class="card mt-3">
       <p-table
         [value]="vacancies"
-        [tableStyle]="{ 'min-width': '60rem' }"
-        [paginator]="true"
-        [rows]="5"
-        [showCurrentPageReport]="true"
-      >
+        [tableStyle]="{ 'min-width': '60rem' }">
         <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="jobTitle" style="width: 10%">
@@ -50,9 +48,9 @@
             <td>{{ vacancy.noOfVacancies }}</td>
             <td>{{ vacancy.minimumQualification }}</td>
             <td>{{ vacancy.experienceRequired }}</td>
-            <td>{{ vacancy.lastDate | date : "yyyy-MM-dd" }}</td>
-            <td>{{ vacancy.maxSalary }}</td>
-            <td>{{ vacancy.minSalary }}</td>
+            <td>{{ vacancy.lastDate | date : "dd-MM-yyyy" }}</td>
+            <td>{{ vacancy.minSalary | currency:'INR' }}</td>
+            <td>{{ vacancy.maxSalary | currency:'INR'}}</td>
 
             <td>
               <button
@@ -146,102 +144,173 @@
             <div class="modal-body">
               <h1 class="mt-3">Edit Vacancy</h1>
 
-              <form #form="ngForm" >
+              <form [formGroup]="editVacancyForm" >
                 <div class="mt-2 mb-5">
                   <div class="mt-3">
                     <label for="jobtitle" class="form-label">Job Title</label>
                     <input
                       type="text"
-                      id="jobtitle"
-                      name="jobtitle"
-                      class="form-control"
-                      [(ngModel)]="vacancy.jobTitle"
+                      id="jobTitle"
+                      name="jobTitle"
+                      class="form-control w-100"
+                      placeholder="Enter Job Title"
+                      formControlName="jobTitle"
+                      [value]="vacancy.jobTitle"
                     />
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editVacancyForm.get('jobTitle')?.invalid &&
+                        editVacancyForm.get('jobTitle')?.dirty
+                      "
+                    >
+                      Job Title is Required.
+                    </small>
                   </div>
 
                   <div class="mt-3">
                     <label for="urlHandle" class="form-label"
                       >No Of Vacancy</label
                     >
-                    <input
-                      type="text"
-                      id="noOfVacancy"
-                      name="noOfVacancy"
-                      class="form-control"
-                      [(ngModel)]="vacancy.noOfVacancies"
-                    />
+                    <input 
+                    type="text" 
+                    id="noOfVacancies" 
+                    name="noOfVacancies"
+                    class="form-control w-100"
+                    placeholder="Enter Total Number of Vacancies"
+                    formControlName="noOfVacancies"
+                    [value]="vacancy.noOfVacancies"/>
+                <small class="d-block text-danger"
+                    *ngIf="editVacancyForm.get('noOfVacancies')?.invalid && editVacancyForm.get('noOfVacancies')?.dirty">
+                    Total Number of Vacancies should be greater than 1.
+                </small>
                   </div>
 
                   <div class="mt-3">
                     <label for="minimumQualification" class="form-label"
                       >Minimum Qualification</label
                     >
-                    <input
-                      type="text"
-                      id="minimumQualification"
-                      name="minimumQualification"
-                      class="form-control"
-                      [(ngModel)]="vacancy.minimumQualification"
-                    />
+                    <input 
+                    type="text" 
+                    id="minimumQualification" 
+                    name="minimumQualification" 
+                    class="form-control w-100"
+                    placeholder="Enter Minimum Qualification"
+                    formControlName="minimumQualification"
+                    [value]="vacancy.minimumQualification"/>
+                <small class="d-block text-danger"
+                    *ngIf="editVacancyForm.get('minimumQualification')?.invalid && editVacancyForm.get('minimumQualification')?.dirty">
+                    Minimum Qualification is Required.
+                </small>
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editVacancyForm.get('noOfVacancies')?.invalid &&
+                        editVacancyForm.get('noOfVacancies')?.dirty
+                      "
+                    >
+                      Total Number of Vacancies should be greater than 1.
+                    </small>
                   </div>
                   <div class="mt-3">
                     <label for="jobdescription" class="form-label"
                       >Job Description</label
                     >
                     <textarea
-                      type="text"
-                      id="jobdescription"
-                      name="jobdescription"
-                      class="form-control"
-                      [(ngModel)]="vacancy.jobDescription"
-                    ></textarea>
+                      pInputTextarea
+                      id="jobDescription"
+                      name="jobDescription"
+                      style="height: 180px; max-height: 180px"
+                      class="form-control w-100"
+                      placeholder="Enter Job Description"
+                      formControlName="jobDescription"
+                      [value]="vacancy.jobDescription"
+                    >
+                    </textarea>
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editVacancyForm.get('jobDescription')?.invalid &&
+                        editVacancyForm.get('jobDescription')?.dirty
+                      "
+                    >
+                      Minimum 50 characters are Required
+                    </small>
                   </div>
 
                   <label for="experienceRequired" class="form-label"
                     >Minimum years of Experience Required</label
                   >
-                  <input
-                    type="text"
-                    id="experienceRequired"
-                    name="experienceRequired"
-                    class="form-control"
-                    [(ngModel)]="vacancy.experienceRequired"
-                  />
+                  <input 
+                  type="text" 
+                  id="experienceRequired" 
+                  name="experienceRequired" 
+                  class="form-control w-100"
+                  placeholder="Enter Experience Required"
+                  formControlName="experienceRequired"
+                  [value]="vacancy.experienceRequired"/>
+              <small class="d-block text-danger"
+                  *ngIf="editVacancyForm.get('experienceRequired')?.invalid && editVacancyForm.get('experienceRequired')?.dirty">
+                  Experience is Required.
+              </small>
                 </div>
 
                 <div class="mt-3">
                   <label for="lastDate" class="form-label">Last Date</label>
-                  <input
+                  <p-calendar
                     type="date"
                     id="lastDate"
                     name="lastDate"
-                    class="form-control"
+                    placeholder="dd/MM/yyyy"
                     [(ngModel)]="vacancy.lastDate"
-                  />
+                    [ngModelOptions]="{ standalone: true }"
+                  ></p-calendar>
                 </div>
                 <div class="mt-3">
                   <label for="minSalary" class="form-label"
                     >Minimum Salary</label
                   >
                   <input
-                    type="text"
+                    type="number"
                     id="minSalary"
-                    name="experienceRequired"
-                    class="form-control"
-                    [(ngModel)]="vacancy.minSalary"
+                    name="minSalary"
+                    class="form-control w-100"
+                    placeholder="Enter Minimum Salary"
+                    formControlName="minSalary"
+                    [value]="vacancy.minSalary"
                   />
+                  <small
+                    class="d-block text-danger"
+                    *ngIf="
+                      editVacancyForm.get('minimumSalary')?.invalid &&
+                      editVacancyForm.get('minimumSalary')?.dirty
+                    "
+                  >
+                    Minimum Salary is Required.
+                  </small>
                 </div>
                 <div class="mt-3">
                   <label for="maxSalary" class="form-label"
-                    >Minimum Salary</label
+                    >Maximum Salary</label
                   >
                   <input
-                    type="text"
+                    type="number"
                     id="maxSalary"
                     name="maxSalary"
-                    class="form-control"
-                    [(ngModel)]="vacancy.maxSalary"
+                    class="form-control w-100"
+                    placeholder="Enter Maximum Salary"
+                    formControlName="maxSalary"
+                    [value]="vacancy.maxSalary"
                   />
+                  <small
+                    class="d-block text-danger"
+                    *ngIf="
+                      editVacancyForm.get('maxSalary')?.invalid &&
+                      editVacancyForm.get('maxSalary')?.dirty
+                    "
+                  >
+                    Maximum Salary is Required.
+                  </small>
                 </div>
               </form>
             </div>
@@ -256,10 +325,14 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="UpdateVacancy()"
+              
                 data-dismiss="modal"
+                type="submit"
+                [disabled]="editVacancyForm.invalid"
+                (click)="UpdateVacancy()"
               >
-                Save changes
+
+              Save Changes
               </button>
             </div>
           </div>

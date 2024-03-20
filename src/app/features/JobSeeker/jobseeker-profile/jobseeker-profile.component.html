@@ -19,7 +19,6 @@
           <h3>Details</h3>
         </div>
 
-        <ng-container *ngIf="user?.userType?.includes('JobSeeker')">
           <button
             class="btn btn-primary"
             data-toggle="modal"
@@ -27,7 +26,6 @@
           >
             Update Personal Details
           </button>
-        </ng-container>
       </div>
       <hr />
       <div >
@@ -53,7 +51,7 @@
                 style="font-size: 1.2rem"
               ></i>
               <span class="fw-bold"> Date of Birth: </span
-              >{{ jobseeker.dob | date : "yyyy-MM-dd" }}
+              >{{ jobseeker.dob | date : "dd-MM-yyyy" }}
             </div>
             <div class="col-6">
               <i class="bi bi-award-fill" style="font-size: 1.2rem"></i>
@@ -67,9 +65,8 @@
       <div class="mt-2">
         <div class="d-flex flex-row">
           <div class="col-6">
-            <i class="bi bi-currency-pound" style="font-size: 1.2rem"></i>
             <span class="fw-bold"> Expected Salary: </span
-            >{{ jobseeker.expectedSalary }}
+            >{{ jobseeker.expectedSalary| currency:'INR' }}
           </div>
           <div class="col-6">
             <i class="bi bi-house-fill" style="font-size: 1.2rem"></i>
@@ -128,7 +125,7 @@
                       style="font-size: 1.2rem"
                     ></i>
                     <span class="fw-bold"> Start Date: </span
-                    >{{ experience.startYear | date : "yyyy-MM-dd" }}
+                    >{{ experience.startYear | date : "dd-MM-yyyy" }}
                   </div>
                   <div class="col-6">
                     <i
@@ -136,7 +133,7 @@
                       style="font-size: 1.2rem"
                     ></i>
                     <span class="fw-bold"> End Date: </span
-                    >{{ experience.endYear | date : "yyyy-MM-dd" }}
+                    >{{ experience.endYear | date : "dd-MM-yyyy" }}
                   </div>
                 </div>
               </div>
@@ -202,7 +199,7 @@
                       style="font-size: 1.2rem"
                     ></i>
                     <span class="fw-bold">Year of Completion: </span
-                    >{{ qualification.yearOfCompletion | date : "yyyy" }}
+                    >{{ qualification.yearOfCompletion }}
                   </div>
                   <div class="col-6">
                     <i
@@ -230,7 +227,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
             <button
               type="button"
               class="close"
@@ -241,87 +238,108 @@
             </button>
           </div>
           <div class="modal-body">
-            <form #form="ngForm" (click)="onFormSubmit()">
+            <form [formGroup]="editProfileForm" >
               <div class="mt-2">
                 <div class="mt-3 d-flex justify-content-start">
                   <div class="col-4">
                     <label class="form-label">First Name</label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      class="form-control"
-                      name="firstName"
-                      [(ngModel)]="jobseeker.firstName"
-                    />
+                    <input 
+                    type="text" 
+                    id="firstName" 
+                    name="firstName" 
+                    class="form-control w-100"
+                    placeholder="Enter Your First Name" 
+                    formControlName="firstName" 
+                    [value]="jobseeker.firstName"/>
+                <small class="d-block text-danger"
+                    *ngIf="editProfileForm.get('firstName')?.invalid && editProfileForm.get('firstName')?.dirty">
+                    First Name is Required.
+                </small>
                   </div>
                   <div class="col-6 mx-3">
                     <label class="form-label">Last Name</label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      class="form-control"
-                      name="lastName"
-                      [(ngModel)]="jobseeker.lastName"
-                    />
+                    <input 
+                            type="text" 
+                            id="lastName" 
+                            name="lastName" 
+                            class="form-control w-100"
+                            placeholder="Enter Your Last Name" 
+                            formControlName="lastName" 
+                            [value]="jobseeker.lastName"/>
+                        <small class="d-block text-danger"
+                            *ngIf="editProfileForm.get('lastName')?.invalid && editProfileForm.get('lastName')?.dirty">
+                            Last Name is Required.
+                        </small>
                   </div>
                 </div>
 
                 <div class="mt-3 d-flex justify-content-start">
                   <div class="col-4">
                     <label class="form-label">Contact-Number</label>
-                    <input
-                      type="text"
-                      id="phone"
-                      class="form-control"
-                      name="phone"
-                      [(ngModel)]="jobseeker.phone"
-                    />
+                    <input 
+                    type="string" 
+                    id="phone" 
+                    name="phone" 
+                    class="form-control w-100"
+                    placeholder="Enter Your Phone Number" 
+                    formControlName="phone" 
+                    [value]="jobseeker.phone"/>
+                <small class="d-block text-danger"
+                    *ngIf="editProfileForm.get('phone')?.invalid && editProfileForm.get('phone')?.dirty">
+                    Phone Number should be of 10 digit
+                </small>
                   </div>
-                  <div class="col-6 mx-3">
-                    <label class="form-label">Date Of Birth</label>
-                    <input
-                      type="date"
-                      id="dateOfBirth"
-                      class="form-control"
-                      name="dob"
-                      value="{{ jobseeker.dob }}"
-                      [ngModel]="jobseeker.dob | date : 'yyy-MM-dd'"
-                      (ngModelChange)="jobseeker.dob = $event"
-                    />
-                  </div>
+                
                 </div>
 
                 <div class="mt-3 col-6">
                   <label class="form-label">Address</label>
-                  <input
-                    type="text"
-                    id="address"
-                    class="form-control"
-                    name="address"
-                    [(ngModel)]="jobseeker.address"
-                  />
+                  <textarea 
+                  pInputTextarea 
+                  id="address" 
+                  name="address" 
+                  rows="5" 
+                  cols="30" 
+                  class="w-100 h-100"
+                  formControlName="address"
+                  [value]="jobseeker.address">
+              </textarea>
+              <small class="d-block text-danger"
+              *ngIf="editProfileForm.get('address')?.invalid && editProfileForm.get('address')?.dirty">
+              Address is Required.
+          </small>
                 </div>
 
                 <div class="mt-3 d-flex justify-content-start">
                   <div class="col-4">
                     <label class="form-label">Years of Experience</label>
-                    <input
-                      type="text"
-                      id="totalExperience"
-                      class="form-control"
-                      name="totalExperience"
-                      [(ngModel)]="jobseeker.totalExperience"
-                    />
+                    <input 
+                    type="number" 
+                    id="totalExperience" 
+                    name="totalExperience" 
+                    class="form-control w-100"
+                    placeholder="Enter Your Total Experience" 
+                    formControlName="totalExperience" 
+                    [value]="jobseeker.totalExperience"/>
+                <small class="d-block text-danger"
+                    *ngIf="editProfileForm.get('totalExperience')?.invalid && editProfileForm.get('totalExperience')?.dirty">
+                    Total Experience is Required.
+                </small>
                   </div>
                   <div class="col-6 mx-3">
                     <label class="form-label">Expected Salary</label>
-                    <input
-                      type="text"
-                      id="expectedSalary"
-                      class="form-control"
-                      name="expectedSalary"
-                      [(ngModel)]="jobseeker.expectedSalary"
-                    />
+                    <input 
+                    type="number" 
+                    id="expectedSalary" 
+                    name="expectedSalary"
+                    class="form-control w-100"
+                    placeholder="Enter Your Expected Salary" 
+                    formControlName="expectedSalary" 
+                    [value]="jobseeker.expectedSalary"/>
+                <small class="d-block text-danger"
+                    *ngIf="editProfileForm.get('expectedSalary')?.invalid && editProfileForm.get('expectedSalary')?.dirty">
+                    Expected Salary is Required.
+                </small>
                   </div>
                 </div>
                 <div class="mt-3 p-2">
@@ -340,6 +358,8 @@
                   type="submit"
                   class="btn btn-primary"
                   data-dismiss="modal"
+                  [disabled]="editProfileForm.invalid"
+                  (click)="onFormSubmit()"
                 >
                   Save Changes
                 </button>

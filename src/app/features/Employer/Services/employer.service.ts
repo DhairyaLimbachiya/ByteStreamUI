@@ -28,7 +28,7 @@ export class EmployerService {
       }
     );
   }
-  updateEmployer(request: Employer): Observable<Employer> {
+  updateEmployer(request:  Employer): Observable<Employer> {
     return this.http.put<Employer>(
       `${environment.employerBaseURL}/api/employer?addAuth=true`,
       {
@@ -66,4 +66,10 @@ export class EmployerService {
       request
     );
   }
+  getDetailsbyApplication(id:string):Observable<ApplicationResponse>{
+  return this.http.get<ApplicationResponse>(
+    `${environment.employerBaseURL}/api/application/getDetailsbyApplication/${id}?addAuth=true`,
+  );
+  
+}
 }
