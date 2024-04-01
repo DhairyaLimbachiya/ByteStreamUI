@@ -1,4 +1,7 @@
+
 <div class="container-sm "  >
+    <button class="mt-4 btn btn-light border" [routerLink]="['/Vacancy/appliedinVacancy/',jobapplication?.vacancyId]"><i class="bi bi-arrow-bar-left"></i> Back to Applications</button>
+
     <div class="my-3 border border-dark rounded  p-3" style="background-color: rgba(192, 229, 244, 0.314);">
         <div class="d-flex justify-content-between">
             <div>
@@ -6,46 +9,54 @@
             </div>
         </div>
         <hr>
-        <div class="mt-2">
-            <div class="d-flex flex-row">
-                <div class="col-6">
-                    <i class="bi bi-person-fill" style="font-size: 1.2rem;"></i>
-                    <span class="fw-bold"> Name: </span>{{jobseeker.firstName}} {{jobseeker.lastName}}
-                </div>
-                <div class="col-6">
-                    <i class="bi bi-telephone-fill" style="font-size: 1.2rem;"></i>
-                    <span class="fw-bold"> Phone Number: </span>{{jobseeker.phone}}
-                </div>
+        <div class="d-flex flex-row">
+            <div class="col-3">
+                <img [src]='jobseeker.profileImgURL' alt="" width="80%" height="80%">
             </div>
-        </div>
-
-        <div class="mt-2">
-            <div class="d-flex flex-row">
-              
-                <div class="col-6">
-                    <i class="bi bi-calendar-event-fill" style="font-size: 1.2rem;"></i>
-                    <span class="fw-bold"> Date of Birth: </span>{{jobseeker.dob | date: 'dd-MM-yyyy'}}
+            <div class="col-9">
+                <div class="mt-2">
+                    <div class="d-flex flex-row">
+                        <div class="col-6">
+                            <span class="fw-bold">Name: </span>{{jobseeker.firstName}} {{jobseeker.lastName}}
+                        </div>
+                 
+                    </div>
                 </div>
-                <div class="col-6">
-                    <i class="bi bi-award-fill" style="font-size: 1.2rem;"></i>
-                    <span class="fw-bold"> Total Experience: </span>{{jobseeker.totalExperience}}
+    
+                <div class="mt-2">
+                    <div class="d-flex flex-row">
+                        <div class="col-6">
+                            <span class="fw-bold">Phone Number: </span>{{jobseeker.phone}}
+                        </div>
+                        <div class="col-6">
+                            <span class="fw-bold">Date of Birth: </span>{{jobseeker.dob | date:
+                            'yyyy-MM-dd'}}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="mt-2">
-            <div class="d-flex flex-row">
-                <div class="col-6">
-                    <i class="bi bi-currency-rupee" style="font-size: 1.2rem;"></i>
-                    <span class="fw-bold"> Expected Salary: </span>{{jobseeker.expectedSalary}}
+    
+                <div class="mt-2">
+                    <div class="d-flex flex-row">
+                        <div class="col-6">
+                            <span class="fw-bold">Total Experience: </span>{{jobseeker.totalExperience}}
+                        </div>
+                        <div class="col-6">
+                            <span class="fw-bold">Expected Salary: </span>{{jobseeker.expectedSalary | currency:"INR"}}
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <i class="bi bi-house-fill" style="font-size: 1.2rem;"></i>
-                    <span class="fw-bold"> Address: </span> {{jobseeker.address}}
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center mt-3 ">
+    
+    
+    
+                <div class="mt-2">
+                    <div class="d-flex flex-row">
+                        <div class="col-12">
+                            <p class="m-0 fw-bold">Address: </p>
+                            <div style="white-space: pre-wrap;">{{jobseeker.address}}</div>
+                        </div>
+                    </div>
+          </div>
+          <div class="d-flex justify-content-center mt-3 ">
             <a
               href="{{ jobseeker.resumeURL }}"
               target="_blank"
@@ -53,7 +64,8 @@
               >Resume  <i class="bi bi-envelope-paper"></i></a
             >
           </div>
-    </div>
+        </div>
+          </div>
     <p-accordion >
         <p-accordionTab header="Experiences">
 
@@ -96,7 +108,7 @@
                             <div class="d-flex flex-row">
                                 <div class="col-6">
                                     <i class="bi bi-link-45deg" style="font-size: 1.2rem"></i>
-                                    <span class="fw-bold">  Company Url: </span>{{experience.companyUrl}}
+                                    <span class="fw-bold">  Company Url: </span><a href={{experience.companyUrl}} target="_blank">{{experience.companyName}}</a>
                                 </div>
                             </div>
                         </div>

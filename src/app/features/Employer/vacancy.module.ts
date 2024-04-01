@@ -12,7 +12,7 @@ import { VacancyRoutingModule } from './vacancy-routing.module';
 import { ApplicantDetailsComponent } from './vacancy/Applications/applications/ApplicantDetails/applicant-details/applicant-details.component';
 import { ApplicationsComponent } from './vacancy/Applications/applications/applications.component';
 import { AccordionModule } from 'primeng/accordion';
-
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ ApplicantDetailsComponent,
 ApplicationsComponent
   ],
   imports: [
+    ChipModule,
 VacancyRoutingModule,
     DropdownModule,
     FormsModule,

@@ -46,7 +46,7 @@ export class AddExperienceComponent {
     this.experienceService.addExperience(this.model)
   .subscribe({
     next:(response)=>{
-      this.router.navigateByUrl('experience');
+      this.router.navigateByUrl('Jobseeker/experience');
       this.toast.success({detail:"",summary:'Experience Added Succesfully', position: 'topRight'}); 
 
     }

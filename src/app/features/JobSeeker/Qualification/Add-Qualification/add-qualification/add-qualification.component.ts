@@ -39,7 +39,7 @@ export class AddQualificationComponent {
   .subscribe({
     next:(response)=>{
       this.toast.success({detail:"",summary:'Qualification Added Succesfully', position: 'topRight'}); 
-    this.router.navigateByUrl('qualification');
+    this.router.navigateByUrl('/Jobseeker/qualification');
     }
   });
   }

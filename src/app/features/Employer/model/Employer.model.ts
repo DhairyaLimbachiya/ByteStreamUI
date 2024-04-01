@@ -1,5 +1,7 @@
 export interface Employer{
     id:string;
+    profileImageUrl:string;
+
     organization:string;
     organizationType:string;
     companyEmail:string;

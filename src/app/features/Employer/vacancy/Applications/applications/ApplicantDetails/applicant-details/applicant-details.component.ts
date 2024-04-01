@@ -69,7 +69,7 @@ jobapplication?:ApplicationResponse
             this.toast.warning({detail:"Rejected",summary:'Application Rejected'})
           }
           
-        this.router.navigateByUrl('/Vacancy/vacancy/');
+        this.router.navigateByUrl(`/Vacancy/appliedinVacancy/${this.jobapplication.vacancyId}`);
         }
       },
       error: (error) => {

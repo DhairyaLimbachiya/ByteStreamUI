@@ -105,7 +105,7 @@ checkProfile(){
         
       },
       complete: () => {
-        this.toast.success({ detail: "", summary: 'Vacancy Edited Succesfully', position: 'topRight' });
+        this.toast.success({ detail: "Success", summary: 'Vacancy Edited Succesfully', position: 'topRight' });
         this.router.navigateByUrl('/Vacancy/vacancy');
 
       }

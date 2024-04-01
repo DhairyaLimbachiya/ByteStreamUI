@@ -1,5 +1,6 @@
 export interface Experience{
 id:string;
+
     companyName :string;
 
     startYear :Date;

@@ -69,7 +69,7 @@ this.toast.warning({detail:"",summary:'Qualification Deleted',duration:5000});
       this.qualifications?.push(this.qualification);
       },
       complete:()=>{
-        this.toast.info({detail:"",summary:'Qualification Updated'});
+        this.toast.success({detail:"Success",summary:'Qualification Updated'});
       }
     });
 

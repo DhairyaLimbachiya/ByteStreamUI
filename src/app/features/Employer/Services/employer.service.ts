@@ -70,6 +70,12 @@ export class EmployerService {
   return this.http.get<ApplicationResponse>(
     `${environment.employerBaseURL}/api/application/getDetailsbyApplication/${id}?addAuth=true`,
   );
-  
+}
+uploadImage(file: File, fileName: string): Observable<Response>{
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('fileName', fileName)
+
+  return this.http.post<Response>(`${environment.jobSeekerBaseURL}/api/Employer/uploadImage?addAuth=true`, formData);
 }
 }

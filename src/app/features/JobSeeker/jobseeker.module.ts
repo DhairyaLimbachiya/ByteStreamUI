@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { CalendarModule } from 'primeng/calendar';
+import { Calendar, CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { JobseekerProfileComponent } from './jobseeker-profile/jobseeker-profile.component';
 import { AddJobSeekerComponent } from './add-job-seeker/add-job-seeker.component';

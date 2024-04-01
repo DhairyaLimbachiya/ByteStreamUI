@@ -19,6 +19,7 @@ export class EmployerDetailsComponent implements OnInit {
  */
 employer:Employer;
 flag:boolean=false;
+file?:File;
 constructor(private employerService:EmployerService,private router:Router, private toast: NgToastService, private fb: FormBuilder, private changeDetector: ChangeDetectorRef) {
   this.employer = {
     id:'',
@@ -29,6 +30,7 @@ constructor(private employerService:EmployerService,private router:Router, priva
     noOfEmployees: 0,
     startYear: 0,
     about: '',
+    profileImageUrl:''
   }
 } 
 
@@ -43,6 +45,7 @@ editCompanyForm = this.fb.group({
 });
 
   ngOnInit(): void {
+    
       this.employerService.getEmployer().subscribe({
         next:(response)=>{
           this.employer=response;
@@ -74,18 +77,40 @@ editCompanyForm = this.fb.group({
       noOfEmployees: this.editCompanyForm.get('noOfEmployees')?.value || this.employer.noOfEmployees,
       startYear: this.editCompanyForm.get('startYear')?.value || this.employer.startYear,
       about: this.editCompanyForm.get('about')?.value || this.employer.about,
+      profileImageUrl:this.employer.profileImageUrl
     }
-      this.employerService.updateEmployer(this.employer).subscribe({
-      
-        next:(response)=>{
-          console.log(response);
+    if (this.file) {
+      this.employerService.uploadImage(this.file, this.employer.id).subscribe({
+        next: (response) => {
+            this.employer.profileImageUrl = response.result;
         },
         complete:()=>{
-          
-            this.toast.success({detail:"",summary:'Profile Updated Successfully'});
-          
+          this.updateProfile();
         }
       });
-    }
+  }
+  else{
+    this.updateProfile();
+  }
+}
+
+updateProfile(): void{
+  this.employerService.updateEmployer(this.employer).subscribe({
+    next: (response) => {
+    this.employer=response
+          },
+          complete:()=>{
+            this.toast.success({detail:"",summary:'Profile Updated Successfully'});
+          }
+        });
+      
+}
+
+
+  
+onFileUploadChange(event: Event): void {
+  const element = event.currentTarget as HTMLInputElement;
+  this.file = element.files?.[0];
+}
 
 }

@@ -39,6 +39,14 @@ jobseeker?:JobSeeker;
       const formData = new FormData();
       formData.append('file', file);
       formData.append('fileName', fileName)
+      
+      return this.http.post<Response>(`${environment.jobSeekerBaseURL}/api/jobSeeker/uploadImage?addAuth=true`, formData);
+    }
+  
+    uploadResume(file: File, fileName: string): Observable<Response>{
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('fileName', fileName)
       return this.http.post<Response>(`${environment.jobSeekerBaseURL}/api/JobSeeker/uploadResume?addAuth=true`, formData);
     }
 }

@@ -1,212 +1,275 @@
 <ng-container *ngIf="flag">
-  <h4 class="mt-3">Ohh! it seems you havent Added Your Company Details still...</h4>
+  <h4 class="mt-3">
+    Ohh! it seems you havent Added Your Company Details still...
+  </h4>
 
- 
   <div class="d-flex justify-content-end mt-3 mx-3">
-   
-    <a [routerLink]="['/Employer/employer/add']" class="btn btn-primary mx-3">Add Company Details <i class="bi bi-person-plus"></i></a>
+    <a [routerLink]="['/Employer/employer/add']" class="btn btn-primary mx-3"
+      >Add Company Details <i class="bi bi-person-plus"></i
+    ></a>
   </div>
 </ng-container>
 <ng-container *ngIf="!flag">
-
-  <div class="card text-bg-light container-sm mt-4">
+  <div class="container-sm mt-4 border border-dark rounded " style="background-color: rgba(192, 229, 244, 0.314)"  >
     <h4 class="card-title mt-2">Company Details</h4>
-    <hr>
-    <div class="card-body">
-      <div class="row d-flex justify-content-center">
-        <div class="col-4 d-flex align-items-center gap-2">
-          <label for="organization" class="text-nowrap"><b>Company Name</b></label>
-          <input type="text" readonly class="form-control-plaintext" id="organization" name="organization"
-            [(ngModel)]="employer.organization">
-        </div>
-        <div class="col-4 d-flex align-items-center gap-2">
-          <label for="companyEmail" class="text-nowrap"><b>Company Email</b></label>
-            <input type="text" readonly class="form-control-plaintext" id="companyType" name="companyEmail"
-              [(ngModel)]="employer.companyEmail">
-        </div>
-      </div>
-      
-      <div class="row d-flex justify-content-center">
-        <div class="col-4 d-flex align-items-center gap-2">
-          <label for="companyType" class="text-nowrap"><b>Company Type</b></label>
-            <input type="text" readonly class="form-control-plaintext" id="companyType" name="organizationType"
-              [(ngModel)]="employer.organizationType">
-        </div>
-        <div class="col-4 d-flex align-items-center gap-2">
-          <label for="companyPhone" class="text-nowrap"><b>Company Phone Number</b></label>
-            <input type="text" readonly class="form-control-plaintext" id="companyPhone"
-              [(ngModel)]="employer.companyPhone">
-        </div>
-      </div>
-      
-      <div class="row d-flex justify-content-center">
-        <div class="col-4 d-flex align-items-center gap-2">
-          <label for="staticEmail" class="text-nowrap"><b>Year of Establishment</b></label>
-          <input type="text" readonly class="form-control-plaintext" id="startedInYear" name="startYear"
-            [(ngModel)]="employer.startYear">
-        </div>
-        <div class="col-4 d-flex align-items-center gap-2">
-          <label for="noOfEmployees" class="text-nowrap"><b>No Of Employees</b></label>
-          <input type="text" readonly class="form-control-plaintext" id="noOfEmployees" name="noOfEmployees"
-            [(ngModel)]="employer.noOfEmployees">
-        </div>
-      </div>
+    <hr />
+    <div>
+      <div class="my-3 p-3">
+          <div class="d-flex flex-row">
+              <div class="col-3">
+                  <img   [src]="employer.profileImageUrl" alt="Company Logo" width="80%" height="80%">
+              </div>
+              <div class="col-9">
+                  <div class="mt-1">
+                      <div class="d-flex flex-row">
+                          <div class="col-6 p-2">
+                              <span class="fw-bold">Organization Name: </span>{{employer.organization}}
+                          </div>
+                          <div class="col-6 p-2">
+                              <span class="fw-bold">Organization Type: </span>{{employer.organizationType}}
+                          </div>
+                      </div>
+                  </div>
 
-  
+                  <div class="mt-1">
+                      <div class="d-flex flex-row">
+                          <div class="col-6 p-2">
+                              <span class="fw-bold">Company Email: </span>{{employer.companyEmail}}
+                          </div>
+                          <div class="col-6 p-2">
+                              <span class="fw-bold">Company Phone: </span>{{employer.companyPhone}}
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="mt-1">
+                      <div class="d-flex flex-row">
+                          <div class="col-6 p-2">
+                              <span class="fw-bold">Start Year: </span>{{employer.startYear}}
+                          </div>
+                          <div class="col-6 p-2">
+                              <span class="fw-bold">Total No Of Employees: </span>{{employer.noOfEmployees}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="mt-1 justify-content-around">
+              <div class="d-flex flex-row ">
+                  <div class="col-12 p-2">
+                      <p class="fw-bold ">About Company </p>
+                      <div style="white-space: pre-wrap; ">{{employer.about}}</div>
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="d-flex flex-column mx-auto p-3 w-75 justify-content-start">
-        <h4 class="text-center">About {{employer.organization}}</h4>
-        <div class="text-center">
-          <div style="white-space: pre-wrap; text-align: justify;
-          ">{{employer.about}}</div>
-        </div>
-      </div>
-    </div>
-   
-  <div class="justify-content-around d-flex mt-2 mb-3">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Update Details
-    </button>
   </div>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="editCompanyForm" >
-            <div class="mt-2">
-              <div class="mt-3">
-                <label class="form-label">Organization Name</label>
-                <input 
-                type="text" 
-                id="organization" 
-                name="organization" 
-                class="form-control w-100"
-                placeholder="Enter Organization Name"
-                formControlName="organization" 
-                [value]="employer.organization"/>
-            <small class="d-block text-danger"
-                *ngIf="editCompanyForm.get('organization')?.invalid && editCompanyForm.get('organization')?.dirty">
-                Organization Name is Required.
-            </small>
-              </div>
 
 
-              <div class="mt-3">
-                <label class="form-label">Organization Type</label>
-                <input 
-                type="text" 
-                id="organizationType" 
-                name="organizationType" 
-                class="form-control w-100"
-                placeholder="Enter Organization Type"
-                formControlName="organizationType"
-                [value]="employer.organizationType"/>
-            <small class="d-block text-danger"
-                *ngIf="editCompanyForm.get('organizationType')?.invalid && editCompanyForm.get('organizationType')?.dirty">
-                Organization Type is Required.
-            </small>
-              </div>
-              <div class="mt-3">
-                <label class="form-label">Company Email</label>
-                <input 
-                            type="text" 
-                            id="companyEmail" 
-                            name="companyEmail" 
-                            class="form-control w-100"
-                            placeholder="Enter Company Email"
-                            formControlName="companyEmail"
-                            [value]="employer.companyEmail"/>
-                        <small class="d-block text-danger"
-                            *ngIf="editCompanyForm.get('companyEmail')?.invalid && editCompanyForm.get('companyEmail')?.dirty">
-                            Company Email is Required.
-                        </small>
-              </div>
-              <div class="mt-3">
-                <label class="form-label">Company's Phone Number</label>
-                <input 
-                type="text" 
-                id="companyPhone" 
-                name="companyPhone" 
-                class="form-control w-100"
-                placeholder="Enter Company Number"
-                formControlName="companyPhone"
-                [value]="employer.companyPhone"/>
-            <small class="d-block text-danger"
-                *ngIf="editCompanyForm.get('companyPhone')?.invalid && editCompanyForm.get('companyPhone')?.dirty">
-                Company Phone Number Should be 10 digits.
-            </small>
-              </div>
-              <div class="mt-3">
-                <label class="form-label">No of Employee</label>
-                <input 
-                type="number" 
-                id="noOfEmployees" 
-                name="noOfEmployees" 
-                class="form-control w-100"
-                placeholder="Enter Total Number of Employees"
-                formControlName="noOfEmployees"
-                [value]="employer.noOfEmployees"/>
-            <small class="d-block text-danger"
-                *ngIf="editCompanyForm.get('noOfEmployees')?.invalid && editCompanyForm.get('noOfEmployees')?.dirty">
-                Total Number of Employees should be greater than 1.
-            </small>
-              </div>
-              <div class="mt-3">
-                <label class="form-label">Started In Year</label>
-                <input 
-                type="number" 
-                id="startYear" 
-                name="startYear" 
-                class="form-control w-100"
-                placeholder="When was Organization Established?"
-                formControlName="startYear"
-                [value]="employer.startYear"/>
-            <small class="d-block text-danger"
-                *ngIf="editCompanyForm.get('startYear')?.invalid && editCompanyForm.get('startYear')?.dirty">
-                Invalid Year Should be between 1900 - 2024
-            </small>
-              </div>
-              <div class="mt-3">
-                <label class="form-label">About Company</label>
-                <textarea 
-                pInputTextarea
-                id="about" 
-                name="about" 
-                class="form-control" 
-                style="height: 180px; max-height: 180px;" 
-                class="form-control w-100"
-                placeholder="Enter Organization Information"
-                formControlName="about"
-                [value]="employer.about">
-            </textarea>
-            <small class="d-block text-danger"
-                *ngIf="editCompanyForm.get('about')?.invalid && editCompanyForm.get('about')?.dirty">
-                Minimum 50 characters are Required
-            </small>
-              </div>
-
-
+      <div class="justify-content-around d-flex mt-2 mb-3">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Update Details
+        </button>
+      </div>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div class="modal-body">
+              <form [formGroup]="editCompanyForm">
+                <div class="mt-2">
+                  <div class="mt-3">
+                    <label class="form-label">Organization Name</label>
+                    <input
+                      type="text"
+                      id="organization"
+                      name="organization"
+                      class="form-control w-100"
+                      placeholder="Enter Organization Name"
+                      formControlName="organization"
+                      [value]="employer.organization"
+                    />
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editCompanyForm.get('organization')?.invalid &&
+                        editCompanyForm.get('organization')?.dirty
+                      "
+                    >
+                      Organization Name is Required.
+                    </small>
+                  </div>
 
-
-            <button type="submit" class="btn btn-primary"[disabled]="editCompanyForm.invalid" (click)="onFormSubmit()"data-dismiss="modal">Submit</button>
-
-          </form>
-
+                  <div class="mt-3">
+                    <label class="form-label">Organization Type</label>
+                    <input
+                      type="text"
+                      id="organizationType"
+                      name="organizationType"
+                      class="form-control w-100"
+                      placeholder="Enter Organization Type"
+                      formControlName="organizationType"
+                      [value]="employer.organizationType"
+                    />
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editCompanyForm.get('organizationType')?.invalid &&
+                        editCompanyForm.get('organizationType')?.dirty
+                      "
+                    >
+                      Organization Type is Required.
+                    </small>
+                  </div>
+                  <div class="mt-3">
+                    <label class="form-label">Company Email</label>
+                    <input
+                      type="text"
+                      id="companyEmail"
+                      name="companyEmail"
+                      class="form-control w-100"
+                      placeholder="Enter Company Email"
+                      formControlName="companyEmail"
+                      [value]="employer.companyEmail"
+                    />
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editCompanyForm.get('companyEmail')?.invalid &&
+                        editCompanyForm.get('companyEmail')?.dirty
+                      "
+                    >
+                      Company Email is Required.
+                    </small>
+                  </div>
+                  <div class="mt-3">
+                    <label class="form-label">Company's Phone Number</label>
+                    <input
+                      type="text"
+                      id="companyPhone"
+                      name="companyPhone"
+                      class="form-control w-100"
+                      placeholder="Enter Company Number"
+                      formControlName="companyPhone"
+                      [value]="employer.companyPhone"
+                    />
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editCompanyForm.get('companyPhone')?.invalid &&
+                        editCompanyForm.get('companyPhone')?.dirty
+                      "
+                    >
+                      Company Phone Number Should be 10 digits.
+                    </small>
+                  </div>
+                  <div class="mt-3">
+                    <label class="form-label">No of Employee</label>
+                    <input
+                      type="number"
+                      id="noOfEmployees"
+                      name="noOfEmployees"
+                      class="form-control w-100"
+                      placeholder="Enter Total Number of Employees"
+                      formControlName="noOfEmployees"
+                      [value]="employer.noOfEmployees"
+                    />
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editCompanyForm.get('noOfEmployees')?.invalid &&
+                        editCompanyForm.get('noOfEmployees')?.dirty
+                      "
+                    >
+                      Total Number of Employees should be greater than 1.
+                    </small>
+                  </div>
+                  <div class="mt-3">
+                    <label class="form-label">Started In Year</label>
+                    <input
+                      type="number"
+                      id="startYear"
+                      name="startYear"
+                      class="form-control w-100"
+                      placeholder="When was Organization Established?"
+                      formControlName="startYear"
+                      [value]="employer.startYear"
+                    />
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editCompanyForm.get('startYear')?.invalid &&
+                        editCompanyForm.get('startYear')?.dirty
+                      "
+                    >
+                      Invalid Year Should be between 1900 - 2024
+                    </small>
+                  </div>
+                  <div class="mt-3">
+                    <label class="form-label">About Company</label>
+                    <textarea
+                      pInputTextarea
+                      id="about"
+                      name="about"
+                      class="form-control"
+                      style="height: 180px; max-height: 180px"
+                      class="form-control w-100"
+                      placeholder="Enter Organization Information"
+                      formControlName="about"
+                      [value]="employer.about"
+                    >
+                    </textarea>
+                    <small
+                      class="d-block text-danger"
+                      *ngIf="
+                        editCompanyForm.get('about')?.invalid &&
+                        editCompanyForm.get('about')?.dirty
+                      "
+                    >
+                      Minimum 50 characters are Required
+                    </small>
+                  </div>
+                </div>
+                <div class="mt-3 p-2">
+                  <label for="UploadImage" class="form-label">Change Company Logo </label>
+                  <input type="file" id="UploadImage" name="UploadImage" class="form-control" (change)="onFileUploadChange($event)" />
+              </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="editCompanyForm.invalid"
+                  (click)="onFormSubmit()"
+                  data-dismiss="modal"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
-  </div>
-
-
+  
 </ng-container>
-
-

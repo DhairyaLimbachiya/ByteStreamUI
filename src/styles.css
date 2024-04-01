@@ -8,3 +8,29 @@
     color: rgb(248, 28, 28);
     font-weight: bold;
 }
+.yellowdot {
+    height: 40px;
+    width: 100px;
+    background-color: rgb(242, 255, 53);
+    border-radius: 25%;
+    display: inline-block;
+  }
+ 
+  .reddot{
+    height: 200px;
+    width: 100px;
+    background-color: rgb(213, 43, 43);
+    border-radius: 20%;
+   
+  }
+  .greendot {
+    height: 20px;
+    width: 20px;
+    background-color: rgb(52, 199, 57);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .vacancy-card:hover{
+
+    box-shadow: 10px 10px 20px rgba(36, 36, 36, 0.5); 
+  }

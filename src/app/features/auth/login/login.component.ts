@@ -113,7 +113,11 @@ export class LoginComponent implements OnInit {
 
       },
       error: (error) => {
-        console.log(error);
+        this.toast.error({
+          detail: 'Error',
+          summary: error.error.text,
+          position: 'topRight',
+        });
       },
     });
   }
@@ -131,6 +135,14 @@ export class LoginComponent implements OnInit {
           position: 'topRight',
         });
       },
+      error:(error)=>{
+        this.toast.error({
+          detail: 'Error',
+          summary: error.error.title,
+          position: 'topRight',
+        });
+        console.log(error)
+      }
     });
   }
 

@@ -4,10 +4,10 @@
 <div class="d-flex justify-content-end mt-3">
     <a [routerLink]="['/home']" class="btn btn-primary">Apply for job</a>
 </div>
-</div>
+
 <ng-container *ngIf="applicationResponses else noApplication">
-    <div class="card mt-3">
-    <p-table [value]="applicationResponses" [tableStyle]="{ 'min-width': '60rem'}" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [paginator]="true" [rows]="5">
+    <div class="card mt-3" >
+    <p-table [value]="applicationResponses" [tableStyle]="{ 'min-width': '60rem'}">
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="vacancy.jobTitle" style="width:15%">Job Title <p-sortIcon field="vacancy.jobTitle"></p-sortIcon></th>
@@ -20,14 +20,21 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-applicationResponses>
-            <tr>
+            <tr >
                 <td>{{applicationResponses.vacancy?.jobTitle}}</td>
                 <td>{{applicationResponses.vacancy?.publishedBy}}</td>
                 <td>{{applicationResponses.vacancy?.minSalary | currency:'INR'}} - {{applicationResponses.vacancy?.maxSalary | currency:'INR'}}</td>
                 <td>{{applicationResponses.vacancy?.noOfVacancies}}</td>
                 <td>{{applicationResponses.appliedDate | date: 'yyyy-MM-dd'}}</td>
-                <td>{{applicationResponses.applicationStatus}}</td>
-               
+                <ng-container *ngIf="applicationResponses.applicationStatus=='Pending'">
+                    <td > <a class="btn" style="background-color: rgb(36, 204, 255); color: white;"> {{applicationResponses.applicationStatus}}</a></td>
+                </ng-container>
+                <ng-container *ngIf="applicationResponses.applicationStatus=='Accepted'">
+                    <td ><a class="btn" style="background-color: rgb(79, 202, 58); color: white;"> {{applicationResponses.applicationStatus}}</a></td>
+                </ng-container>
+                <ng-container *ngIf="applicationResponses.applicationStatus=='Rejected'">
+                    <td  > <a class="btn" style="background-color: rgb(228, 76, 66); color: white;"> {{applicationResponses.applicationStatus}}</a></td>
+                </ng-container> 
             </tr>
         </ng-template>
     </p-table>

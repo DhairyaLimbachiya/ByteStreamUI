@@ -78,11 +78,21 @@
           <label for="UploadResume" class="form-label">Upload Resume <span class="RequiredValidationSign">*</span></label>
           <input type="file" id="UploadResume" name="UploadResume" class="form-control"
               (change)="onFileUploadChange($event)" />
+              <small class="d-block text-danger" *ngIf="resumeFlag">
+                Upload Resume
+            </small>
               
       </div>
+      <div class="mt-3 p-2">
+        <label for="ProfileImg" class="form-label">Upload Profile Photo <span class="RequiredValidationSign">*</span></label>
+        <input type="file" id="UploadImage" name="UploadImage" class="form-control"
+            (change)="onImageFileUploadChange($event)" />
+            <small class="d-block text-danger" *ngIf="profileImgFlag">
+              Upload Profile Photo
+          </small>
+            
+    </div>
      
-
-  
         <div class="mt-3">
           <button class="btn btn-primary"(click)="onFormSubmit()" [disabled]="addProfileForm.invalid">Save</button>
         </div>

@@ -41,9 +41,8 @@ onFormSubmit():void{
   this.vacancyService.createVacancy(this.addvacancy)
 .subscribe({
   next:(response)=>{
-  this.router.navigateByUrl('vacancy');
+  this.router.navigateByUrl('/Vacancy/vacancy');
   this.toast.success({detail:"",summary:'vacancy Created Successfully'});
-
   }, 
 
 });

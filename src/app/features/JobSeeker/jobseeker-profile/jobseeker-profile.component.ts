@@ -19,7 +19,8 @@ export class JobseekerProfileComponent {
   jobseeker: JobSeeker = {} as JobSeeker;
   flag: boolean = true;
   user?: User;
-  file?: File;
+  resumefile?: File;
+  profileImgFile?:File;
   constructor(private jobSeekerService: JobseekerService, private router: Router, private route: ActivatedRoute, private authservice: AuthService, private toast: NgToastService, private fb: FormBuilder, private changeDetector: ChangeDetectorRef) {
   }
   editProfileForm = this.fb.group({
@@ -58,7 +59,7 @@ export class JobseekerProfileComponent {
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
   }
-  onFormSubmit(): void {
+  onFormSubmit() {
     this.jobseeker = {
       id: this.jobseeker.id,
       firstName: this.editProfileForm.get('firstName')?.value || this.jobseeker.firstName,
@@ -70,32 +71,60 @@ export class JobseekerProfileComponent {
       totalExperience: this.editProfileForm.get('totalExperience')?.value || this.jobseeker.totalExperience,
       dob: this.jobseeker.dob,
       resumeURL: this.jobseeker.resumeURL,
+      profileImgURL: this.jobseeker.profileImgURL,
       qualification:this.jobseeker.qualification,
       experience:this.jobseeker.experience
     }
-    if(this.file){
-    this.jobSeekerService.uploadImage(this.file,this.jobseeker?.id).subscribe({
-      next: (response) => {
-        if(response.isSuccess){
-          this.jobseeker.resumeURL = response.result;
+    this.uploadResume();
+  }
+
+  uploadResume(): void{
+    if(this.resumefile){
+      this.jobSeekerService.uploadResume(this.resumefile, this.jobseeker.id).subscribe({
+        next: (response) => {
+          if (response.isSuccess) {
+            this.jobseeker.resumeURL = response.result;
+          }
+          
+        },
+        error: (error) => {
+          console.error(error);
         }
-      }
-        });
-      }
-      else{      
+      });
+    }
+    this.uploadImage();
+  }
+
+  uploadImage(): void{
+    if (this.profileImgFile) {
+      this.jobSeekerService.uploadImage(this.profileImgFile, this.jobseeker.id).subscribe({
+        next: (response) => {
+            this.jobseeker.profileImgURL = response.result;
+        },
+        complete:()=>{
+          this.updateProfile();
+        }
+      });
+    }
+    else{
+      this.updateProfile();
+    }
+  }
+
+  updateProfile(): void{
     this.jobSeekerService.updateJobSeeker(this.jobseeker).subscribe({
-next: (response) => {
-this.jobseeker=response
+      next: (response) => {
+        this.toast.success({
+          detail: 'Success',
+          summary: 'Profile Updated Successfully',
+        });
       },
-      complete:()=>{
-        this.toast.success({detail:"",summary:'Profile Updated Successfully'});
+      error: (error) => {
+        console.error(error);
       }
+      
     });
   }
-}
-
-
-
   DeleteProfile(id: string) {
     this.jobSeekerService.deleteJobSeeker(id).subscribe({
       next: (response) => {
@@ -107,8 +136,11 @@ this.jobseeker=response
 
   onFileUploadChange(event: Event) : void{
     const element = event.currentTarget as HTMLInputElement;
-    this.file = element.files?.[0];
+    this.resumefile = element.files?.[0];
   }
 
-
+  onImageFileUploadChange(event: Event): void {
+    const element = event.currentTarget as HTMLInputElement;
+    this.profileImgFile = element.files?.[0];
+  }
 }

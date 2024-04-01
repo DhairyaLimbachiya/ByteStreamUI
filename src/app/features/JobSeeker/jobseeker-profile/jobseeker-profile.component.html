@@ -3,7 +3,7 @@
     Ohh! it seems you havent Added Your Profile Details still...
   </h4>
   <div class="d-flex justify-content-end mt-3 mx-3">
-    <a [routerLink]="['/jobseeker/add']" class="btn btn-primary mx-3"
+    <a [routerLink]="['/Jobseeker/jobseeker/add']" class="btn btn-primary mx-3"
       >Add profile <i class="bi bi-person-plus"></i></a
     >
   </div>
@@ -28,51 +28,52 @@
           </button>
       </div>
       <hr />
-      <div >
-        <div class="mt-2">
-          <div class="d-flex flex-row">
-            <div class="col-6">
-              <i class="bi bi-person-fill" style="font-size: 1.2rem"></i>
-              <span class="fw-bold"> Name: </span>{{ jobseeker.firstName }}
-              {{ jobseeker.lastName }}
-            </div>
-            <div class="col-6">
-              <i class="bi bi-telephone-fill" style="font-size: 1.2rem"></i>
-              <span class="fw-bold"> Phone Number: </span>{{ jobseeker.phone }}
-            </div>
-          </div>
+      <div class="d-flex flex-row">
+        <div class="col-3">
+            <img [src]='jobseeker.profileImgURL' alt="" width="80%" height="80%">
         </div>
+        <div class="col-9">
+            <div class="mt-2">
+                <div class="d-flex flex-row">
+                    <div class="col-6">
+                        <span class="fw-bold">Name: </span>{{jobseeker.firstName}} {{jobseeker.lastName}}
+                    </div>
+             
+                </div>
+            </div>
 
-        <div class="mt-2">
-          <div class="d-flex flex-row">
-            <div class="col-6">
-              <i
-                class="bi bi-calendar-event-fill"
-                style="font-size: 1.2rem"
-              ></i>
-              <span class="fw-bold"> Date of Birth: </span
-              >{{ jobseeker.dob | date : "dd-MM-yyyy" }}
+            <div class="mt-2">
+                <div class="d-flex flex-row">
+                    <div class="col-6">
+                        <span class="fw-bold">Phone Number: </span>{{jobseeker.phone}}
+                    </div>
+                    <div class="col-6">
+                        <span class="fw-bold">Date of Birth: </span>{{jobseeker.dob | date:
+                        'yyyy-MM-dd'}}
+                    </div>
+                </div>
             </div>
-            <div class="col-6">
-              <i class="bi bi-award-fill" style="font-size: 1.2rem"></i>
-              <span class="fw-bold"> Total Experience: </span
-              >{{ jobseeker.totalExperience }}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="mt-2">
-        <div class="d-flex flex-row">
-          <div class="col-6">
-            <span class="fw-bold"> Expected Salary: </span
-            >{{ jobseeker.expectedSalary| currency:'INR' }}
-          </div>
-          <div class="col-6">
-            <i class="bi bi-house-fill" style="font-size: 1.2rem"></i>
-            <span class="fw-bold"> Address: </span> {{ jobseeker.address }}
-          </div>
-        </div>
+            <div class="mt-2">
+                <div class="d-flex flex-row">
+                    <div class="col-6">
+                        <span class="fw-bold">Total Experience: </span>{{jobseeker.totalExperience}}
+                    </div>
+                    <div class="col-6">
+                        <span class="fw-bold">Expected Salary: </span>{{jobseeker.expectedSalary | currency:"INR"}}
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="mt-2">
+                <div class="d-flex flex-row">
+                    <div class="col-12">
+                        <p class="m-0 fw-bold">Address: </p>
+                        <div style="white-space: pre-wrap;">{{jobseeker.address}}</div>
+                    </div>
+                </div>
       </div>
       <div class="d-flex justify-content-center mt-3 ">
         <a
@@ -83,13 +84,14 @@
         >
       </div>
     </div>
+      </div>
+  
     <p-accordion>
       <p-accordionTab header="Experiences">
         <div
           class="my-3 border border-dark rounded p-3"
           style="background-color: rgba(192, 229, 244, 0.314)"
         >
-          <ng-container *ngIf="jobseeker.experience">
             <div class="d-flex justify-content-between">
               <div>
                 <h3>Experiences</h3>
@@ -142,8 +144,7 @@
                 <div class="d-flex flex-row">
                   <div class="col-6">
                     <i class="bi bi-link-45deg" style="font-size: 1.2rem"></i>
-                    <span class="fw-bold"> Company Url: </span
-                    >{{ experience.companyUrl }}
+                    <span class="fw-bold">  Company Url: </span><a href={{experience.companyUrl}} target="_blank">{{experience.companyName}}</a>
                   </div>
                 </div>
               </div>
@@ -160,7 +161,8 @@
                 </div>
               </div>
             </div>
-          </ng-container>
+          
+
         </div>
       </p-accordionTab>
       <p-accordionTab header="Qualifications">
@@ -168,7 +170,7 @@
           class="my-3 border border-dark rounded p-3"
           style="background-color: rgba(192, 229, 244, 0.314)"
         >
-          <ng-container *ngIf="jobseeker.qualification">
+      
             <div class="d-flex justify-content-between">
               <h3>Qualifications</h3>
             </div>
@@ -212,8 +214,8 @@
                 </div>
               </div>
             </div>
-          </ng-container>
         </div>
+        
       </p-accordionTab>
     </p-accordion>
     <div
@@ -342,17 +344,18 @@
                 </small>
                   </div>
                 </div>
-                <div class="mt-3 p-2">
-                  <label for="totalExperience" class="form-label"
-                    >Upload Resume</label
-                  >
-                  <input
-                    type="file"
-                    class="form-control"
-                    (change)="onFileUploadChange($event)"
-                  />
-                </div>
+                <div class="mt-3 d-flex flex-row">
+                  <div class="col-6 p-2">
+                      <label for="UploadResume" class="form-label">Upload Resume</label>
+                      <input type="file" class="form-control" (change)="onFileUploadChange($event)"/>
+                  </div>
+                  <div class="col-6 p-2">
+                      <label for="UploadImage" class="form-label">Upload Image</label>
+                      <input type="file" class="form-control" (change)="onImageFileUploadChange($event)"/>
+                  </div>
               </div>
+              </div>
+              
               <div class="mt-3">
                 <button
                   type="submit"
@@ -369,5 +372,8 @@
         </div>
       </div>
     </div>
+
+    </div>
   </div>
+  
 </ng-container>

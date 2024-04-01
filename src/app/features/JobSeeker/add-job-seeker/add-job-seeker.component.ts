@@ -19,8 +19,11 @@ export class AddJobSeekerComponent implements OnInit {
   user?:User;
   model:AddJobSeeker={} as AddJobSeeker;
   file?:File;
-
+  image?:File;
+  resumeFlag: boolean = false;
+  profileImgFlag:boolean=false;
   addProfileSubscription$?: Subscription;
+  dateFlag: boolean = false;
   constructor(private jobseekerService:JobseekerService,private router:Router,private toast:NgToastService,private authService:AuthService,private fb:FormBuilder) {
   }
   addProfileForm = this.fb.group({
@@ -38,9 +41,9 @@ export class AddJobSeekerComponent implements OnInit {
       }
     })
   }
- 
-  onFormSubmit(): void {
+  onFormSubmit() {
     this.model = {
+     
       firstName: this.addProfileForm.get('firstName')?.value || '',
       lastName: this.addProfileForm.get('lastName')?.value || '',
       phone: this.addProfileForm.get('phone')?.value || '',
@@ -48,37 +51,73 @@ export class AddJobSeekerComponent implements OnInit {
       email: this.model.email,
       expectedSalary: this.addProfileForm.get('expectedSalary')?.value || 0,
       totalExperience: this.addProfileForm.get('totalExperience')?.value || 0,
-      dob: this.model.dob,
+      dob: new Date(),
       resumeURL: this.model.resumeURL,
+      profileImgURL: this.model.profileImgURL,
     }
-   
-    if (this.file && this.user?.id){
-      this.jobseekerService.uploadImage(this.file, this.user.id).subscribe({
-        next: (response) => {
-          if(response.isSuccess){
-            this.model.resumeURL = response.result;
-            this.addProfileSubscription$ = this.jobseekerService.addJobSeeker(this.model).subscribe({
-              next: (response) =>{
-             
-                this.router.navigateByUrl('/jobseeker');
-                this.toast.success({detail:"",summary:'Profile added Succesfully', position: 'topRight'}); 
 
-              },
-              error: (error) => {
-                console.error(error);
-              }
-            });
-          }
+    if (this.model.dob.getTime() == new Date().getTime()) {
+      this.dateFlag = true;
+    }
+    this.uploadResume();
+  }
+
+  uploadResume(): void{
+    if(this.file&&this.user?.id){
+      this.resumeFlag = false;
+      this.jobseekerService.uploadResume(this.file, this.user?.id).subscribe({
+        next: (response) => {
+     
+            this.model.resumeURL = response.result;
+            this.uploadImage();
+        
         },
-        error: (error) => {
-          console.error(error);
-        }
+   
       });
     }
+    else{
+      this.resumeFlag = true;
+    }
+  }
+
+  uploadImage(): void{
+    if (this.image&&this.user?.id) {
+      this.profileImgFlag = false;
+      this.jobseekerService.uploadImage(this.image, this.user.id).subscribe({
+        next: (response) => {
+          
+            this.model.profileImgURL = response.result;
+            this.addProfile();
+          
+        
+        },
+     
+      });
+    }
+    else{
+      this.profileImgFlag = true;
+    }
+  }
+
+  addProfile(): void{
+    console.log(this.model);
+    this.addProfileSubscription$ = this.jobseekerService.addJobSeeker(this.model).subscribe({
+      next: (response) => {
+        console.log(response);
+
+          this.router.navigateByUrl('/Jobseeker/jobseeker');
+      
+      },
+     
+    });
   }
 
   onFileUploadChange(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     this.file = element.files?.[0];
+  }
+  onImageFileUploadChange(event: Event): void {
+    const element = event.currentTarget as HTMLInputElement;
+    this.image = element.files?.[0];
   }
   }

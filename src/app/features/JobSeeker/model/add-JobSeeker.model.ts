@@ -8,4 +8,5 @@ export interface AddJobSeeker{
     expectedSalary:number;
     dob:Date;
     resumeURL:string;
+    profileImgURL:string;
 }

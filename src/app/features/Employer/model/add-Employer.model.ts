@@ -1,4 +1,5 @@
 export interface AddEmployer{
+    profileImageUrl:string;
     organization:string;
     organizationType:string;
     companyEmail:string;

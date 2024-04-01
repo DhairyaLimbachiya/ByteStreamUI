@@ -3,6 +3,7 @@ import { Qualification } from "../Qualification/models/qualification.model";
 
 export interface JobSeeker{
     id:string;
+    profileImgURL:string;
     firstName:string;
     lastName:string;
     email:string;
