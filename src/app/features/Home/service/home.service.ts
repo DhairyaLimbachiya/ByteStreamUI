@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ApplyRequest } from '../home/models/application-request.model';
 import { environment } from 'src/enviroments/enviroment.development';
 import { Observable } from 'rxjs';
+import { Response } from '../../JobSeeker/model/response-model';
 
 @Injectable({
   providedIn: 'root'

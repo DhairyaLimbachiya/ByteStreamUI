@@ -4,9 +4,9 @@ import { JobSeeker } from "src/app/features/JobSeeker/model/JobSeeker.model";
 export interface  ApplyRequest{
     id:string
     vacancyId :string;
-    vacancy :Vacancy
+    vacancy :Vacancy|null
     userId :string
-    jobseeker :JobSeeker;
+    jobseeker :JobSeeker|null;
     appliedDate : Date;
-    
+    totalrecords:number
 }
