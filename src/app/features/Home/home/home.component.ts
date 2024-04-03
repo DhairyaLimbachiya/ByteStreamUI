@@ -41,12 +41,7 @@ export class HomeComponent {
         this.vacancies = response;
          this.allvacancies=response;
       },
-    });
-
-    this.authService.user().subscribe({
-      next: (response) => {
-        this.user = response;
-      },
+      
     });
   }
 

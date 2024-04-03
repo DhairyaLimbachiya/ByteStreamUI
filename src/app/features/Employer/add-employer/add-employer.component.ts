@@ -56,9 +56,9 @@ onFormSubmit(): void {
 
 
   uploadImage(): void{
-    if (this.file&&this.user?.id) {
+    if (this.file&&this.model.organization) {
       this.profileimageFlag = false;
-      this.employerService.uploadImage(this.file, this.user.id).subscribe({
+      this.employerService.uploadImage(this.file, this.model.organization).subscribe({
         next: (response) => {
           if (response.isSuccess) {
             this.model.profileImageUrl = response.result;

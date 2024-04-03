@@ -1,5 +1,3 @@
-<div
-    style=" background-image: url('https://www.employmenthelp.org/wp-content/uploads/Job-Board-Header-Background.png'); height: 92vh">
     <div class="container">
         <div>
             <div class="d-flex justify-content-end ">
@@ -8,29 +6,56 @@
                         (input)="filterResults(filter.value)">
                 </span>
             </div>
+            <section class="section">
+                <div class="container">
+                    <div class="justify-content-center row">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div  *ngFor="let vacancy of vacancies">
 
-            <div class="row align-items-stretch">
-                <ng-container *ngIf="vacancies ">
-                    <div class="col-12 col-md-4 mt-3" *ngFor="let vacancy of vacancies">
-                        <div class="card h-100 vacancy-card" style="background-color: rgb(219, 244, 255);">
-                            <div class="card-body  d-flex flex-column">
-                                <h5 class="card-title"> <i class="bi bi-file-person-fill"></i> {{vacancy.jobTitle}}</h5>
-                                <div class="card-text"><b> <i class="bi bi-buildings-fill"></i> Organization Name: </b>
-                                    {{vacancy.publishedBy}}</div>
-                                <div class="card-text"><b><i class="bi bi-people-fill"></i> No of Vacancies:</b>
-                                    {{vacancy.noOfVacancies}}</div>
-                                <div class="card-text"><b>Salary Range: </b> {{vacancy.minSalary | currency:'INR' }} -
-                                    {{vacancy.maxSalary | currency:'INR'}}</div>
-                                <span class="d-flex align-items-end mt-3" style="flex: 1">
-                                    <button type="button" (click)="OnModelOpen(vacancy.publishedBy,vacancy.id)"
-                                        class="btn btn-light btn-sm " data-toggle="modal"
-                                        data-target="#exampleModalCenter">
-                                        Read more
-                                    </button>
-                                </span>
+                                  <div class="candidate-list-box card mt-4">
+                                    <div class="p-4 card-body">
+                                        <div class="align-items-center row">
+                                            <div class="col-auto">
+                                                <div class="candidate-list-images">
+                                                    <img [src]="'https://localhost:7003/Images/'+vacancy.publishedBy+'.jpg'" alt="" class="avatar-md img-thumbnail rounded-circle" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <div class="candidate-list-content mt-3 mt-lg-0">
+                                                    <h5 class="fs-19 mb-0">
+                                                        <div class="fw-bold ">{{vacancy.jobTitle}}</div>
+                                                    </h5>
+                                                   <div class="mt-4">
 
-                            </div>
-                            <div class="modal fade modal-xl" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                                        <span class="fw-bold"> Salary Range</span> <span> <i class="mdi mdi-wallet"></i>{{vacancy.minSalary | currency:"INR"}}-{{vacancy.maxSalary| currency:"INR"}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="candidate-list-content mt-3 mt-lg-0">
+                                                    <div class="fs-19 mb-0">
+                                                        <span class="fw-bold "><i class="bi bi-people-fill"></i> Vacancies:</span><span>{{vacancy.noOfVacancies}}</span>
+                                                    </div>
+                                                   <div class="mt-4">
+
+                                                        <span class="fw-bold">Last Date To Apply </span> <span> <i class="mdi mdi-wallet"></i>{{vacancy.lastDate|date:"dd-MM-YYYY"}}</span>
+                                                    </div>
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                        <div class="favorite-icon">
+                                            <button class="btn-lg" type="button" (click)="OnModelOpen(vacancy.publishedBy,vacancy.id)"
+                                            class="btn btn-light btn-sm " data-toggle="modal"
+                                            data-target="#exampleModalCenter">
+                                            Read more
+                                        </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade modal-xl" id="exampleModalCenter" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
@@ -172,6 +197,17 @@
                                                     </div>
                                                 </div>
 
+                               
+                         
                                             </div>
-
                                         </div>
+                                    </div>
+                                </div>
+                                </div>  
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+           
+            </section>
