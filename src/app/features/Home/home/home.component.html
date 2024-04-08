@@ -1,213 +1,279 @@
+<div class="container "  >
+    <div>
+    <div class="d-flex justify-content-end">
+      <span class="col-12 col-md-4 mt-3">
+        <input
+          pInputText
+          type="text"
+          placeholder="Search Company/JobTitle"
+          #filter
+          class="form-control"
+          (input)="filterResults(filter.value)"
+        />
+      </span>
+    </div>
+  </div>
+</div>
     <div class="container">
-        <div>
-            <div class="d-flex justify-content-end ">
-                <span class="col-12 col-md-4 mt-3">
-                    <input pInputText type="text" placeholder="Search Company/JobTitle" #filter class="form-control"
-                        (input)="filterResults(filter.value)">
-                </span>
-            </div>
-            <section class="section">
-                <div class="container">
-                    <div class="justify-content-center row">
+      <div class="justify-content-center row"></div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div *ngFor="let vacancy of vacancies">
+            <div class="candidate-list-box card mt-4">
+              <div class="p-4 card-body">
+                <div class="align-items-center row">
+                  <div class="col-auto">
+                    <div class="candidate-list-images">
+                      <img
+                        [src]="
+                          'https://localhost:7003/Images/' +
+                          vacancy.publishedBy +
+                          '.png'
+                        "
+                        alt=""
+                        class="avatar-md img-thumbnail rounded-circle"
+                      />
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div  *ngFor="let vacancy of vacancies">
-
-                                  <div class="candidate-list-box card mt-4">
-                                    <div class="p-4 card-body">
-                                        <div class="align-items-center row">
-                                            <div class="col-auto">
-                                                <div class="candidate-list-images">
-                                                    <img [src]="'https://localhost:7003/Images/'+vacancy.publishedBy+'.jpg'" alt="" class="avatar-md img-thumbnail rounded-circle" />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-5">
-                                                <div class="candidate-list-content mt-3 mt-lg-0">
-                                                    <h5 class="fs-19 mb-0">
-                                                        <div class="fw-bold ">{{vacancy.jobTitle}}</div>
-                                                    </h5>
-                                                   <div class="mt-4">
-
-                                                        <span class="fw-bold"> Salary Range</span> <span> <i class="mdi mdi-wallet"></i>{{vacancy.minSalary | currency:"INR"}}-{{vacancy.maxSalary| currency:"INR"}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="candidate-list-content mt-3 mt-lg-0">
-                                                    <div class="fs-19 mb-0">
-                                                        <span class="fw-bold "><i class="bi bi-people-fill"></i> Vacancies:</span><span>{{vacancy.noOfVacancies}}</span>
-                                                    </div>
-                                                   <div class="mt-4">
-
-                                                        <span class="fw-bold">Last Date To Apply </span> <span> <i class="mdi mdi-wallet"></i>{{vacancy.lastDate|date:"dd-MM-YYYY"}}</span>
-                                                    </div>
-                                                </div>
-                                        
-                                            </div>
-                                        </div>
-                                        <div class="favorite-icon">
-                                            <button class="btn-lg" type="button" (click)="OnModelOpen(vacancy.publishedBy,vacancy.id)"
-                                            class="btn btn-light btn-sm " data-toggle="modal"
-                                            data-target="#exampleModalCenter">
-                                            Read more
-                                        </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade modal-xl" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Vacancy Details</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="card container-sm mt-4"
-                                                style="background-color: rgba(192, 229, 244, 0.314);">
-                                                <div class="card-body">
-                                                    <div class="mt-2">
-                                                        <div class="d-flex flex-row">
-                                                            <div class="col-6">
-                                                                <span class="fw-bold"> Job Title </span>
-                                                                {{ vacancy.jobTitle }}
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <span class="fw-bold"> Published By</span>
-                                                                {{ vacancy.publishedBy }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mt-2">
-                                                        <div class="d-flex flex-row">
-                                                            <div class="col-6">
-                                                                <span class="fw-bold"> No Of Vacancies </span>
-                                                                {{ vacancy.noOfVacancies }}
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <span class="fw-bold"> MinimumQualification </span>
-                                                                {{ vacancy.minimumQualification }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-2">
-                                                        <div class="d-flex flex-row">
-                                                            <div class="col-6">
-                                                                <span class="fw-bold"> LastDate To Apply </span>
-                                                                {{ vacancy.lastDate }}
-                                                            </div>
-                                                            <div class="col-6">
-                                                                <span class="fw-bold"> Experience Required </span>
-                                                                {{ vacancy.experienceRequired }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-2">
-                                                        <div class="d-flex flex-row">
-                                                            <div class="col-6">
-                                                                <span class="fw-bold"> Salary Range: </span>
-                                                                {{ vacancy.minSalary| currency:"INR" }} - {{
-                                                                vacancy.maxSalary| currency:"INR" }}
-                                                            </div>
-                                                        </div>
-                                                        <div class="mt-2 ">
-
-                                                            <div class="fw-bold">
-                                                                Job Description
-                                                            </div>
-                                                            <div class="white-space: pre-wrap; text-align: justify">
-                                                                {{ vacancy.jobDescription }}
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <hr>
-                                                    <h3 class="text-center">About {{employer.organization}}</h3>
-                                                    <div>
-
-                                                        <div class="card-body">
-                                                            <div class="mt-2">
-                                                                <div class="d-flex flex-row">
-                                                                    <div class="col-6">
-                                                                        <span class="fw-bold"> Company Email</span>
-                                                                        {{ employer.companyEmail }}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="mt-2">
-                                                                <div class="d-flex flex-row">
-                                                                    <div class="col-6">
-                                                                        <span class="fw-bold"> Company type: </span>
-                                                                        {{ employer.organizationType }}
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <span class="fw-bold"> Phone No: </span>
-                                                                        {{ employer.companyPhone }}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-2">
-                                                                <div class="d-flex flex-row">
-                                                                    <div class="col-6">
-                                                                        <span class="fw-bold"> Year of Establishment:
-                                                                        </span>
-                                                                        {{ employer.startYear }}
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <span class="fw-bold"> No of Employees: </span>
-                                                                        {{ employer.noOfEmployees }}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex flex-column p-3  justify-content-start">
-                                                                <h4 class="text-center">more about {{
-                                                                    employer.organization }}</h4>
-                                                                <div class="text-center">
-                                                                    <div
-                                                                        style="white-space: pre-wrap; text-align: justify">
-                                                                        {{ employer.about }}
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
-                                                                <ng-container
-                                                                    *ngIf="user !== undefined && user?.userType?.includes('JobSeeker')  && !vacancyDetail.alreadyApplied">
-                                                                    <button type="button" (click)="ApplyVacancy()"
-                                                                        class="btn btn-primary"
-                                                                        data-dismiss="modal">Apply</button>
-                                                                </ng-container>
-                                                                <ng-container
-                                                                    *ngIf="user !== undefined && user?.userType?.includes('JobSeeker') && vacancyDetail.alreadyApplied ">
-                                                                    <button type="button" disabled
-                                                                        class="btn" style="background-color: rgb(212, 242, 255);"
-                                                                        data-dismiss="modal">Already Applied </button>
-                                                                </ng-container>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                               
-                         
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>  
-                            </div>
-                        </div>
-                        
+                  </div>
+                  <div class="col-lg-5">
+                    <div class="candidate-list-content mt-3 mt-lg-0">
+                      <h5 class="fs-19 mb-0">
+                        <div class="fw-bold">{{ vacancy.jobTitle }}</div>
+                      </h5>
+                      <div class="mt-4">
+                        <span class="fw-bold" style="font-size: 1.7rem"
+                          ><i class="bi bi-buildings-fill fs-20"></i
+                        ></span>
+                        <span class="fs-50 fw-bold">
+                          {{ vacancy.publishedBy }}</span
+                        >
+                      </div>
+                      <div class="mt-4">
+                        <span class="fw-bold"
+                          ><i
+                            class="mdi mdi-wallet"
+                            style="font-size: 1.2rem"
+                          ></i
+                        ></span>
+                        <span>
+                          {{ vacancy.minSalary | currency : "INR" }}-{{
+                            vacancy.maxSalary | currency : "INR"
+                          }}</span
+                        >
+                      </div>
                     </div>
+                  </div>
+                  <div class="col-lg-4 mt-4">
+                    <div class="candidate-list-content mt-lg-0">
+                      <div class="fs-19 mb-0">
+                        <span><i class="bi bi-people-fill"></i> Vacancies:</span
+                        ><span>{{ vacancy.noOfVacancies }}</span>
+                      </div>
+                      <div class="mt-4">
+                        <span
+                          ><i class="bi bi-calendar2-minus-fill"></i> Apply
+                          Before :
+                        </span>
+                        <span>
+                          {{ vacancy.lastDate | date : "dd-MM-YYYY" }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
                 </div>
-           
-            </section>
+              </div>
+
+              <div class="d-flex justify-content-center mb-3">
+                <button
+                  type="button"
+                  (click)="OnModelOpen(vacancy.publishedBy, vacancy.id)"
+                  class="btn btn-primary btn-sm"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                >
+                  Read more
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="totalRecords" [rowsPerPageOptions]="[2, 3, 5, 10]"></p-paginator>
+
+      </div>
+    </div>
+
+
+
+<div
+  *ngIf="vacancyDetail"
+  class="modal fade modal-xl"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Vacancy Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card container-sm mt-4">
+          <div class="card-body">
+            <div class="mt-2">
+              <div class="d-flex flex-row">
+                <div class="col-6">
+                  <span class="fw-bold"> Job Title </span>
+                  {{ vacancyDetail.jobTitle }}
+                </div>
+                <div class="col-6">
+                  <span class="fw-bold"> Published By</span>
+                  {{ vacancyDetail.publishedBy }}
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-2">
+              <div class="d-flex flex-row">
+                <div class="col-6">
+                  <span class="fw-bold"> No Of Vacancies </span>
+                  {{ vacancyDetail.noOfVacancies }}
+                </div>
+                <div class="col-6">
+                  <span class="fw-bold"> MinimumQualification </span>
+                  {{ vacancyDetail.minimumQualification }}
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="d-flex flex-row">
+                <div class="col-6">
+                  <span class="fw-bold"> LastDate To Apply </span>
+                  {{ vacancyDetail.lastDate }}
+                </div>
+                <div class="col-6">
+                  <span class="fw-bold"> Experience Required </span>
+                  {{ vacancyDetail.experienceRequired }}
+                </div>
+              </div>
+            </div>
+            <div class="mt-2">
+              <div class="d-flex flex-row">
+                <div class="col-6">
+                  <span class="fw-bold"> Salary Range: </span>
+                  {{ vacancyDetail.minSalary | currency : "INR" }} -
+                  {{ vacancyDetail.maxSalary | currency : "INR" }}
+                </div>
+              </div>
+              <div class="mt-2">
+                <div class="fw-bold">Job Description</div>
+                <div class="white-space: pre-wrap; text-align: justify">
+                  {{ vacancyDetail.jobDescription }}
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <h3 class="text-center">About {{ employer.organization }}</h3>
+            <div>
+              <div class="card-body">
+                <div class="mt-2">
+                  <div class="d-flex flex-row">
+                    <div class="col-6">
+                      <span class="fw-bold"> Company Email</span>
+                      {{ employer.companyEmail }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <div class="d-flex flex-row">
+                    <div class="col-6">
+                      <span class="fw-bold"> Company type: </span>
+                      {{ employer.organizationType }}
+                    </div>
+                    <div class="col-6">
+                      <span class="fw-bold"> Phone No: </span>
+                      {{ employer.companyPhone }}
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <div class="d-flex flex-row">
+                    <div class="col-6">
+                      <span class="fw-bold"> Year of Establishment: </span>
+                      {{ employer.startYear }}
+                    </div>
+                    <div class="col-6">
+                      <span class="fw-bold"> No of Employees: </span>
+                      {{ employer.noOfEmployees }}
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-column p-3 justify-content-start">
+                  <h3 class="text-center">more about this organization</h3>
+                  <div class="text-center">
+                    <div style="white-space: pre-wrap; text-align: justify">
+                      {{ employer.about }}
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <ng-container
+                    *ngIf="
+                      user !== undefined &&
+                      user?.userType?.includes('JobSeeker') &&
+                      !vacancyDetail.alreadyApplied
+                    "
+                  >
+                    <button
+                      type="button"
+                      (click)="ApplyVacancy()"
+                      class="btn btn-primary"
+                      data-dismiss="modal"
+                    >
+                      Apply
+                    </button>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="
+                      user !== undefined &&
+                      user?.userType?.includes('JobSeeker') &&
+                      vacancyDetail.alreadyApplied
+                    "
+                  >
+                    <button
+                      type="button"
+                      disabled
+                      class="btn"
+                      style="background-color: rgb(212, 242, 255)"
+                      data-dismiss="modal"
+                    >
+                      Already Applied
+                    </button>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { AccordionModule } from 'primeng/accordion';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
     CalendarModule,
     NgToastModule,
     AccordionModule,
-    NgxDocViewerModule
+    NgxDocViewerModule,
+    PaginatorModule
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

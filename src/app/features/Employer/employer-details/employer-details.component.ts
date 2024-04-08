@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AddEmployer } from '../model/add-Employer.model';
+import { Observable } from 'rxjs';
+import { Response } from '../../JobSeeker/model/response-model';
 
 @Component({
   selector: 'app-employer-details',
@@ -17,21 +19,13 @@ export class EmployerDetailsComponent implements OnInit {
 /**
  *
  */
-employer:Employer;
+employer$?:Observable<Employer> ;
+employer:Employer={} as Employer;
 flag:boolean=false;
 file?:File;
-constructor(private employerService:EmployerService,private router:Router, private toast: NgToastService, private fb: FormBuilder, private changeDetector: ChangeDetectorRef) {
-  this.employer = {
-    id:'',
-    organization: '',
-    organizationType: '',
-    companyEmail: '',
-    companyPhone: '',
-    noOfEmployees: 0,
-    startYear: 0,
-    about: '',
-    profileImageUrl:''
-  }
+response$?:Observable<Response>;
+constructor(private employerService:EmployerService, private toast: NgToastService, private fb: FormBuilder, private changeDetector: ChangeDetectorRef) {
+ 
 } 
 
 editCompanyForm = this.fb.group({
@@ -45,8 +39,9 @@ editCompanyForm = this.fb.group({
 });
 
   ngOnInit(): void {
-    
-      this.employerService.getEmployer().subscribe({
+    if(this.employer$){
+       this.employer$=this.employerService.getEmployer();
+       this.employer$.subscribe({
         next:(response)=>{
           this.employer=response;
           this.editCompanyForm.setValue({
@@ -64,6 +59,7 @@ editCompanyForm = this.fb.group({
         }
       })
   }
+}
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
   }
@@ -79,8 +75,9 @@ editCompanyForm = this.fb.group({
       about: this.editCompanyForm.get('about')?.value || this.employer.about,
       profileImageUrl:this.employer.profileImageUrl
     }
-    if (this.file) {
-      this.employerService.uploadImage(this.file, this.employer.id).subscribe({
+    if (this.file && this.response$) {
+     this.response$= this.employerService.uploadImage(this.file, this.employer.organization);
+      this.response$.subscribe({
         next: (response) => {
             this.employer.profileImageUrl = response.result;
         },
@@ -102,8 +99,7 @@ updateProfile(): void{
           complete:()=>{
             this.toast.success({detail:"",summary:'Profile Updated Successfully'});
           }
-        });
-      
+        }); 
 }
 
 

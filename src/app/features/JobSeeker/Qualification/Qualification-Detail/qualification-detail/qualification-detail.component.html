@@ -8,7 +8,7 @@
 
   <ng-container *ngIf="qualifications; else noqualifications">
     <div class="card mt-3">
-      <p-table [value]="qualifications" [tableStyle]="{ 'min-width': '60rem' }" >
+      <p-table [value]="qualifications" >
         <ng-template pTemplate="header">
           <tr>
             <th pSortableColumn="qualificationName" style="width: 20%">

@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent {
   model:RegisterRequest;
   roles = ['  JobSeeker', 'Employer']
   constructor(private authservice:AuthService,
-    private cookieService:CookieService,private router:Router, private fb: FormBuilder){
+    private cookieService:CookieService,private router:Router, private fb: FormBuilder ,private toast:NgToastService){
     this.model={
       fullName:'',
       email:'',
@@ -39,16 +40,21 @@ export class RegisterComponent {
       userType: this.registerForm.get('selectedRole')?.value || '',
       password: this.registerForm.get('password')?.value || '',
     };
-    
+ 
     this.authservice.register(this.model).subscribe({
       next:(response)=>{
         console.log(response);
         this.router.navigateByUrl('/auth/login');
       },
       error:(error)=>{
-        console.log(error);
+        this.toast.error({
+          detail: 'Error',
+          summary: error.error,
+          position: 'topRight',
+        });
       }
     
     });
+  
   }
 }

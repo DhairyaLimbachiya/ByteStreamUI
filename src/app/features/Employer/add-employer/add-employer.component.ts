@@ -6,29 +6,28 @@ import { NgToastService } from 'ng-angular-popup';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../auth/models/user.model';
+import { Observable } from 'rxjs';
+import { Response } from '../../JobSeeker/model/response-model';
 
 @Component({
   selector: 'app-add-employer',
   templateUrl: './add-employer.component.html',
   styleUrls: ['./add-employer.component.css']
 })
-export class AddEmployerComponent implements OnInit {
+export class AddEmployerComponent {
 /**
  *
  */
+model$?:Observable<AddEmployer>
 model:AddEmployer={} as AddEmployer;
 file?: File;
 profileimageFlag: boolean = false;
 user?:User
+user$?:Observable<User>
+response$?:Observable<Response>
 constructor(private employerService:EmployerService,private router:Router,private toast:NgToastService,private fb:FormBuilder,private authService:AuthService) {
 }
-ngOnInit(): void {
-  this.authService.user().subscribe({
-    next:(response)=>{
-    this.user=response;  
-    }
-  })
-}
+
 
 addCompanyForm = this.fb.group({
   organization: ['', Validators.required],
@@ -56,15 +55,16 @@ onFormSubmit(): void {
 
 
   uploadImage(): void{
-    if (this.file&&this.model.organization) {
+    if (this.file && this.response$ ) {
       this.profileimageFlag = false;
-      this.employerService.uploadImage(this.file, this.model.organization).subscribe({
+      
+     this.response$= this.employerService.uploadImage(this.file, this.model.organization);
+   this.response$.subscribe({
         next: (response) => {
           if (response.isSuccess) {
             this.model.profileImageUrl = response.result;
             this.addProfile();
           }
-        
         },
      
       });
@@ -75,19 +75,17 @@ onFormSubmit(): void {
   }
 
   addProfile(): void{
-    console.log(this.model);
-    this.employerService.addEmployer(this.model).subscribe({
+if(this.model$){
+  this.model$=  this.employerService.addEmployer(this.model);
+  this.model$.subscribe({
       next: (response) => {
-        console.log(response);
-
           this.router.navigateByUrl('/Employer/profile');
       
       },
      
     });
   }
-
-
+  }
   onFileUploadChange(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     this.file = element.files?.[0];
