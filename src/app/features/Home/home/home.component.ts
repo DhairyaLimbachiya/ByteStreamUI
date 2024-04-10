@@ -148,4 +148,6 @@ export class HomeComponent {
       vacancy.publishedBy.toLowerCase().includes(this.searchText.trim().toLowerCase())
     );;
   }
+
+  
 }

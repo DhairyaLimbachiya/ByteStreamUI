@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "bootstrap-icons": "^1.11.3",
+    "emailjs-com": "^3.2.0",
     "jwt-decode": "^4.0.0",
     "ng-angular-popup": "^0.5.2",
     "ngx-cookie-service": "^16.0.0",

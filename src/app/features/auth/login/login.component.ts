@@ -62,6 +62,8 @@ export class LoginComponent implements OnInit {
 
     this.authservice.login(this.model).subscribe({
       next: (response) => {
+        console.log(response)
+
         this.handleLoginResponse(response.token);
       },
       error: (error) => {
@@ -76,8 +78,10 @@ export class LoginComponent implements OnInit {
 
   handleLoginResponse(token: string): void {
     this.cookieService.set('Authorization', `Bearer ${token}`, undefined, '/', undefined, true, 'Strict');
-    this.authservice.JwtDecoder(token);
+    // this.authservice.JwtDecoder(token);
+    this.authservice.user().subscribe((data)=> this.user=data);
 
+   console.log(this.user)
     if (this.user?.id && this.user.userType.includes('JobSeeker')) {
       this.checkJobSeekerProfile();
     }

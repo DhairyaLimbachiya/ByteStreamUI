@@ -30,7 +30,7 @@ export class QualificationDetailComponent {
     this.qualificationService.getQualification().subscribe({
       next: (response) => {
         this.qualifications = response
-       
+       console.log(response)
       }
     });
 
@@ -38,7 +38,8 @@ export class QualificationDetailComponent {
   QualificationDelete(id: string) {
     this.qualificationService.deleteQualification(id).subscribe({
       next: (response) => {
-this.qualifications=this.qualifications?.filter((qua)=>qua.id!=id);
+        window.location.reload();
+
 this.toast.warning({detail:"",summary:'Qualification Deleted',duration:5000});
 
       }

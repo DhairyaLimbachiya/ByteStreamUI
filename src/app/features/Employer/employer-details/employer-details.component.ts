@@ -39,9 +39,8 @@ editCompanyForm = this.fb.group({
 });
 
   ngOnInit(): void {
-    if(this.employer$){
-       this.employer$=this.employerService.getEmployer();
-       this.employer$.subscribe({
+
+       this.employerService.getEmployer().subscribe({
         next:(response)=>{
           this.employer=response;
           this.editCompanyForm.setValue({
@@ -58,7 +57,7 @@ editCompanyForm = this.fb.group({
         this.flag=true;
         }
       })
-  }
+  
 }
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
@@ -75,9 +74,8 @@ editCompanyForm = this.fb.group({
       about: this.editCompanyForm.get('about')?.value || this.employer.about,
       profileImageUrl:this.employer.profileImageUrl
     }
-    if (this.file && this.response$) {
-     this.response$= this.employerService.uploadImage(this.file, this.employer.organization);
-      this.response$.subscribe({
+    if (this.file) {
+     this.employerService.uploadImage(this.file, this.employer.organization).subscribe({
         next: (response) => {
             this.employer.profileImageUrl = response.result;
         },
@@ -98,6 +96,8 @@ updateProfile(): void{
           },
           complete:()=>{
             this.toast.success({detail:"",summary:'Profile Updated Successfully'});
+            window.location.reload();
+
           }
         }); 
 }

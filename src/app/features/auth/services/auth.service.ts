@@ -39,19 +39,26 @@ export class AuthService {
         
       });
     }
-JwtDecoder(token: string){
-  const decodedToken: any = jwtDecode(token);
+JwtDecoder(){
+  const Token:any =this.cookieService.get('Authorization');
+  if(Token){
+  const actual:any = Token.replace('Bearer ',"")
+  console.log(actual)
+
+  const decodedToken: any = jwtDecode(actual);
+  
   this.$user.next({
     userType: decodedToken.role,
     fullName: decodedToken.name,
     email: decodedToken.email,
-    token: token,
+    token: actual,
     id:decodedToken.sub,
   });
-  
+  }
 }
 
   user(){
+    this.JwtDecoder();
     return this.$user.asObservable();
   }
 

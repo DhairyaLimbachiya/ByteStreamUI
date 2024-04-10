@@ -39,13 +39,16 @@ profileMade?:boolean;
   VacancyDelete(id: string) {
     this.vacancyService.deletevacancy(id).subscribe({
       next: (response) => {
-        this.vacancies = this.vacancies?.filter((vac) => vac.id != id);
-        console.log(response);
+        this.vacancies = this.vacancies
+        window.location.reload();
+
         this.toast.warning({ detail: "", summary: 'Vacancy Deleted Succesfully', position: 'topRight' });
+
       },
       error:(error)=>{
         console.log(error);
       }
+
     });
   }
 

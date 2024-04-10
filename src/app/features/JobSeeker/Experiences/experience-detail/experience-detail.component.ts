@@ -29,8 +29,9 @@ export class ExperienceDetailComponent {
     this.experienceService.getExperience().subscribe({
       next: (response) => {
         this.experiences = response
-        console.log(response);
-      }
+      },
+   
+      
     });
 
   }

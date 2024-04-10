@@ -117,20 +117,15 @@ export class JobseekerProfileComponent {
         this.toast.success({
           detail: 'Success',
           summary: 'Profile Updated Successfully',
+          
         });
+        window.location.reload();
+
       },
       error: (error) => {
         console.error(error);
       }
       
-    });
-  }
-  DeleteProfile(id: string) {
-    this.jobSeekerService.deleteJobSeeker(id).subscribe({
-      next: (response) => {
-        this.router.navigateByUrl('/jobseeker');
-        this.flag = true;
-      }
     });
   }
 

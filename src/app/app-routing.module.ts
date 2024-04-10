@@ -4,6 +4,7 @@ import { HomeComponent } from './features/Home/home/home.component';
 import { authGuard } from './features/auth/guard/auth.guard';
 
 const routes: Routes = [
+
   {
 path: 'home',component:HomeComponent,  canActivate: [authGuard]
   },

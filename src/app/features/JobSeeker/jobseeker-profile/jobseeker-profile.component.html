@@ -8,19 +8,17 @@
     >
   </div>
 </ng-container>
-<ng-container *ngIf="flag" class="card-body">
-  <div class="container-sm justify-content-center">
-    <div
-      class="my-3 border border-dark rounded p-3"
-      style="background-color: rgba(192, 229, 244, 0.314)"
-    >
-      <div class="d-flex justify-content-between">
+<ng-container *ngIf="flag" >
+  <div class="justify-content-center p-5" >
+   
+      <div class="d-flex justify-content-between ">
         <div class="d-flex">
-          <h3>Details</h3>
+          <h2 class="mt-8">{{jobseeker.firstName}} {{jobseeker.lastName}}
+          </h2>
         </div>
 
           <button
-            class="btn btn-primary"
+            class="btn btn-primary btn-sm"
             data-toggle="modal"
             data-target="#exampleModal"
           >
@@ -28,75 +26,80 @@
           </button>
       </div>
       <hr />
-      <div class="d-flex flex-row">
-        <div class="col-2">
-            <img [src]='jobseeker.profileImgURL' alt="" width="80%" height="80%">
+      <div class="d-flex flex-row" >
+        <div class="col-2 mt-4 ">
+            <img    [src]='jobseeker.profileImgURL' alt="" width="80%" height="80%">
+            <div class="fw-bold">
+          </div>
         </div>
         <div class="col-9">
             <div class="mt-2">
                 <div class="d-flex flex-row">
-                    <div class="col-6">
-                        <span class="fw-bold">Name: </span>{{jobseeker.firstName}} {{jobseeker.lastName}}
-                    </div>
+                   
              
                 </div>
             </div>
 
-            <div class="mt-2">
+            <div class="mt-3">
                 <div class="d-flex flex-row">
                     <div class="col-6">
-                        <span class="fw-bold">Phone Number: </span>{{jobseeker.phone}}
-                    </div>
-                    <div class="col-6">
-                        <span class="fw-bold">Date of Birth: </span>{{jobseeker.dob | date:
+                        <div class="fw-bold" style="font-size: 1.2rem"> Phone No</div>+91 {{jobseeker.phone   }}
+                       </div>
+                    <div  class="col-6">
+                        <div class="fw-bold"  style="font-size: 1.2rem">Date Of Birth 
+                        </div>  {{ jobseeker.dob | date:
                         'yyyy-MM-dd'}}
                     </div>
                 </div>
             </div>
 
-            <div class="mt-2">
+            <div class="mt-3">
                 <div class="d-flex flex-row">
                     <div class="col-6">
-                        <span class="fw-bold">Total Experience: </span>{{jobseeker.totalExperience}}
+                        <div class="fw-bold">Total years of Experience: </div>{{jobseeker.totalExperience}}
                     </div>
                     <div class="col-6">
-                        <span class="fw-bold">Expected Salary: </span>{{jobseeker.expectedSalary | currency:"INR"}}
+                        <div class="fw-bold">Expected Salary: </div>{{jobseeker.expectedSalary | currency:"INR"}}
                     </div>
                 </div>
             </div>
 
 
 
-            <div class="mt-2">
+            <div class="mt-3">
                 <div class="d-flex flex-row">
-                    <div class="col-12">
+                    <div class="col-6">
                         <p class="m-0 fw-bold">Address: </p>
                         <div style="white-space: pre-wrap;">{{jobseeker.address}}</div>
                     </div>
+                    <div class="col-6">
+                      <a
+                        href="{{ jobseeker.resumeURL }}"
+                        target="_blank"
+                        class="btn btn-outline-secondary btn-light text-decoration-none fw-bold"
+                        >Resume  <i class="bi bi-envelope-paper"></i></a
+                      >
+                    </div>
                 </div>
       </div>
-      <div class="d-flex justify-content-center mt-3 ">
-        <a
-          href="{{ jobseeker.resumeURL }}"
-          target="_blank"
-          class="btn btn-primary text-decoration-none fw-bold"
-          >Resume  <i class="bi bi-envelope-paper"></i></a
-        >
-      </div>
+    
     </div>
       </div>
-  
-    <p-accordion>
-      <p-accordionTab header="Experiences">
+    </div>
+<div class="p-5">
+<p-accordion [activeIndex]="0">
+      <p-accordionTab header="Experiences" >
         <div
-          class="my-3 border border-dark rounded p-3"
-          style="background-color: rgba(192, 229, 244, 0.314)"
+          class="p-3"
+          
         >
-            <div class="d-flex justify-content-between">
-              <div>
+        <div  class="d-flex justify-content-between">
                 <h3>Experiences</h3>
+                <div class="d-flex">
+                  <a [routerLink]="['/Jobseeker/experience/add']" class="btn btn-primary"> <i class="bi bi-buildings-fill"></i> ADD Experience </a>
               </div>
-            </div>
+        </div>          
+          
             <div *ngFor="let experience of jobseeker.experience">
               <hr />
               <div class="mt-3">
@@ -167,13 +170,16 @@
       </p-accordionTab>
       <p-accordionTab header="Qualifications">
         <div
-          class="my-3 border border-dark rounded p-3"
-          style="background-color: rgba(192, 229, 244, 0.314)"
-        >
-      
-            <div class="d-flex justify-content-between">
-              <h3>Qualifications</h3>
+        class="p-3"
+        
+      >
+      <div  class="d-flex justify-content-between">
+              <h3>Qualifications </h3>
+              <div class="d-flex">
+                <a [routerLink]="['/Jobseeker/qualification/add']" class="btn btn-primary"> <i class="bi bi-buildings-fill"></i> ADD Qualification  </a>
             </div>
+      </div>          
+        
             <div *ngFor="let qualification of jobseeker.qualification">
               <hr />
               <div class="mt-3">
@@ -218,6 +224,7 @@
         
       </p-accordionTab>
     </p-accordion>
+</div>
     <div
       class="modal fade"
       id="exampleModal"
@@ -373,7 +380,6 @@
       </div>
     </div>
 
-    </div>
-  </div>
+    
   
 </ng-container>

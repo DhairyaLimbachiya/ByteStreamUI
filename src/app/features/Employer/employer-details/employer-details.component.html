@@ -10,55 +10,55 @@
   </div>
 </ng-container>
 <ng-container *ngIf="!flag">
-  <div class="container-sm mt-4 border border-dark rounded " style="background-color: rgba(192, 229, 244, 0.314)"  >
-    <h4 class="card-title mt-2">Company Details</h4>
+  <div class="container" >
+    <h2 class="mt-2">{{employer.organization}}</h2>
     <hr />
     <div>
       <div class="my-3 p-3">
           <div class="d-flex flex-row">
               <div class="col-3">
-                  <img   [src]="employer.profileImageUrl" alt="Company Logo" width="80%" height="80%">
+                  <img   [src]="employer.profileImageUrl" alt="Company Logo" width="60%" height="70%">
               </div>
               <div class="col-9">
-                  <div class="mt-1">
-                      <div class="d-flex flex-row">
-                          <div class="col-6 p-2">
-                              <span class="fw-bold">Organization Name: </span>{{employer.organization}}
-                          </div>
-                          <div class="col-6 p-2">
-                              <span class="fw-bold">Organization Type: </span>{{employer.organizationType}}
-                          </div>
+                
+                <div class="mt-1">
+                  <div class="d-flex flex-row">
+                      <div class="col-6 p-2">
+                          <div class="fw-bold">Email: </div>{{employer.companyEmail}}
                       </div>
-                  </div>
-
-                  <div class="mt-1">
-                      <div class="d-flex flex-row">
-                          <div class="col-6 p-2">
-                              <span class="fw-bold">Company Email: </span>{{employer.companyEmail}}
-                          </div>
-                          <div class="col-6 p-2">
-                              <span class="fw-bold">Company Phone: </span>{{employer.companyPhone}}
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="mt-1">
-                      <div class="d-flex flex-row">
-                          <div class="col-6 p-2">
-                              <span class="fw-bold">Start Year: </span>{{employer.startYear}}
-                          </div>
-                          <div class="col-6 p-2">
-                              <span class="fw-bold">Total No Of Employees: </span>{{employer.noOfEmployees}}
-                          </div>
+                      <div class="col-6 p-2">
+                          <div class="fw-bold">Phone No: </div>{{employer.companyPhone}}
                       </div>
                   </div>
               </div>
+
+              <div class="mt-1">
+                  <div class="d-flex flex-row">
+                      <div class="col-6 p-2">
+                          <div class="fw-bold">Started in Year: </div>{{employer.startYear}}
+                      </div>
+                      <div class="col-6 p-2">
+                          <div class="fw-bold">Total No Of Employees: </div>{{employer.noOfEmployees}}
+                      </div>
+                  </div>
+              </div>
+                  <div class="mt-1">
+                      <div class="d-flex flex-row">
+                        
+                          <div class="col-6 p-2">
+                              <div class="fw-bold">Organization Type: </div>{{employer.organizationType}}
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
           </div>
-          <div class="mt-1 justify-content-around">
+          
+          <div class="mt-1 align-items-center">
               <div class="d-flex flex-row ">
                   <div class="col-12 p-2">
-                      <p class="fw-bold ">About Company </p>
-                      <div style="white-space: pre-wrap; ">{{employer.about}}</div>
+                      <div class="fw-bold ">About This Company</div>
+                      <div style="white-space: pre-wrap;">{{employer.about}}</div>
                   </div>
               </div>
           </div>
@@ -72,7 +72,7 @@
           class="btn btn-primary"
           data-toggle="modal"
           data-target="#exampleModal"
-        >
+        ><i class="bi bi-pencil-square"></i>
           Update Details
         </button>
       </div>
@@ -94,7 +94,7 @@
                 data-dismiss="modal"
                 aria-label="Close"
               >
-                <span aria-hidden="true">&times;</span>
+                <div aria-hidden="true">&times;</div>
               </button>
             </div>
             <div class="modal-body">
