@@ -88,27 +88,31 @@ export class HomeComponent {
       this.applyRequest.appliedDate = new Date();
       this.jobseekerService.getJobSeeker(this.applyRequest.userId).subscribe({
         next: (response) => {
+          if(response){
           this.homeservice.apply(this.applyRequest).subscribe({
             next: (ApplyRequest) => {
               this.toast.success({
                 detail: 'Success',
                 summary: 'Applied Successfully',
               });
-              console.log('profile is made');
             },
+          
           });
-        },
-        error: (error) => {
-          this.profileMade = false;
-          if (!this.profileMade) {
-            this.toast.warning({
-              detail: 'Error',
-              summary: 'Kindly create your profile before applying',
-            });
-            this.router.navigateByUrl('/Jobseeker/jobseeker/add');
-          }
-        },
+        
+      }
+      else{
+        this.toast.warning({
+          detail: 'Warning',
+          summary: "Kindly Complete your profile before applying to any vacancy",
+          position: 'topRight',
+        });
+        this.router.navigateByUrl('/Jobseeker/jobseeker/add');
+      }
+
+    
+        }
       });
+      
     }
   }
  

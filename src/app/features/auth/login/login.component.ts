@@ -95,16 +95,17 @@ export class LoginComponent implements OnInit {
     if(this.user?.id){
     this.jobseekerService.getJobSeeker(this.user?.id).subscribe({
       next: (response) => {
-        this.profileMade = true;
+        if(response){
+        
         this.navigateToHome();
-      },
-    
-      error: (error) => {
-        this.profileMade = false;
-        if (!this.profileMade) {
+        }
+        else{
           this.router.navigateByUrl('/Jobseeker/jobseeker/add');
+
         }
       },
+    
+    
     });
   }
   }
@@ -112,15 +113,15 @@ export class LoginComponent implements OnInit {
   checkEmployerProfile(): void {
     this.employerService.getEmployer().subscribe({
       next: (response) => {
-        this.profileMade = true;
+        if (response){
         this.navigateToHome();
-      },
-      error: (error) => {
-        this.profileMade = false;
-        if (!this.profileMade) {
+        }
+        else{
           this.router.navigateByUrl('/Employer/employer/add');
         }
       },
+     
+      
     });
   }
 

@@ -54,17 +54,21 @@ profileMade?:boolean;
 
 checkProfile(){
  this.employerService.getEmployer().subscribe({
-  next:()=>{
+  next:(response)=>{
+    if(response){
     this.router.navigateByUrl('/Vacancy/vacancy/add');
-  },
-  error:(error)=>{
-    this.profileMade=false;
-    if(!this.profileMade){
- this.toast.warning({detail:"warning",summary:'Kindly create your profile adding any Vacancy'})
- this.router.navigateByUrl('/Employer/employer/add');
     }
+    else{
+      this.toast.warning({
+        detail: 'warning',
+        summary: "Kindly Complete your profile before adding any vacancies",
+        position: 'topRight',
+      });
+      this.router.navigateByUrl('/Employer/employer/add')
+    }
+  },
 
-  } 
+  
 }); 
 
 }

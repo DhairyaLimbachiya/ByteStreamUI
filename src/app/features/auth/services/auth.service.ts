@@ -63,7 +63,6 @@ JwtDecoder(){
   }
 
   logout():void{
-    console.log("user log out");
     localStorage.clear();
     this.cookieService.delete('Authorization','/');
     this.$user.next(undefined);

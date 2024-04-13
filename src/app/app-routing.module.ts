@@ -4,35 +4,44 @@ import { HomeComponent } from './features/Home/home/home.component';
 import { authGuard } from './features/auth/guard/auth.guard';
 
 const routes: Routes = [
-
   {
-path: 'home',component:HomeComponent,  canActivate: [authGuard]
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [authGuard],
   },
-//Auth Route
-  { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
+  //Auth Route
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
+  },
 
-// Employer Routes
-{ path: 'Employer', loadChildren: () => import('./features/Employer/employer.module').then(m => m.EmployerModule) },
-{ path: 'Vacancy', loadChildren:()=>import('./features/Employer/vacancy.module').then(m=>m.VacancyModule)},
+  // Employer Routes
+  {
+    path: 'Employer',
+    loadChildren: () =>
+      import('./features/Employer/employer.module').then(
+        (m) => m.EmployerModule
+      ),
+  },
+  {
+    path: 'Vacancy',
+    loadChildren: () =>
+      import('./features/Employer/vacancy.module').then((m) => m.VacancyModule),
+  },
 
-
- //JobSeeker Route
- {
-  path :'Jobseeker',loadChildren:()=>import('./features/JobSeeker/jobseeker.module').then(m=>m.JobseekerModule)
- }
-
-
+  //JobSeeker Route
+  {
+    path: 'Jobseeker',
+    loadChildren: () =>
+      import('./features/JobSeeker/jobseeker.module').then(
+        (m) => m.JobseekerModule
+      ),
+  },
 ];
-
-
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-  
- }
+export class AppRoutingModule {}

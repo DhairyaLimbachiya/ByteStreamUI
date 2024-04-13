@@ -40,7 +40,9 @@ export class JobseekerProfileComponent {
       this.jobSeekerService.getJobseeker().subscribe({
         next: (response) => {
           this.jobseeker = response;
+        if(this.jobseeker){
           this.editProfileForm.setValue({
+            
             firstName: this.jobseeker.firstName,
             lastName: this.jobseeker.lastName,
             phone: this.jobseeker.phone,
@@ -49,10 +51,11 @@ export class JobseekerProfileComponent {
             totalExperience: this.jobseeker.totalExperience
           
           });
-          console.log(response);
+        }
+         
         },
         error:()=>{
-          this.flag=false;
+          
         } 
       }); 
   }

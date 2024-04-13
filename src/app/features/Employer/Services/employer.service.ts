@@ -8,6 +8,7 @@ import { ApplicationResponse } from '../../Home/home/models/application-response
 import { UpdatedApplicationResponse } from '../../Home/home/models/updatedApplicationResponse.model';
 import { SP_VacancyRequest } from '../model/Sp_VacancyRequest.model';
 import { Response } from '../../JobSeeker/model/response-model';
+import { SendEmail } from '../model/SendEmail.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,14 @@ export class EmployerService {
   addEmployer(request: AddEmployer): Observable<Employer> {
     return this.http.post<Employer>(
       `${environment.employerBaseURL}/api/employer?addAuth=true`,
+      {
+        ...request,
+      }
+    );
+  }
+  SendEmail(request: SendEmail): Observable<SendEmail> {
+    return this.http.post<SendEmail>(
+      `${environment.employerBaseURL}/api/employer/SendEmail?addAuth=true`,
       {
         ...request,
       }

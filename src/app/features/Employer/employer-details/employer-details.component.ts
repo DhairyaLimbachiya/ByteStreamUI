@@ -43,6 +43,7 @@ editCompanyForm = this.fb.group({
        this.employerService.getEmployer().subscribe({
         next:(response)=>{
           this.employer=response;
+          if(this.employer){
           this.editCompanyForm.setValue({
             organization: this.employer.organization,
             organizationType: this.employer.organizationType,
@@ -52,7 +53,9 @@ editCompanyForm = this.fb.group({
             startYear: this.employer.startYear,
             about: this.employer.about,
           })
+        }
         },
+    
         error:()=>{
         this.flag=true;
         }

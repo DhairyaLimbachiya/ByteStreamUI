@@ -55,11 +55,10 @@ onFormSubmit(): void {
 
 
   uploadImage(): void{
-    if (this.file && this.response$ ) {
+    if (this.file  ) {
       this.profileimageFlag = false;
       
-     this.response$= this.employerService.uploadImage(this.file, this.model.organization);
-   this.response$.subscribe({
+     this.employerService.uploadImage(this.file, this.model.organization).subscribe({
         next: (response) => {
           if (response.isSuccess) {
             this.model.profileImageUrl = response.result;
@@ -75,16 +74,15 @@ onFormSubmit(): void {
   }
 
   addProfile(): void{
-if(this.model$){
-  this.model$=  this.employerService.addEmployer(this.model);
-  this.model$.subscribe({
+
+ this.employerService.addEmployer(this.model).subscribe({
       next: (response) => {
           this.router.navigateByUrl('/Employer/profile');
       
       },
      
     });
-  }
+  
   }
   onFileUploadChange(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
