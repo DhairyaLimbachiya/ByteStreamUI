@@ -33,7 +33,7 @@ addCompanyForm = this.fb.group({
   organization: ['', Validators.required],
   organizationType: ['', Validators.required],
   companyEmail: ['', Validators.required],
-  companyPhone: ['', Validators.minLength(10)],
+  companyPhone:  new FormControl('', [ Validators.minLength(10),Validators.maxLength(10), Validators.required ]),
   noOfEmployees: [1, Validators.min(1)],
   startYear: new FormControl(2024, [Validators.min(1900), Validators.max(2024)]),
   about: ['', Validators.minLength(50)],
