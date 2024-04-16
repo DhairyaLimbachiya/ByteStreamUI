@@ -43,7 +43,6 @@ JwtDecoder(){
   const Token:any =this.cookieService.get('Authorization');
   if(Token){
   const actual:any = Token.replace('Bearer ',"")
-  console.log(actual)
 
   const decodedToken: any = jwtDecode(actual);
   

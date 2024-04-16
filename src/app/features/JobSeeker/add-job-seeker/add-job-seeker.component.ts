@@ -67,10 +67,13 @@ export class AddJobSeekerComponent implements OnInit {
       this.resumeFlag = false;
       this.jobseekerService.uploadResume(this.file, this.user?.id).subscribe({
         next: (response) => {
-     
+          if (response.isSuccess) {
             this.model.resumeURL = response.result;
             this.uploadImage();
-        
+          }
+          else{
+            this.toast.warning({detail:"Warning",summary:response.message});
+          }
         },
    
       });
@@ -85,10 +88,15 @@ export class AddJobSeekerComponent implements OnInit {
       this.profileImgFlag = false;
       this.jobseekerService.uploadImage(this.image, this.user.id).subscribe({
         next: (response) => {
-          
+          if (response.isSuccess) {
             this.model.profileImgURL = response.result;
             this.addProfile();
-          
+          }
+          else{
+            this.toast.warning({detail:"Warning",summary:response.message});
+        
+
+          }  
         
         },
      
@@ -100,11 +108,8 @@ export class AddJobSeekerComponent implements OnInit {
   }
 
   addProfile(): void{
-    console.log(this.model);
     this.addProfileSubscription$ = this.jobseekerService.addJobSeeker(this.model).subscribe({
       next: (response) => {
-        console.log(response);
-
           this.router.navigateByUrl('/Jobseeker/jobseeker');
       
       },

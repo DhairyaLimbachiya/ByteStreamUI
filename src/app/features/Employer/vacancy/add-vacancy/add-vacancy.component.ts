@@ -18,7 +18,7 @@ export class AddVacancyComponent {
 constructor( private vacancyService :VacancyService ,private router :Router, private toast: NgToastService,private fb:FormBuilder) { 
 }
 addVacancyForm = this.fb.group({
-  noOfVacancies: [0, Validators.min(1)],
+  noOfVacancies: [1, Validators.min(1)],
   minimumQualification: ['', Validators.required],
   jobTitle: ['', Validators.required],
   jobDescription: ['', Validators.minLength(50)],

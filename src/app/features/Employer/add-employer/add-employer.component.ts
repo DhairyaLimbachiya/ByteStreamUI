@@ -72,11 +72,18 @@ export class AddEmployerComponent {
         .uploadImage(this.file, this.model.organization)
         .subscribe({
           next: (response) => {
+            console.log(response)
             if (response.isSuccess) {
               this.model.profileImageUrl = response.result;
               this.addProfile();
             }
-          },
+            else{
+              this.toast.warning({detail:"Warning",summary:response.message});
+          
+  
+            }
+                    },
+                    
         });
     } else {
       this.profileimageFlag = true;

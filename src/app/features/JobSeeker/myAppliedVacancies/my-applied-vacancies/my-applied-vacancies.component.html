@@ -25,7 +25,7 @@
                 <td>{{applicationResponses.vacancy?.publishedBy}}</td>
                 <td>{{applicationResponses.vacancy?.minSalary | currency:'INR'}} - {{applicationResponses.vacancy?.maxSalary | currency:'INR'}}</td>
                 <td>{{applicationResponses.vacancy?.noOfVacancies}}</td>
-                <td>{{applicationResponses.appliedDate | date: 'yyyy-MM-dd'}}</td>
+                <td>{{applicationResponses.appliedDate | date: 'dd-MM-yyyy'}}</td>
                 <ng-container *ngIf="applicationResponses.applicationStatus=='Pending'">
                     <td > <a class="btn" style="background-color: rgb(36, 204, 255); color: white;"> {{applicationResponses.applicationStatus}}</a></td>
                 </ng-container>

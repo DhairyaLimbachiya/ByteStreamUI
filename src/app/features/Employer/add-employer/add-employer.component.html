@@ -62,12 +62,13 @@
         </small>
       </div>
       <div class="mt-3 p-2">
-        <label for="UploadImage" class="form-label">Upload Company Logo *</label>
+        <label for="UploadImage" class="form-label">Upload Company Logo  <span class="RequiredValidationSign">*</span></label>
         <input type="file" id="UploadImage" name="UploadImage" class="form-control"
             (change)="onFileUploadChange($event)" />
         <small class="d-block text-danger" *ngIf="profileimageFlag">
             Upload Company Logo
         </small>
+        <p class="fw-light">Only jpg, jpeg & .png Image formats are allowed</p>
     </div>
       <div class="mt-3">
         <label class="form-label">About Company <span class="RequiredValidationSign">*</span></label>
