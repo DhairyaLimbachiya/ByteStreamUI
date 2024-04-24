@@ -30,6 +30,7 @@ export class SignalrHubService implements OnInit {
           ?.start()
           .then(() => {
             console.log('Connection established with SignalR hub');
+
             observer.next();
             observer.complete();
           })
@@ -43,19 +44,39 @@ export class SignalrHubService implements OnInit {
  
   //on events like on click
   addMessageAndSendToReceiver(Employer:Employer)  {
+      
       this.hubConnection
-        ?.invoke('DemoMethod',Employer)
- 
+        ?.invoke('SendData',Employer)
   }
 
+InitializeConnection(Employer:Employer)  {
+      this.hubConnection
+        ?.invoke('InitializeConnection',Employer)
+  }
   // on init when connection is started 
-  receiveMessageFromSender(): Observable<Employer> {
-    return new Observable<Employer>((observer) => {
-      this.hubConnection?.on('UpdateEmployerMethod', (employer:Employer) => {
-        console.log(employer)
-        observer.next(employer);
-       
+  receiveMessageFromSender(): Observable<string> {
+    return new Observable<string>((observer) => {
+      this.hubConnection?.on('UpdateEmployerMethod', (employername:string) => {
+        console.log(employername)
+        observer.next(employername);
       });
     });
+    
   }
+  stopConnection() {
+    if (this.hubConnection?.state === signalR.HubConnectionState.Connected) {
+      this.hubConnection.stop();
+    }
+  }
+
+  leaveGroup(groupName:string) {
+    if (this.hubConnection?.state === signalR.HubConnectionState.Connected) {
+      this.hubConnection.invoke('LeaveGroup', groupName).then(() => {
+        console.log('Left group: ', groupName);
+      }).catch(error => {
+        console.error('Error leaving group:', error);
+      });
+    }
+  }
+
 }

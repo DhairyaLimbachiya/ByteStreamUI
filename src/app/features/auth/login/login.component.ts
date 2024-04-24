@@ -10,6 +10,7 @@ import { EmployerService } from '../../Employer/Services/employer.service';
 import { User } from '../models/user.model';
 import { JobSeeker } from '../../JobSeeker/model/JobSeeker.model';
 import { Employer } from '../../Employer/model/Employer.model';
+import { SignalrHubService } from '../../Home/demo-services.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private toast: NgToastService,
     private jobseekerService: JobseekerService,
-    private employerService: EmployerService
+    private employerService: EmployerService,
   ) {
     this.loginForm = this.fb.group({
       userName: ['', Validators.required],
@@ -97,7 +98,6 @@ export class LoginComponent implements OnInit {
         }
         else{
           this.router.navigateByUrl('/Jobseeker/jobseeker/add');
-
         }
       },
     
@@ -149,10 +149,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
   onLogout(): void {
     this.authservice.logout();
     localStorage.clear();
-    this.cookieService.deleteAll();
-    this.router.navigateByUrl('/');
   }
 }

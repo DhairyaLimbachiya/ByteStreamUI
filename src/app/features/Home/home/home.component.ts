@@ -62,17 +62,7 @@ export class HomeComponent {
         this.user=response;  
         }
       })
-      this.signalRService.startConnection().subscribe({
-        next:()=>{
-          this.signalRService.receiveMessageFromSender().subscribe({
-            next:(updatedEmployer)=>{
-              if(this.employer.id==updatedEmployer.id){
-              this.employer=updatedEmployer;
-              }
-            }
-          })
-        }
-      })
+      
   }
 
   OnModelOpen(name: string, id: string) {

@@ -9,6 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
 import { RegisterRequest } from '../models/register-request.model';
 import { RegisterResponse } from '../models/register-response';
+import { SignalrHubService } from '../../Home/demo-services.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +18,10 @@ export class AuthService {
 
   $user= new BehaviorSubject<User|undefined>(undefined);
 
-  constructor(private http:HttpClient,private cookieService:CookieService) { }
+
+  constructor(private http:HttpClient,private cookieService:CookieService,    private demoservice:SignalrHubService,    private router: Router,
+
+  ) { }
   login(request:LoginRequest):Observable<LoginResponse>{
   return  this.http.post<LoginResponse>(`${environment.apiBaseUrl}/api/auth/login`,{
       userName:request.userName,
@@ -62,9 +67,13 @@ JwtDecoder(){
   }
 
   logout():void{
+    this.router.navigateByUrl('/auth/login');
     localStorage.clear();
     this.cookieService.delete('Authorization','/');
     this.$user.next(undefined);
+    this.demoservice.stopConnection();
+  
+
   }
 
   

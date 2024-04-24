@@ -54,7 +54,20 @@ editCompanyForm = this.fb.group({
             startYear: this.employer.startYear,
             about: this.employer.about,
           })
+
+          this.signalRService.startConnection().subscribe({
+            next:()=>{
+              this.signalRService.InitializeConnection(this.employer);
+              this.signalRService.receiveMessageFromSender().subscribe({
+                next:()=>{
+                this.toast.warning({detail:"Warning",summary:'Something was changed just now please reload the window '});
+                  this.reloadFlagBtn=true;
+                }
+              })
+            }
+          })
         }
+
         },
     
         error:()=>{
@@ -64,7 +77,6 @@ editCompanyForm = this.fb.group({
      
      
 }
-
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
   }
@@ -123,4 +135,7 @@ onFileUploadChange(event: Event): void {
   this.file = element.files?.[0];
 }
 
+ngOnDestroy(): void {
+this.signalRService.stopConnection();
+}
 }
