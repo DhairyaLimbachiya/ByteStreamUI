@@ -9,6 +9,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AddEmployer } from '../model/add-Employer.model';
 import { Observable } from 'rxjs';
 import { Response } from '../../JobSeeker/model/response-model';
+import { SignalrHubService } from '../../Home/demo-services.service';
 
 @Component({
   selector: 'app-employer-details',
@@ -24,7 +25,8 @@ employer:Employer={} as Employer;
 flag:boolean=false;
 file?:File;
 response$?:Observable<Response>;
-constructor(private employerService:EmployerService, private toast: NgToastService, private fb: FormBuilder, private changeDetector: ChangeDetectorRef) {
+reloadFlagBtn:boolean=false;
+constructor(private employerService:EmployerService, private toast: NgToastService, private fb: FormBuilder, private changeDetector: ChangeDetectorRef, private signalRService:SignalrHubService) {
  
 } 
 
@@ -37,7 +39,6 @@ editCompanyForm = this.fb.group({
   startYear: new FormControl(2024, [Validators.min(1800), Validators.max(2024), Validators.required]),
   about: ['', Validators.minLength(50)],
 });
-
   ngOnInit(): void {
 
        this.employerService.getEmployer().subscribe({
@@ -60,8 +61,10 @@ editCompanyForm = this.fb.group({
         this.flag=true;
         }
       })
-  
+     
+     
 }
+
   ngAfterContentChecked(): void {
     this.changeDetector.detectChanges();
   }
@@ -91,21 +94,29 @@ editCompanyForm = this.fb.group({
     this.updateProfile();
   }
 }
-
 updateProfile(): void{
   this.employerService.updateEmployer(this.employer).subscribe({
     next: (response) => {
     this.employer=response
           },
           complete:()=>{
-            this.toast.success({detail:"",summary:'Profile Updated Successfully'});
-            window.location.reload();
+            this.toast.success({detail:"Success",summary:'Profile Updated Successfully'});
+            this.signalRService.startConnection().subscribe({
+              next:()=>{
+              
+                this.signalRService.addMessageAndSendToReceiver(this.employer);
+              }
+            })
 
           }
         }); 
 }
 
+ReloadWindow(){
+  window.location.reload();
 
+  this.reloadFlagBtn=false
+}
   
 onFileUploadChange(event: Event): void {
   const element = event.currentTarget as HTMLInputElement;

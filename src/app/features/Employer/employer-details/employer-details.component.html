@@ -11,6 +11,9 @@
 </ng-container>
 <ng-container *ngIf="employer">
   <div class="container" >
+    <ng-container *ngIf="reloadFlagBtn">
+      <button class="btn btn-primary" (click)="ReloadWindow()"  > reload</button>
+    </ng-container>
     <h2 class="mt-2">{{employer.organization}}</h2>
     <hr />
     <div>

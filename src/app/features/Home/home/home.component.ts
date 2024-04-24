@@ -12,6 +12,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { JobseekerService } from '../../JobSeeker/services/jobseeker.service';
 import { JobSeeker } from '../../JobSeeker/model/JobSeeker.model';
 import { HttpClient } from '@angular/common/http';
+import { SignalrHubService } from '../demo-services.service';
 interface PageEvent {
   first?: number;
   rows?: number;
@@ -44,7 +45,7 @@ export class HomeComponent {
     private router: Router,
     private toast: NgToastService,
     private jobseekerService: JobseekerService,
-    private http: HttpClient
+    private signalRService:SignalrHubService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +55,6 @@ export class HomeComponent {
         this.vacancies = this.allvacancies?.slice(this.first, this.first+this.rows);
         this.totalRecords = this.allvacancies?.length || 0;
       },
-    
     });
    
       this.authService.user().subscribe({
@@ -62,7 +62,17 @@ export class HomeComponent {
         this.user=response;  
         }
       })
-  
+      this.signalRService.startConnection().subscribe({
+        next:()=>{
+          this.signalRService.receiveMessageFromSender().subscribe({
+            next:(updatedEmployer)=>{
+              if(this.employer.id==updatedEmployer.id){
+              this.employer=updatedEmployer;
+              }
+            }
+          })
+        }
+      })
   }
 
   OnModelOpen(name: string, id: string) {
@@ -78,6 +88,7 @@ export class HomeComponent {
           this.vacancyDetail.alreadyApplied = data.alreadyApplied;
         },
       });
+
   }
 
   ApplyVacancy() {
@@ -90,7 +101,7 @@ export class HomeComponent {
         next: (response) => {
           if(response){
           this.homeservice.apply(this.applyRequest).subscribe({
-            next: (ApplyRequest) => {
+            next: () => {
               this.toast.success({
                 detail: 'Success',
                 summary: 'Applied Successfully',

@@ -54,7 +54,6 @@ export class RegisterComponent {
           detail: 'Error',
           summary: error.error,
           position: 'topRight',
-        
         });
       }
     });

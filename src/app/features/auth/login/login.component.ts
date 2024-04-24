@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
   handleLoginResponse(token: string): void {
     this.cookieService.set('Authorization', `Bearer ${token}`, undefined, '/', undefined, true, 'Strict');
     this.authservice.user().subscribe((data)=> this.user=data);
+
     if (this.user?.id && this.user.userType.includes('JobSeeker')) {
       this.checkJobSeekerProfile();
     }
